@@ -1,4 +1,5 @@
 const initialState = {
+    userINF: [],
     token: localStorage.getItem("token")
 }
 
@@ -40,6 +41,25 @@ const user = (state = initialState, action) =>{
                 error: action.error
             }
         }
+        case "user/get/pending":
+            return{
+                ...state,
+                loading: true
+            }
+        case "user/get/fullfilled":
+            return{
+                ...state,
+                userINF: [
+                    ...state.userINF,
+                    action.payload
+                ],
+                loading: false
+            }
+        case "user/get/rejected":
+            return{
+                ...state,
+                error: action.error
+            }
         default:
             return{
             ...state
@@ -48,16 +68,16 @@ const user = (state = initialState, action) =>{
     }
 }
 export default user;
-export const registerUser = (name,email, password)=>{
+export const registerUser = (firstname, lastname, login, email, password, passwordValid)=>{
     return async (dispatch)=>{
         dispatch({type: "register/post/pending"})
         try{
-            await fetch("", {
+            await fetch("http://localhost:4000/user/signup", {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
                 },
-                body: JSON.stringify({name,email,password})
+                body: JSON.stringify({firstname, lastname, login, email, password, passwordValid})
             })
             dispatch({type: "register/post/fullfilled"})
 
@@ -68,16 +88,16 @@ export const registerUser = (name,email, password)=>{
     }
 }
 
-export const registerUser = (name,email, password)=>{
+export const loginUser = (email, password)=>{
     return async (dispatch)=>{
         dispatch({type: "login/post/pending"})
         try{
-            const data =  await fetch("", {
+            const data =  await fetch("http://localhost:4000/user/signin", {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
                 },
-                body: JSON.stringify({name,email,password})
+                body: JSON.stringify({email,password})
             })
             const token = await data.json()
             localStorage.setItem("token", token )
@@ -86,6 +106,20 @@ export const registerUser = (name,email, password)=>{
         }
         catch(err){
             dispatch({type: "login/post/rejected", error: err.toString()})
+        }
+    }
+}
+
+export const getUser = ()=>{
+    return async (dispatch)=>{
+        dispatch({type: "user/get/pending"})
+        try{
+            const data = await fetch(`http://localhost:4000/user`)
+            const user = await data.json()
+            dispatch({type: "user/get/fullfilled", payload: user})
+        }
+        catch(err){
+            dispatch({type: "user/get/rejected", error: err.toString()})
         }
     }
 }
