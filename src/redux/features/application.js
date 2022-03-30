@@ -4,7 +4,7 @@ const initialState = {
   error: null,
 };
 
-const user = (state = initialState, action) => {
+const application = (state = initialState, action) => {
   switch (action.type) {
     case "register/post/pending": {
       return {
@@ -66,7 +66,7 @@ const user = (state = initialState, action) => {
       };
   }
 };
-export default user;
+
 export const registerUser = (
   firstname,
   lastname,
@@ -131,3 +131,5 @@ export const getUser = () => {
     }
   };
 };
+
+export default application;
