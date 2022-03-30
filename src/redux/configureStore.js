@@ -11,3 +11,5 @@ const store = createStore(
   combineRouter,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+export default store;
