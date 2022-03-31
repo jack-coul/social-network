@@ -108,17 +108,3 @@
     margin-left: 6px;
 }
 
-.main {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 957px;
-}
-
-.mainPosts {
-    margin-right: 28px;
-    margin-bottom: 26px;
-}
-.mainPostsImg img{
-    width: 200px;
-    height: 200px;
-}
