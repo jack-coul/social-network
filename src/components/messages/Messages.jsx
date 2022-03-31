@@ -12,7 +12,7 @@ const Messages = () => {
         </div>
 
         <div className={styles.chatUserNickname}>
-          <span className={styles.yourNickname}>ssss</span>
+          <span className={styles.yourNickname}>Ник юзера с которым переписываешься</span>
         </div>
       </div>
 
@@ -22,13 +22,40 @@ const Messages = () => {
           <Conversation />
           <Conversation />
           <Conversation />
+          <Conversation />
+
         </div>
         <div className={styles.dialogues}>
           <Message />
           <Message />
           <Message />
           <Message />
-          <input placeholder="Введите сообщение.." type="text" />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <div className={styles.inpWrapper}>
+            <div className={styles.inpBtn}>
+              <input placeholder="Введите сообщение.." type="text" />
+              <button>Отправить</button>
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -1,8 +1,6 @@
 * {
     box-sizing: border-box;
 }
-
-
 .header {
     display: flex;
     margin-bottom: 44px;
