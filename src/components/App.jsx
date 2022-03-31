@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Header from "./header/Header";
 import Messages from "./messages/Messages";
+import Profile from "./profile/Profile";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <div className="App">
       <Routes>
         <Route path="/messages" element={<Messages />} />
+        <Route path="/" element={<Profile />} />
       </Routes>
       </div>
          main
