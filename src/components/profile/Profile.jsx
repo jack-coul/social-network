@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { fakeDatabase } from './fakeDatabase';
+import React from 'react';
 import styles from './Profile.module.css'
+import Posts from './posts/Posts';
+import Saved from '../saved/Saved';
 
 
 const Profile = () => {
 
-    const [posts] = useState(fakeDatabase)
+    
     return (
         <div className={styles.profile}>
             <div className={styles.header}>
@@ -57,17 +58,8 @@ const Profile = () => {
                     </a>
                 </div>
             </div>
-            <div className={styles.main}>
-                {posts.map((post) => {
-                    return(
-                        <div className={styles.mainPosts}>
-                            <div className={styles.mainPostsImg}>
-                                <img src={post.image} alt="postImage"/>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
+            <Posts />
+            <Saved />
         </div>
     );
 };
