@@ -1,0 +1,66 @@
+.messages, .messagesBlock {
+    border: 1px solid black;
+    background-color: #fff;
+    display: flex;
+
+}
+.yourNicknameWrapper {
+    width: 33%;
+    padding: 15px 0;
+    border-right: 1px solid red;
+    text-align: center;
+}
+
+.chatUserNickname {
+    width: 67%;
+    padding: 15px 0;
+    text-align: center;
+}
+.yourNickname {
+    font-weight: 600;
+}
+.chats {
+    border: 1px solid blue;
+    width: 33%;
+}
+.notic {
+    width: 14px;
+    height: 14px;
+    background-color: rgb(102, 102, 202);
+    border-radius: 100px;
+}
+.userMessageSend {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+.userAvatar {
+    cursor: pointer;
+}
+.userNicknameSendMessage {
+    font-weight: 600;
+    margin-right: 120px;
+    cursor: pointer;
+}
+.dialogues {
+    position: relative;
+    width: 63%;
+    padding: 10px;
+}
+.dialogues input {
+    position: absolute;
+    bottom: 20px;
+    width: 80%;
+    left: 13%;
+    padding: 15px;
+    border-radius: 20px;
+    outline: none;
+}
+.userSendWrapper {
+    border: 1px solid black;
+    display: flex;
+    width: 300px;
+    padding: 15px;
+}
+
