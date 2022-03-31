@@ -14,8 +14,6 @@ function App() {
         <Route path="/" element={<Profile />} />
       </Routes>
       </div>
-         main
-
     </div>
   );
 }
