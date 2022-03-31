@@ -1,0 +1,18 @@
+.messageWrapper {
+    cursor: pointer;
+    margin-left: 10px;
+    position: relative;
+}
+.numberOfMessages {
+    position: absolute;
+    background-color: rgb(236, 83, 83);
+    color: white;
+    font-size: 12px;
+    width: 15px;
+    text-align: center;
+    height: 15px;
+    border-radius: 100%;
+    top: -4px;
+    left: 12px;
+    line-height: 15px;
+}
