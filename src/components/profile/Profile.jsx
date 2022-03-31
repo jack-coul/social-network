@@ -9,7 +9,7 @@ const Profile = () => {
     
     return (
         <div className={styles.profile}>
-            <header className={styles.header}>
+            <div className={styles.header}>
                 <div className={styles.headerImg}>
                     <div className={styles.headerImgWrap}>
                         <img src="https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg" alt='profile'/>
@@ -37,7 +37,7 @@ const Profile = () => {
                          Sad.Adam
                     </div>
                 </div>
-            </header>
+            </div>
             <div className={styles.menu}>
                 <div className={styles.menuMain}>
                     <a className={styles.menuLink} href='kjkj'>

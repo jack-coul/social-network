@@ -1,9 +1,7 @@
 * {
     box-sizing: border-box;
 }
-.profile {
-    width: 100%;
-}
+
 
 .header {
     display: flex;
