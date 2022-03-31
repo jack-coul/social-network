@@ -103,7 +103,6 @@
 .menuText {
     margin-left: 6px;
 }
-
 .main {
     display: flex;
     flex-wrap: wrap;
@@ -118,3 +117,4 @@
     width: 200px;
     height: 200px;
 }
+
