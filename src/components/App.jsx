@@ -1,10 +1,13 @@
-
+import React from "react";
+import Ribbon from "./ribbon/Ribbon";
 
 function App() {
   return (
     <div className="App">
-      1111
+     
+     <Ribbon/>
     </div>
+    
   );
 }
 
