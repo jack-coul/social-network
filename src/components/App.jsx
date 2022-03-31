@@ -1,11 +1,18 @@
-import React from "react";
-import Ribbon from "./ribbon/Ribbon";
+import { Route, Routes } from "react-router-dom";
+import Header from "./header/Header";
+import Messages from "./messages/Messages";
+import Profile from "./profile/Profile";
 
 function App() {
   return (
-    <div className="App">
-     
-     <Ribbon/>
+    <div>
+      <Header />
+      <div className="App">
+      <Routes>
+        <Route path="/messages" element={<Messages />} />
+        <Route path="/" element={<Profile />} />
+      </Routes>
+      </div>
     </div>
     
   );

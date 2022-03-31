@@ -1,0 +1,107 @@
+.messages {
+  border: 1px solid rgb(226, 226, 226);
+  background-color: #fff;
+  display: flex;
+}
+.messagesBlock {
+  border-left: 1px solid rgb(226, 226, 226);
+  display: flex;
+  border-right: 1px solid rgb(226, 226, 226);
+  border-bottom: 1px solid rgb(226, 226, 226);
+}
+.yourNicknameWrapper {
+  width: 33%;
+  padding: 15px 0;
+  border-right: 1px solid rgb(226, 226, 226);
+  text-align: center;
+}
+
+.chatUserNickname {
+  width: 67%;
+  padding: 15px 0;
+  text-align: center;
+}
+.yourNickname {
+  font-weight: 600;
+}
+.chats {
+  width: 33%;
+  overflow-y: scroll;
+  border-right: 1px solid rgb(226, 226, 226);
+}
+.notic {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(47, 144, 255);
+  border-radius: 100px;
+}
+.userMessageSend {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+.userMessageSend:hover {
+  background-color: rgb(245, 245, 245);
+}
+.userAvatar {
+  cursor: pointer;
+}
+.userNicknameSendMessage {
+  font-weight: 600;
+  margin-right: 120px;
+  cursor: pointer;
+}
+.dialogues {
+  width: 67%;
+  padding: 10px;
+  background-color: #fff;
+  overflow-y: scroll;
+  overflow-x:hidden;  /*для горизонтального*/
+}
+.dialogues input {
+  width: 550px;
+  padding: 15px;
+  border: 0;
+  font-size: 16px;
+  border-radius: 40px;
+  outline: none;
+}
+.inpBtn {
+  position: absolute;
+  display: flex;
+  border: 1px solid rgb(187, 187, 187);
+  border-radius: 40px;
+  width: 600px;
+}
+.userSendWrapper {
+  display: flex;
+  width: 300px;
+  padding: 10px;
+}
+
+.messagesBlock {
+  height: 600px;
+
+}
+.inpWrapper {
+  position: relative;
+  bottom: -162px;
+  left: 15px;
+
+}
+.inpWrapper button {
+  font-size: 16px;
+  color: rgb(11, 85, 255);
+  background-color: #fff;
+  border: 0;
+  border-radius: 40px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.messagesSend {
+    border: 1px solid rgb(187, 187, 187);
+    padding: 10px;
+    border-radius: 20px;
+}
