@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./../Messages.module.css";
+import {format} from "timeago.js"
 
-const Message = () => {
+const Message = ({message}) => {
+  
   return (
-    <div className={styles.userSendWrapper}>
+    <div className={message._id === "62458d11d519fc03593b18f5"? styles.userRecWrapper: styles.userSendWrapper}>
       <div className={styles.userAvatar}>
         <img
           width={37}
@@ -13,7 +15,9 @@ const Message = () => {
         />
       </div>
       <div className={styles.messagesSend}>
-        Чудесный день Нынче sadadasdadasdasdasdasd
+        {message.text}
+        <div>{format(message.createdAt)}</div>
+
       </div>
     </div>
   );

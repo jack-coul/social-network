@@ -16,7 +16,7 @@ const saves = (state = initialState, action) => {
       return {
         ...state,
         loadingSaves: false,
-        saves: [...action.payload],
+        saves: [...action.payload[0].saves],
       };
     case "get/saves/rejected":
       return {
@@ -30,10 +30,16 @@ const saves = (state = initialState, action) => {
 };
 
 export const getSaves = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const token = state.application.token;
     dispatch({ type: "get/saves/pending" });
     try {
-      const res = await fetch(`http://localhost:4000/saves`);
+      const res = await fetch(`http://localhost:4000/saves`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const saves = await res.json();
       if (saves.error) {
         dispatch({ type: "get/saves/rejected", error: saves.error });
