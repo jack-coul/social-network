@@ -24,6 +24,7 @@ const application = (state = initialState, action) => {
     case "register/post/rejected": {
       return {
         ...state,
+        loading: false,
         error: action.error,
       };
     }
@@ -47,7 +48,9 @@ const application = (state = initialState, action) => {
     case "login/post/rejected": {
       return {
         ...state,
+        loading: false,
         error: action.error,
+        message: action.payload,
       };
     }
     case "user/get/pending":
@@ -58,12 +61,16 @@ const application = (state = initialState, action) => {
     case "user/get/fullfilled":
       return {
         ...state,
-        userINF: [...action.payload],
+        userINF: [...state.userINF, action.payload],
+        id: action.payload.id,
+        firstname: action.payload.firstname,
+        lastname: action.payload.lastname,
         loading: false,
       };
     case "user/get/rejected":
       return {
         ...state,
+        loading: false,
         error: action.error,
       };
     default:
@@ -123,7 +130,7 @@ export const loginUser = (email, password) => {
       if (token.error) {
         dispatch({
           type: "register/post/rejected",
-          error: token.error,
+          payload: token.error,
         });
       } else {
         dispatch({
@@ -143,19 +150,28 @@ export const loginUser = (email, password) => {
   };
 };
 
-export const getUser = (userID) => {
+export const getUser = () => {
   return async (dispatch, getState) => {
     const state = getState();
     dispatch({ type: "user/get/pending" });
     try {
-      const data = await fetch(`http://localhost:4000/user/${userID}`, {
+      const data = await fetch(`http://localhost:4000/user`, {
         method: "GET",
         headers: {
+          "Content-type": "application/json",
           Authorization: `Bearer ${state.application.token}`,
         },
       });
-      const user1 = await data.json();
-      dispatch({ type: "user/get/fullfilled", payload: user1 });
+      const user = await data.json();
+      console.log(user);
+      dispatch({
+        type: "user/get/fullfilled",
+        payload: {
+          id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+        },
+      });
     } catch (err) {
       dispatch({ type: "user/get/rejected", error: err.toString() });
     }
