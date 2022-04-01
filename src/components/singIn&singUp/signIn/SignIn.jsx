@@ -9,6 +9,7 @@ const SignIn = () => {
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
+    console.log(1);
     dispatch(loginUser(email, password));
   };
 
@@ -55,9 +56,9 @@ const SignIn = () => {
                 </Link>
               </div>
               <div class="form-group">
-                <button type="submit" onClick={handleSignIn}>
+                <Link to="#" onClick={handleSignIn}>
                   Log In
-                </button>
+                </Link>
               </div>
             </form>
           </div>

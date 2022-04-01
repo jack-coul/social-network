@@ -77,7 +77,7 @@ export const registerUser = (firstname, lastname, login, email, password) => {
   return async (dispatch) => {
     dispatch({ type: "register/post/pending" });
     try {
-      await fetch("http://localhost:4000/user/signup", {
+      const res = await fetch("http://localhost:4000/user/signup", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -90,7 +90,16 @@ export const registerUser = (firstname, lastname, login, email, password) => {
           password,
         }),
       });
-      dispatch({ type: "register/post/fullfilled" });
+      const user = await res.json();
+
+      if (user.error) {
+        dispatch({
+          type: "register/post/rejected",
+          error: user.error,
+        });
+      } else {
+        dispatch({ type: "register/post/fullfilled" });
+      }
     } catch (err) {
       dispatch({ type: "register/post/rejected", error: err.toString() });
     }
@@ -99,6 +108,7 @@ export const registerUser = (firstname, lastname, login, email, password) => {
 
 export const loginUser = (email, password) => {
   return async (dispatch) => {
+    console.log(1);
     dispatch({ type: "login/post/pending" });
     try {
       const data = await fetch("http://localhost:4000/user/signin", {
@@ -110,15 +120,23 @@ export const loginUser = (email, password) => {
       });
       const token = await data.json();
       localStorage.setItem("token", token.token);
-      dispatch({
-        type: "login/post/fullfilled",
-        payload: {
-          token: token.token,
-          id: token.id,
-          firstname: token.firstname,
-          lastname: token.lastname,
-        },
-      });
+      if (token.error) {
+        dispatch({
+          type: "register/post/rejected",
+          error: token.error,
+        });
+      } else {
+        dispatch({
+          type: "login/post/fullfilled",
+          payload: {
+            token: token.token,
+            id: token.id,
+            firstname: token.firstname,
+            lastname: token.lastname,
+          },
+        });
+      }
+      console.log(token);
     } catch (err) {
       dispatch({ type: "login/post/rejected", error: err.toString() });
     }
