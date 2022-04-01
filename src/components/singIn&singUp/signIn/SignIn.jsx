@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../../redux/features/application";
 
 const SignIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSignIn = () => {
+    dispatch(loginUser(email, password));
+  };
+
   return (
     <div>
       <div class="form">
@@ -17,6 +28,8 @@ const SignIn = () => {
                   type="text"
                   name="username"
                   required="required"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <span class="validLog">неверное что-то там</span>
               </div>
@@ -27,6 +40,8 @@ const SignIn = () => {
                   type="password"
                   name="password"
                   required="required"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <span class="validLog">неверное что-то там</span>
               </div>
@@ -35,30 +50,32 @@ const SignIn = () => {
                   <input type="checkbox" />
                   Remember Me
                 </label>
-                <a class="form-recovery" href="#">
+                <Link class="form-recovery" href="#">
                   Forgot Password?
-                </a>
+                </Link>
               </div>
               <div class="form-group">
-                <button type="submit">Log In</button>
+                <button type="submit" onClick={handleSignIn}>
+                  Log In
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
       <div class="pen-footer">
-        <a
+        <Link
           href="https://www.behance.net/gallery/30478397/Login-Form-UI-Library"
           target="_blank"
         >
           <i class="material-icons">arrow_backward</i>View on Behance
-        </a>
-        <a
+        </Link>
+        <Link
           href="https://github.com/andyhqtran/UI-Library/tree/master/Login%20Form"
           target="_blank"
         >
           View on Github<i class="material-icons">arrow_forward</i>
-        </a>
+        </Link>
       </div>
     </div>
   );

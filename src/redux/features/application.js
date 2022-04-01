@@ -58,7 +58,7 @@ const application = (state = initialState, action) => {
     case "user/get/fullfilled":
       return {
         ...state,
-        userINF:action.payload,
+        userINF: [...action.payload],
         loading: false,
       };
     case "user/get/rejected":
@@ -73,14 +73,7 @@ const application = (state = initialState, action) => {
   }
 };
 
-export const registerUser = (
-  firstname,
-  lastname,
-  login,
-  email,
-  password,
-  passwordValid
-) => {
+export const registerUser = (firstname, lastname, login, email, password) => {
   return async (dispatch) => {
     dispatch({ type: "register/post/pending" });
     try {
@@ -95,7 +88,6 @@ export const registerUser = (
           login,
           email,
           password,
-          passwordValid,
         }),
       });
       dispatch({ type: "register/post/fullfilled" });
@@ -135,14 +127,14 @@ export const loginUser = (email, password) => {
 
 export const getUser = (userID) => {
   return async (dispatch, getState) => {
-    const state = getState()
+    const state = getState();
     dispatch({ type: "user/get/pending" });
     try {
-      const data = await fetch(`http://localhost:4000/user/${userID}`,{
+      const data = await fetch(`http://localhost:4000/user/${userID}`, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${state.application.token}`
-        }
+          Authorization: `Bearer ${state.application.token}`,
+        },
       });
       const user1 = await data.json();
       dispatch({ type: "user/get/fullfilled", payload: user1 });
