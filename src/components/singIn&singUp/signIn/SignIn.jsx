@@ -12,6 +12,7 @@ const SignIn = () => {
     console.log(1);
     dispatch(loginUser(email, password));
   };
+  const { loading, message } = useSelector((state) => state.application);
 
   return (
     <div>
@@ -54,6 +55,7 @@ const SignIn = () => {
                 <Link class="form-recovery" to="#">
                   Forgot Password?
                 </Link>
+                <span>{loading && message}</span>
               </div>
               <div class="form-group">
                 <Link to="#" onClick={handleSignIn}>
