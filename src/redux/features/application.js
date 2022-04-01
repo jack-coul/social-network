@@ -1,6 +1,9 @@
 const initialState = {
   userINF: [],
   token: localStorage.getItem("token"),
+  id: "",
+  firstname: "",
+  lastname: "",
   error: null,
 };
 
@@ -35,7 +38,10 @@ const application = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        token: action.payload,
+        token: action.payload.token,
+        id: action.payload.id,
+        firstname: action.payload.firstname,
+        lastname: action.payload.lastname,
       };
     }
     case "login/post/rejected": {
@@ -111,8 +117,16 @@ export const loginUser = (email, password) => {
         body: JSON.stringify({ email, password }),
       });
       const token = await data.json();
-      localStorage.setItem("token", token);
-      dispatch({ type: "login/post/fullfilled", payload: token });
+      localStorage.setItem("token", token.token);
+      dispatch({
+        type: "login/post/fullfilled",
+        payload: {
+          token: token.token,
+          id: token.id,
+          firstname: token.firstname,
+          lastname: token.lastname,
+        },
+      });
     } catch (err) {
       dispatch({ type: "login/post/rejected", error: err.toString() });
     }
