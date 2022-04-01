@@ -78,7 +78,13 @@
 .userSendWrapper {
   display: flex;
   width: 300px;
+  align-items: right;
+}
+.userRecWrapper {
+  display: flex;
+  width: 300px;
   padding: 10px;
+  text-align: right;
 }
 
 .messagesBlock {
