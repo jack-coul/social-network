@@ -50,7 +50,7 @@ const SignIn = () => {
                   <input type="checkbox" />
                   Remember Me
                 </label>
-                <Link class="form-recovery" href="#">
+                <Link class="form-recovery" to="#">
                   Forgot Password?
                 </Link>
               </div>
@@ -62,20 +62,6 @@ const SignIn = () => {
             </form>
           </div>
         </div>
-      </div>
-      <div class="pen-footer">
-        <Link
-          href="https://www.behance.net/gallery/30478397/Login-Form-UI-Library"
-          target="_blank"
-        >
-          <i class="material-icons">arrow_backward</i>View on Behance
-        </Link>
-        <Link
-          href="https://github.com/andyhqtran/UI-Library/tree/master/Login%20Form"
-          target="_blank"
-        >
-          View on Github<i class="material-icons">arrow_forward</i>
-        </Link>
       </div>
     </div>
   );
