@@ -1,130 +1,138 @@
-
-
-
-
-
 .ribbonWrapper {
-    width:500px;
-    background-color:rgb(10, 235, 10);
-} 
+  width: 900px;
+  margin-bottom: 50px;
+  background-color: rgb(248, 248, 248);
+  margin: auto;
+}
 
-.feed_foot  {
-    width:500px;
-    height:56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.feed_foot {
+  width: 900px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+.feed_foot h4 {
+  font-size: 22px;
+  margin: 0;
+  margin-left: 50px;
+}
+.feed_foot img {
+  margin-left: 10px;
 }
 
 .feed_img {
-    width:42px;
-    height: 42px;
-    text-align: center;
-    
-}
-.feed_img img {
-
-}
-.feed_foot img {
-    margin-top: 5px;
-    width: 33px;
-    text-align: center;
+  width: 42px;
+  height: 42px;
+  text-align: center;
 }
 
 .feed_block {
-    width:368px;
-    height:40px;
-    margin-left: 10px;
-    
-}
-
-.feed_block h4 {
-    
-    margin-top: 10px;
+  width: 368px;
+  height: 40px;
+  margin-left: 10px;
 }
 
 .feed_btn {
-    width:40px;
-    height:40px;
-
+  width: 40px;
+  height: 40px;
 }
 .feed_btn button {
-   width: 24px;
-   margin: 9px;
-   border:none;
+  width: 24px;
+  margin: 9px;
+  border: none;
 }
 .feed_file img {
-    width:500px;
-
-    
-}
-.feed_file {
-    
+  width: 900px;
 }
 
 .likes_comms {
-     width:450px;
-     height: 46px;
-    
-     
+  padding: 15px;
 }
-.likes_comms  img {
-    width:24px;
+.likes_comms img {
+  width: 24px;
 }
 .likes_controller {
-    width:100px;
-    display: flex;
-    justify-content: space-between;
+  width: 65px;
+  display: flex;
+  justify-content: space-between;
 }
-.save  {
-    width:350px;
-    display: flex;
-    justify-content:right;
-    margin-top: -22px;
-    margin-left: 145px;
-} 
+.likeIcon, .commentIcon {
+    cursor: pointer;
+}
 
+.save {
+  display: flex;
+  justify-content: right;
+  margin-top: -22px;
+  cursor: pointer;
+}
+
+
+.like_sect span {
+  margin: 0;
+  font-weight: 600;
+}
 .like_sect {
-    width:450px;
-    margin-top: -30px;
+  padding-left: 15px;
+}
+.likes {
+  color: rgb(13, 198, 255);
+}
+.comments {
+  padding-left: 15px;
+  background-color: rgb(228, 228, 228);
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+.commentsWrapper {
+    overflow-y: scroll;
+    height: 107px;
 }
 .ig_name {
-    margin-top: -10px;
+  cursor: pointer;
+  padding: 15px;
 }
-.comments_sec h4 {
-   font-size: 10px;
-   color:grey;
+.ig_name h4 {
+  margin: 0;
 }
-.time_sec {
-    font-size: 10px;
-    color:grey;
+.comments_sec {
+  padding-left: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
-.footer_sec {
-    display: flex;
-    justify-content: space-between;
+.comments_sec span {
+  font-size: 14px;
+  color: grey;
 }
-.footer_img img  {
-    width:24px;
+.comments_sec .commentCounter {
+  color: rgb(13, 198, 255);
+  font-size: 17px;
+  font-weight: 600;
 }
 
 .footer_sec {
-   display: flex;
-   justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
-.footer_comtns {
-    width:480px;
-    margin-right: 100px;
-    display: flex;
-    
-    
+
+.footer_sec input {
+  outline: none;
+  width: 80%;
+  padding: 15px;
+
+  border: 1px solid rgb(13, 198, 255);
+  border-bottom-left-radius: 15px;
+  border-right: 0;
+  font-size: 18px;
 }
-.footer_comtns input {
-    border:none;
-    width:300px;
-    height: 30px;
-    margin-left:10px;
-}
-.footer_comtns button {
-    border:none;
-    margin-left:25px;
+.footer_sec button {
+  width: 20%;
+cursor: pointer;
+  border: 1px solid rgb(13, 198, 255);
+  background-color: #fff;
+  color: rgb(13, 198, 255);
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom-right-radius: 15px;
+  border-left: 0;
 }
