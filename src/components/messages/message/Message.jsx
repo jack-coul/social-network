@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import styles from "./../Messages.module.css";
 import {format} from "timeago.js"
 
