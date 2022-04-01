@@ -7,11 +7,11 @@ import styles from "./../Messages.module.css";
 
 
 
-const Conversation = ({conversations, setConversation}) => {
+const Conversation = ({conversations, setConversation, userId}) => {
     const dispatch = useDispatch()
     const [user, setUser] = useState(null)
     useEffect(()=>{
-        const userID = conversations.members.find((m) => m._id !== "62458d11d519fc03593b18f5" )
+        const userID = conversations.members.find((m) => m._id !== userId )
         setUser(userID)
         
 setConversation(userID)

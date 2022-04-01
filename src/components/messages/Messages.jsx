@@ -16,12 +16,26 @@ const Messages = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessages, setNewMessages]= useState("")
+  const [arrivelMessages, setArrivelMessages]= useState(null)
+
 const socket = useRef()
-  const userId = "62458d11d519fc03593b18f5"
+  const userId = useSelector((state)=>state.application.id)
 
   useEffect(()=>{
     socket.current = io("http://localhost:8900")
+    socket.current.on("getMessage", data =>{
+      setArrivelMessages({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now()
+      })
+    })
   })
+
+  useEffect(()=>{
+    arrivelMessages && currentChat?.members.includes(arrivelMessages.sender)&&
+    setMessages((prev)=>[...prev, arrivelMessages])
+  },[arrivelMessages, currentChat])
 
 useEffect(()=>{
   socket.current.emit("AddUser", userId )
@@ -40,10 +54,16 @@ useEffect(()=>{
   }, [dispatch]);
   
   const handleSubmit =  (conversationId,text)=>{
-
-    
     dispatch(postMessages(conversationId, text))
+    
+    const receiverId = currentChat?.members.find((member)=>member._id !==userId)
+    socket.current.emit("sendMessage", {
+      senderId: userId,
+      receiverId,
+      text: newMessages
+    })
   }
+  
   return (
     <>
       <div className={styles.messages}>
@@ -63,7 +83,7 @@ useEffect(()=>{
           {state.map((c) => {
             return (
               <div onClick={() => setCurrentChat(c)}>
-                <Conversation conversations={c} setConversation ={setConversation} />
+                <Conversation conversations={c} setConversation ={setConversation} userId = {userId} />
               </div>
             );
           })}
