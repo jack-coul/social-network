@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { getConversation } from "../../redux/features/conversation";
 import { getMessage, postMessages } from "../../redux/features/message";
 import Conversation from "./conversation/Conversation";
@@ -12,13 +12,23 @@ const Messages = () => {
   const state = useSelector((state) => state.conversation.conversation);
   const message = useSelector(state=> state.message.message)
   const dispatch = useDispatch();
-  const [conversation, setConversation] = useState([]);
+  const [conversation, setConversation] = useState();
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessages, setNewMessages]= useState("")
-const socket = useRef(io("http://localhost:8900"))
-  
+const socket = useRef()
+  const userId = "62458d11d519fc03593b18f5"
 
+  useEffect(()=>{
+    socket.current = io("http://localhost:8900")
+  })
+
+useEffect(()=>{
+  socket.current.emit("AddUser", userId )
+  socket.current.on("getUsers", (users) =>{
+    console.log(users)
+  })
+}, [dispatch])
 useEffect(()=>{
   dispatch(getMessage(currentChat?._id))
   setMessages(message)
@@ -43,7 +53,7 @@ useEffect(()=>{
 
         <div className={styles.chatUserNickname}>
           <span className={styles.yourNickname}>
-            Ник юзера с которым переписываешься
+            <span>{conversation?.firstname}</span>
           </span>
         </div>
       </div>
@@ -53,7 +63,7 @@ useEffect(()=>{
           {state.map((c) => {
             return (
               <div onClick={() => setCurrentChat(c)}>
-                <Conversation conversations={c} />
+                <Conversation conversations={c} setConversation ={setConversation} />
               </div>
             );
           })}
