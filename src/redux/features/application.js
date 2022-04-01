@@ -52,7 +52,7 @@ const application = (state = initialState, action) => {
     case "user/get/fullfilled":
       return {
         ...state,
-        userINF: [...state.userINF, action.payload],
+        userINF:action.payload,
         loading: false,
       };
     case "user/get/rejected":
@@ -119,13 +119,19 @@ export const loginUser = (email, password) => {
   };
 };
 
-export const getUser = () => {
-  return async (dispatch) => {
+export const getUser = (userID) => {
+  return async (dispatch, getState) => {
+    const state = getState()
     dispatch({ type: "user/get/pending" });
     try {
-      const data = await fetch(`http://localhost:4000/user`);
-      const user = await data.json();
-      dispatch({ type: "user/get/fullfilled", payload: user });
+      const data = await fetch(`http://localhost:4000/user/${userID}`,{
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${state.application.token}`
+        }
+      });
+      const user1 = await data.json();
+      dispatch({ type: "user/get/fullfilled", payload: user1 });
     } catch (err) {
       dispatch({ type: "user/get/rejected", error: err.toString() });
     }

@@ -4,6 +4,25 @@ const initialState = {
 
 const conversation = (state= initialState, action)=>{
     switch(action.type){
+        case "conversation/get/pending":
+            return{
+                ...state,
+                loadingConversation: true,
+                error: null
+            }
+        case "conversation/get/fullfilled":
+            return{
+                ...state,
+                conversation:[
+                    ...action.payload
+                ],
+                loadingConversation: false,
+            }
+        case "conversation/get/rejected":
+        return{
+            ...state,
+            error: action.error
+        }
         default:{
             return{
                 ...state
@@ -22,7 +41,7 @@ export const postConversation = ()=>{
             const data = await fetch("http://localhost:4000/conversation",{
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${state.user.token.id}`,
+                    Authorization: `Bearer ${state.application.token}`,
                     "Content-type": "application/json"
                 }
             })
@@ -44,7 +63,7 @@ export const getConversation = ()=>{
             const data = await fetch("http://localhost:4000/conversation",{
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${state.user.token.id}`,
+                    Authorization: `Bearer ${state.application.token}`,
                     "Content-type": "application/json"
                 }
             })
