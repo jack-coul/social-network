@@ -9,10 +9,10 @@ function App() {
     <div>
       <Header />
       <div className="App">
-      <Routes>
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/" element={<Profile />} />
-      </Routes>
+        <Routes>
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/" element={<Profile />} />
+        </Routes>
       </div>
     </div>
   );
