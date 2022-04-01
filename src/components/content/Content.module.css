@@ -1,0 +1,141 @@
+.content {
+    width: 90%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    background-color: aquamarine;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 100px;
+}
+
+.contentMedia {
+    width: 50%;
+    height: 100%;
+    background-color: gray;
+}
+
+.mediaWrap img{
+    width: 100%;
+    height: 100%;
+}
+
+.contentComments {
+    width: 50%;
+    height: 100%;
+    border-left: 1px solid #efefef;
+}
+
+.commentsHeader {
+    width: 100%;
+    height: 61px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #efefef;
+}
+.commentsHeaderTitle {
+    display: flex;
+}
+
+.commentsHeaderImg img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.commentsHeaderUserTitle {
+    display: flex;
+    margin-left: 14px;
+}
+
+.mainComments{
+    height: 225px;
+    border-bottom: 1px solid #efefef;
+    overflow-y: scroll;
+    scrollbar-color: rebeccapurple green;
+    scrollbar-width: thin;
+}
+.mainCommentsShow {
+    display: flex;
+    padding: 15px 10px 5px 15px;
+    
+}
+
+.mainCommentsUserLogo img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.userInfo {
+    display: flex;
+    margin-left: 14px;
+}
+.userName {
+    margin-right: 10px;
+}
+
+.commentTime{
+    color: #8e8e8e;
+    font-size: 10px;
+    line-height: 12px;
+    margin: 8px 0 0 14px; 
+}
+
+.mainCommentButtons {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 16px;
+}
+
+.mainButtons {
+    display: flex;
+}
+.mainButtons div{
+    margin-right: 16px;
+}
+
+.mainLike{
+    padding: 0 0 10px 15px;
+    border-bottom: 1px solid #efefef;;
+}
+.likeCount {
+    display: flex;
+}
+.likeCount div {
+    margin-right: 6px;
+}
+.likeTime {
+    color: #8e8e8e;
+    font-size: 10px;
+    line-height: 12px;
+}
+form{
+    display: flex;
+    width: 100%;
+    padding: 15px 15px 14px 15px;
+}
+.commentSmile {
+    width: 10%;
+}
+.commentInput {
+    width: 65%;
+}
+.commentInput input{
+    width: 90%;
+    height: 18px !important;
+    background-color: transparent;
+    border: none;
+}
+.commentSend {
+    width: 20%;
+}
+
+.commentSend a{
+    text-decoration: none;
+    color: #0095f6;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+}
