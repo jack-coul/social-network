@@ -44,6 +44,15 @@ const message = (state = initialState, action) => {
                 ...state,
                 error: action.error
             }
+        case "onlineMessage":
+            console.log(action.payload)
+            return{
+                ...state,
+                message:[
+                    ...state.message,
+                    action.payload
+                ]
+            }
     default:
       return {
         ...state,
