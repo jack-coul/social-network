@@ -1,4 +1,8 @@
 .userPage {
-    cursor: pointer;
-    margin-left: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.userPage img {
+  border-radius: 50%;
 }

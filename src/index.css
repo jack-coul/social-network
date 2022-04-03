@@ -1,9 +1,9 @@
 body {
   margin: 0;
   background-color: #fafafa;
-  background-color: rgba(var(--b3f,250,250,250),1);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  background-color: rgba(var(--b3f, 250, 250, 250), 1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,13 +19,12 @@ body {
   width: 975px;
   margin: auto;
   padding-top: 100px;
-
 }
 
 .form {
   z-index: 15;
   position: relative;
-  background: #FFFFFF;
+  background: #ffffff;
   width: 600px;
   border-radius: 4px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
@@ -38,7 +37,7 @@ body {
   position: absolute;
   top: 60px;
   right: 60px;
-  background: #FFFFFF;
+  background: #ffffff;
   width: 60px;
   height: 60px;
   border-radius: 100%;
@@ -95,19 +94,19 @@ body {
   color: rgba(0, 0, 0, 0.8);
 }
 .two .form-group input {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .two .form-group input:focus {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .form-group button {
   outline: none;
-  background: #4285F4;
+  background: #4285f4;
   width: 100%;
   border: 0;
   border-radius: 4px;
   padding: 12px 20px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: inherit;
   font-size: inherit;
   font-weight: 500;
@@ -116,8 +115,8 @@ body {
   cursor: pointer;
 }
 .two .form-group button {
-  background: #4285F4;
-  color: #FFF;
+  background: #4285f4;
+  color: #fff;
 }
 .form-group .form-remember {
   font-size: 12px;
@@ -125,13 +124,13 @@ body {
   letter-spacing: 0;
   text-transform: none;
 }
-.form-group .form-remember input[type=checkbox] {
+.form-group .form-remember input[type="checkbox"] {
   display: inline-block;
   width: auto;
   margin: 0 10px 0 0;
 }
 .form-group .form-recovery {
-  color: #4285F4;
+  color: #4285f4;
   font-size: 12px;
   text-decoration: none;
 }
@@ -156,7 +155,7 @@ body {
   position: absolute;
   top: 0;
   left: 95%;
-  background: #4285F4;
+  background: #4285f4;
   width: 100%;
   min-height: 100%;
   padding: 60px calc(10% + 60px) 60px 60px;
@@ -169,7 +168,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   cursor: default;
 }
-.form-panel.two.active:before, .form-panel.two.active:after {
+.form-panel.two.active:before,
+.form-panel.two.active:after {
   opacity: 0;
 }
 .form-header {
@@ -177,7 +177,7 @@ body {
 }
 .form-header h1 {
   padding: 4px 0;
-  color: #4285F4;
+  color: #4285f4;
   font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;
@@ -185,7 +185,7 @@ body {
 .two .form-header h1 {
   position: relative;
   z-index: 40;
-  color: #4285F4 ;
+  color: #4285f4;
 }
 .pen-footer {
   display: flex;
@@ -195,7 +195,7 @@ body {
   margin: 20px auto 100px;
 }
 .pen-footer a {
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 12px;
   text-decoration: none;
   text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.1);
@@ -208,13 +208,13 @@ body {
 }
 
 .cp-fab {
-  background: #FFFFFF !important;
-  color: #4285F4 !important;
+  background: #ffffff !important;
+  color: #4285f4 !important;
 }
 .form-two {
   z-index: 15;
   position: relative;
-  background: #FFFFFF;
+  background: #ffffff;
   width: 600px;
   border-radius: 4px;
   box-shadow: 0 0 30px rgb(0 0 0 / 10%);
@@ -223,15 +223,15 @@ body {
 }
 .form-two .form-panel.two {
   z-index: 5;
-    top: 0;
-    left: 0;
-    background: #FFF;
-    box-shadow: 0 0 30px rgb(0 0 0 / 10%);
-    width: 100%;
-    min-height: 100%;
-    padding: 60px calc(10% + 60px) 60px 60px;
-    transition: 0.3s ease;
-    cursor: pointer;
+  top: 0;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 0 30px rgb(0 0 0 / 10%);
+  width: 100%;
+  min-height: 100%;
+  padding: 60px calc(10% + 60px) 60px 60px;
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 .validLog {
   margin-top: 5px;

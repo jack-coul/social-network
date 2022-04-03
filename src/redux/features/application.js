@@ -1,9 +1,12 @@
+import axios from "axios";
+
 const initialState = {
   userINF: [],
   token: localStorage.getItem("token"),
   id: "",
   firstname: "",
   lastname: "",
+  image: "",
   error: null,
 };
 
@@ -66,8 +69,25 @@ const application = (state = initialState, action) => {
         firstname: action.payload.firstname,
         lastname: action.payload.lastname,
         loading: false,
+        image: action.payload.image,
       };
     case "user/get/rejected":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case "edit/user/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "edit/user/fullfilled":
+      return {
+        ...state,
+        image: action.payload,
+      };
+    case "edit/user/rejected":
       return {
         ...state,
         loading: false,
@@ -163,17 +183,52 @@ export const getUser = () => {
         },
       });
       const user = await data.json();
-      console.log(user);
-      dispatch({
-        type: "user/get/fullfilled",
-        payload: {
-          id: user.id,
-          firstname: user.firstname,
-          lastname: user.lastname,
-        },
-      });
+      if (user.error) {
+        dispatch({ type: "user/get/rejected", error: user.error });
+      } else {
+        dispatch({
+          type: "user/get/fullfilled",
+          payload: {
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            image: user.image,
+          },
+        });
+      }
     } catch (err) {
       dispatch({ type: "user/get/rejected", error: err.toString() });
+    }
+  };
+};
+
+export const editUser = (img, firstname, lastname, login) => {
+  return async (dispatch, getState) => {
+    dispatch({ type: "edit/user/pending" });
+    const state = getState();
+    const token = state.application.token;
+    let formData = new FormData();
+    formData.append("image", img);
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    formData.append("login", login);
+    try {
+      const res = await fetch("http://localhost:4000/user", {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      const image = await res.json();
+      console.log(image.avatar);
+      if (image.error) {
+        dispatch({ type: "edit/user/rejected", error: image.error });
+      } else {
+        dispatch({ type: "edit/user/fulfilled", payload: image.avatar });
+      }
+    } catch (error) {
+      dispatch({ type: "edit/user/rejected", error });
     }
   };
 };

@@ -16,14 +16,14 @@ const SignIn = () => {
 
   return (
     <div>
-      <div class="form">
-        <div class="form-panel one">
-          <div class="form-header">
+      <div className="form">
+        <div className="form-panel one">
+          <div className="form-header">
             <h1>Авторизация</h1>
           </div>
-          <div class="form-content">
+          <div className="form-content">
             <form>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="username">Email Address</label>
                 <input
                   id="username"
@@ -33,9 +33,9 @@ const SignIn = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <span class="validLog">неверное что-то там</span>
+                <span className="validLog">неверное что-то там</span>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="password">Пароль</label>
                 <input
                   id="password"
@@ -45,19 +45,19 @@ const SignIn = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <span class="validLog">неверное что-то там</span>
+                <span className="validLog">неверное что-то там</span>
               </div>
-              <div class="form-group">
-                <label class="form-remember">
+              <div className="form-group">
+                <label className="form-remember">
                   <input type="checkbox" />
                   Remember Me
                 </label>
-                <Link class="form-recovery" to="#">
+                <Link className="form-recovery" to="#">
                   Forgot Password?
                 </Link>
                 <span>{loading && message}</span>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Link to="#" onClick={handleSignIn}>
                   Log In
                 </Link>

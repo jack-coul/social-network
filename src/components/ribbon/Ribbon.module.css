@@ -18,6 +18,7 @@
 }
 .feed_foot img {
   margin-left: 10px;
+  border-radius: 50%;
 }
 
 .feed_img {
@@ -56,8 +57,9 @@
   display: flex;
   justify-content: space-between;
 }
-.likeIcon, .commentIcon {
-    cursor: pointer;
+.likeIcon,
+.commentIcon {
+  cursor: pointer;
 }
 
 .save {
@@ -66,7 +68,6 @@
   margin-top: -22px;
   cursor: pointer;
 }
-
 
 .like_sect span {
   margin: 0;
@@ -85,8 +86,8 @@
   border-radius: 5px;
 }
 .commentsWrapper {
-    overflow-y: scroll;
-    height: 107px;
+  overflow-y: scroll;
+  height: 107px;
 }
 .ig_name {
   cursor: pointer;
@@ -127,7 +128,7 @@
 }
 .footer_sec button {
   width: 20%;
-cursor: pointer;
+  cursor: pointer;
   border: 1px solid rgb(13, 198, 255);
   background-color: #fff;
   color: rgb(13, 198, 255);
