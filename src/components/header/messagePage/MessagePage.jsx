@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styles from "./MessagePage.module.css";
 
 const MessagePage = () => {
+  const { message } = useSelector((state) => state.message);
   return (
     <div className={styles.messageWrapper}>
-      <div className={styles.numberOfMessages}>0</div>
+      <div className={styles.numberOfMessages}>{message.length}</div>
       <Link to="/messages">
         <img
           width={24}

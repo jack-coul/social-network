@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Ribbon.module.css";
+import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
 import Logo1 from "../Images/img2.jpg";
 import Logo2 from "../Images/heart.png";
 import Logo3 from "../Images/bubble-chat.png";
 import Logo4 from "../Images/send.png";
+import { getUser } from "../../redux/features/application";
 
 const Ribbon = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
+
+  const { image, loading } = useSelector((state) => state.application);
   const [showComments, setShowComments] = useState(false);
   const [savePost, setSavePost] = useState(false);
   const [likePost, setLikePost] = useState(false);
@@ -28,7 +37,7 @@ const Ribbon = () => {
   };
 
   const hundleShowComments = () => {
-    if(showComments) {
+    if (showComments) {
       setShowComments(false);
     } else {
       setShowComments(true);
@@ -38,8 +47,16 @@ const Ribbon = () => {
   return (
     <div className={styles.ribbonWrapper}>
       <div className={styles.feed_foot}>
-        <img width={34} height={34} src={Logo} alt="" />
-
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <img
+            width={34}
+            height={34}
+            src={image ? `http://localhost:4000/${image}` : Logo}
+            alt=""
+          />
+        )}
         <h4>Ник владельца публикации</h4>
       </div>
       <div className={styles.feed_main}>
