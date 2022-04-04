@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Profile.module.css";
 import Posts from "./posts/Posts/Posts";
-import Saved from "../saved/Saved";
-import { Link } from "react-router-dom";
+// import Saved from "../saved/Saved";
+// import { Link } from "react-router-dom";
 import HeaderForUser from "./headerForUser/HeaderForUser";
 
 const Profile = () => {

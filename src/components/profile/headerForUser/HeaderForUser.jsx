@@ -6,7 +6,10 @@ import Logo from "../../Images/user.png";
 import styles from "../Profile.module.css";
 
 const HeaderForUser = () => {
-  const { image, loading } = useSelector((state) => state.application);
+  const { image, loading, firstname, lastname } = useSelector(
+    (state) => state.application
+  );
+  console.log(image);
   return (
     <>
       <div className={styles.header}>
@@ -26,7 +29,7 @@ const HeaderForUser = () => {
         </div>
         <div className={styles.headerDescription}>
           <div className={styles.descriptionEdit}>
-            <h2>adam.baker.786</h2>
+            <h2>{`${firstname} ${lastname}`}</h2>
             <div className={styles.descriptionEditButton}>
               <Link className={styles.editButton} to="/editProfile">
                 Редактировать профиль

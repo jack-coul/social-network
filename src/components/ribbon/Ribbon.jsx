@@ -4,9 +4,9 @@ import styles from "./Ribbon.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
 import Logo1 from "../Images/img2.jpg";
-import Logo2 from "../Images/heart.png";
-import Logo3 from "../Images/bubble-chat.png";
-import Logo4 from "../Images/send.png";
+// import Logo2 from "../Images/heart.png";
+// import Logo3 from "../Images/bubble-chat.png";
+// import Logo4 from "../Images/send.png";
 import { getUser } from "../../redux/features/application";
 
 const Ribbon = () => {
@@ -15,7 +15,10 @@ const Ribbon = () => {
     dispatch(getUser());
   }, [dispatch]);
 
-  const { image, loading } = useSelector((state) => state.application);
+  const { image, loading, firstname, lastname } = useSelector(
+    (state) => state.application
+  );
+  console.log(firstname, lastname);
   const [showComments, setShowComments] = useState(false);
   const [savePost, setSavePost] = useState(false);
   const [likePost, setLikePost] = useState(false);
@@ -57,7 +60,7 @@ const Ribbon = () => {
             alt=""
           />
         )}
-        <h4>Ник владельца публикации</h4>
+        <h4>{`${firstname} ${lastname}`}</h4>
       </div>
       <div className={styles.feed_main}>
         <div className={styles.feed_file}>
