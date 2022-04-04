@@ -14,7 +14,7 @@
 .feed_foot h4 {
   font-size: 22px;
   margin: 0;
-  margin-left: 50px;
+  margin-left: 15px;
 }
 .feed_foot img {
   margin-left: 10px;
@@ -48,7 +48,13 @@
 
 .likes_comms {
   padding: 15px;
+  display: flex;
+  justify-content: space-between;
 }
+.likes_comms svg {
+ cursor: pointer;
+}
+
 .likes_comms img {
   width: 24px;
 }
@@ -57,17 +63,6 @@
   display: flex;
   justify-content: space-between;
 }
-.likeIcon,
-.commentIcon {
-  cursor: pointer;
-}
-
-.save {
-  display: flex;
-  justify-content: right;
-  margin-top: -22px;
-  cursor: pointer;
-}
 
 .like_sect span {
   margin: 0;
@@ -75,6 +70,7 @@
 }
 .like_sect {
   padding-left: 15px;
+  margin-bottom: 10px;
 }
 .likes {
   color: rgb(13, 198, 255);
@@ -83,15 +79,18 @@
   padding-left: 15px;
   background-color: rgb(228, 228, 228);
   margin-bottom: 5px;
+  border: 1px solid #d4d4d4;
   border-radius: 5px;
+  padding: 10px;
 }
 .commentsWrapper {
   overflow-y: scroll;
-  height: 107px;
+  height: 150px;
 }
 .ig_name {
   cursor: pointer;
-  padding: 15px;
+  padding-left: 15px;
+  margin-bottom: 5px;
 }
 .ig_name h4 {
   margin: 0;
@@ -104,6 +103,7 @@
 .comments_sec span {
   font-size: 14px;
   color: grey;
+  
 }
 .comments_sec .commentCounter {
   color: rgb(13, 198, 255);
@@ -121,19 +121,19 @@
   width: 80%;
   padding: 15px;
 
-  border: 1px solid rgb(13, 198, 255);
-  border-bottom-left-radius: 15px;
+  border: 1px solid rgb(140, 140, 140);
+
   border-right: 0;
   font-size: 18px;
 }
 .footer_sec button {
   width: 20%;
   cursor: pointer;
-  border: 1px solid rgb(13, 198, 255);
+  border: 1px solid rgb(123, 123, 123);
   background-color: #fff;
-  color: rgb(13, 198, 255);
+  color: rgb(69, 69, 69);
   font-size: 16px;
   font-weight: 600;
-  border-bottom-right-radius: 15px;
+
   border-left: 0;
 }

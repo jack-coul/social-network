@@ -157,13 +157,14 @@ const Ribbon = () => {
             )}
           </div>
         </div>
+        <div className={styles.ig_name}>
+          <h4>{firstname}</h4>
+        </div>
         <div className={styles.like_sect}>
           <span className={styles.likes}>7 002</span>
           <span> отметок "Нравится"</span>
         </div>
-        <div className={styles.ig_name}>
-          <h4>Ник владельца публикации</h4>
-        </div>
+
         {showComments ? (
           ""
         ) : (
