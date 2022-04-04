@@ -221,7 +221,7 @@ export const editUser = (img, firstname, lastname, login) => {
         body: formData,
       });
       const image = await res.json();
-      console.log(image.avatar);
+
       if (image.error) {
         dispatch({ type: "edit/user/rejected", error: image.error });
       } else {
