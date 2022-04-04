@@ -17,7 +17,6 @@ const Messages = () => {
   const [messages, setMessages] = useState([]);
   const [newMessages, setNewMessages] = useState("");
   const [arrivelMessages, setArrivelMessages] = useState(null);
-  const [tryMessages, setTryMessages] = useState(null)
 
   const socket = useRef();
   const userId = useSelector((state) => state.application.id);
@@ -30,29 +29,29 @@ const Messages = () => {
   
     socket.current.on("getMessage", (data) => {
       console.log(data);
-      setArrivelMessages({
+      setArrivelMessages ({
         sender: data.senderId,
         text: data.text,
       });
-      console.log(arrivelMessages)
-    });
-    
-  },arrivelMessages)
+      setMessages([...messages, arrivelMessages])
 
+    },arrivelMessages );
+    
+  },[arrivelMessages])
+  console.log(currentChat)
   useEffect(() => {
+    // setMessages(message)
     arrivelMessages &&
       currentChat?.members.includes(arrivelMessages.sender) &&
-      setTryMessages((prev)=>[...prev,arrivelMessages]);
 
-      // setMessages((prev) => [...prev, arrivelMessages]);
-      // console.log(tryMessages)
+      setMessages((prev) => [...prev, arrivelMessages]);
   });
 
 
   useEffect(() => {
     socket.current.emit("addUser", userId);
-    // socket.current.on("getUsers", (users) => {
-    // });
+    socket.current.on("getUsers", (users) => {
+    });
   }, [dispatch]);
   useEffect(() => {
     dispatch(getMessage(currentChat?._id));
@@ -69,17 +68,19 @@ const Messages = () => {
       text: text,
       conversationId: currentChat._id
     }
+    console.log(messagePost)
     const receiverId = currentChat?.members.find(
       (member) => member._id !== userId
-      
+    
     );
     socket.current.emit("sendMessage", {
       senderId: userId,
       receiverId: receiverId._id,
       text: newMessages,
     });
-    setMessages([...messages, messagePost])
+    // setMessages([...messages, messagePost])
   };
+  console.log(state)
 
   return (
     <>
@@ -112,7 +113,7 @@ const Messages = () => {
         {currentChat ? (
           <>
             <div className={styles.dialogues}>
-              {tryMessages?.map((m) => {
+              {message?.map((m) => {
                 return <Message message={m} />;
               })}
 
