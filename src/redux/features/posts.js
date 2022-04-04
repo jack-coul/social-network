@@ -100,19 +100,24 @@ export const getPosts = () => {
   };
 };
 
-export const addPost = (text) => {
+export const addPost = (text, img) => {
   return async (dispatch, getState) => {
     const state = getState();
     const token = state.application.token;
+    let formData = new FormData();
+    formData.append("image", img);
+    formData.append("text", text);
+
+    console.log(formData);
+
     dispatch({ type: "add/post/pending" });
     try {
       const res = await fetch("http://localhost:4000/post", {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
           authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ text }),
+        body: formData
       });
       const addedPost = await res.json();
 
