@@ -16,63 +16,62 @@ const Messages = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessages, setNewMessages] = useState("");
-  const [arrivelMessages, setArrivelMessages] = useState(null);
+  const [arrivelMessages, setArrivelMessages] = useState({});
 
   const socket = useRef();
   const userId = useSelector((state) => state.application.id);
+  // useEffect(() => {
+  //   socket.current = io("http://localhost:9990");
+  // }, [])
 
   useEffect(() => {
-    socket.current = io("http://localhost:8900");
-
-  });
-  useEffect(()=>{
-  
+    socket.current = io("http://localhost:9990");
     socket.current.on("getMessage", (data) => {
-      console.log(data);
-      setArrivelMessages ({
+      console.log(data)
+      setArrivelMessages ( {
         sender: data.senderId,
         text: data.text,
       });
-      setMessages([...messages, arrivelMessages])
+    } );
 
-    },arrivelMessages );
-    
-  },[arrivelMessages])
-  console.log(currentChat)
-  useEffect(() => {
-    // setMessages(message)
-    arrivelMessages &&
-      currentChat?.members.includes(arrivelMessages.sender) &&
+    if(arrivelMessages &&
+      currentChat?.members.includes(arrivelMessages.sender)) {
+        setMessages([...message, arrivelMessages]);
+      }
 
-      setMessages((prev) => [...prev, arrivelMessages]);
-  });
+      
+      console.log(messages)
+
+  }, [arrivelMessages, currentChat, message, messages]);
+ 
+  
 
 
   useEffect(() => {
     socket.current.emit("addUser", userId);
     socket.current.on("getUsers", (users) => {
     });
-  }, [dispatch]);
+  }, [dispatch, userId]);
+  
   useEffect(() => {
     dispatch(getMessage(currentChat?._id));
-    setMessages(message);
-  }, [currentChat]);
+     setMessages(message);
+  }, [currentChat, dispatch, message]);
 
   useEffect(() => {
     dispatch(getConversation());
   }, [dispatch]);
+
   const handleSubmit = (conversationId, text) => {
     dispatch(postMessages(conversationId, text));
-    const messagePost = {
-      sender: userId,
-      text: text,
-      conversationId: currentChat._id
-    }
-    console.log(messagePost)
+    // const messagePost = {
+    //   sender: userId,
+    //   text: text,
+    //   conversationId: currentChat._id
+    // }
     const receiverId = currentChat?.members.find(
       (member) => member._id !== userId
-    
-    );
+      );
     socket.current.emit("sendMessage", {
       senderId: userId,
       receiverId: receiverId._id,
@@ -80,7 +79,6 @@ const Messages = () => {
     });
     // setMessages([...messages, messagePost])
   };
-  console.log(state)
 
   return (
     <>
@@ -113,8 +111,8 @@ const Messages = () => {
         {currentChat ? (
           <>
             <div className={styles.dialogues}>
-              {message?.map((m) => {
-                return <Message message={m} />;
+              {messages?.map((m) => {
+                return <Message message={m} userId = {userId} />;
               })}
 
               <div className={styles.inpWrapper}>

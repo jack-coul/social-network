@@ -84,7 +84,7 @@
   display: flex;
   width: 300px;
   padding: 10px;
-  text-align: right;
+  justify-content: flex-end;
 }
 
 .messagesBlock {
