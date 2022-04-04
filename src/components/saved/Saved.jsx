@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./Saved.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fakeDatabase1 } from "./fakaDatabase1";
 import { getSaves } from "../../redux/features/saves";
 
 const Saved = () => {
-  const [posts] = useState(fakeDatabase1);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSaves());

@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const initialState = {
   userINF: [],
   token: localStorage.getItem("token"),
@@ -62,6 +60,7 @@ const application = (state = initialState, action) => {
         loading: true,
       };
     case "user/get/fullfilled":
+      console.log(action.payload.firstname, action.payload.lastname);
       return {
         ...state,
         userINF: [...state.userINF, action.payload],
@@ -183,6 +182,7 @@ export const getUser = () => {
         },
       });
       const user = await data.json();
+      console.log(user);
       if (user.error) {
         dispatch({ type: "user/get/rejected", error: user.error });
       } else {
@@ -208,10 +208,10 @@ export const editUser = (img, firstname, lastname, login) => {
     const state = getState();
     const token = state.application.token;
     let formData = new FormData();
-    formData.append("image", img);
-    formData.append("firstname", firstname);
-    formData.append("lastname", lastname);
-    formData.append("login", login);
+    img && formData.append("image", img);
+    firstname && formData.append("firstname", firstname);
+    lastname && formData.append("lastname", lastname);
+    login && formData.append("login", login);
     try {
       const res = await fetch("http://localhost:4000/user", {
         method: "PATCH",
