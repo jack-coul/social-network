@@ -30,28 +30,38 @@ const EditProfile = () => {
           />
         </label>
       </div>
-      <div>
+      <div className="inpValue">
         <input
+         placeholder="Введите имя"
           type="text"
           value={firstname}
           onChange={(e) => setFirstname(e.target.value)}
         />
       </div>
-      <div>
+      <div className="inpValue">
         <input
+         placeholder="Введите фамилию"
           type="text"
           value={lastname}
           onChange={(e) => setLastname(e.target.value)}
         />
       </div>
-      <div>
+      <div className="inpValue">
         <input
+         placeholder="Введите логин"
           type="text"
           value={login}
           onChange={(e) => setLogin(e.target.value)}
         />
       </div>
-      <input type="submit" placeholder="отправить" onClick={handleSubmitForm} />
+      <div className="inpValue">
+        <input
+          className="sendSettings"
+          type="submit"
+          placeholder="отправить"
+          onClick={handleSubmitForm}
+        />
+      </div>
     </div>
   );
 };
