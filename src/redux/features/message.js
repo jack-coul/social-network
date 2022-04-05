@@ -5,60 +5,49 @@ const initialState = {
 const message = (state = initialState, action) => {
   switch (action.type) {
     case "message/post/pending":
-        return{
-            ...state,
-            loadingMessage: true,
-            error: null
-        }
+      return {
+        ...state,
+        loadingMessage: true,
+        error: null,
+      };
     case "message/post/fullfilled":
-        return{
-            ...state, 
-            message:[
-                ...state.message,
-                action.payload
-            ],
-            loadingMessage: false
-        }
+      return {
+        ...state,
+        message: [...state.message, action.payload],
+        loadingMessage: false,
+      };
     case "message/post/rejected":
-        return{
-            ...state,
-            error: action.error
-        }
-        case "message/get/pending":
-            return{
-                ...state,
-                loadingMessage: true,
-                error: null
-            }
-        case "message/get/fullfilled":
-            return{
-                ...state, 
-                message:[
-                    ...action.payload
-                ],
-                loadingMessage: false
-            }
-        case "message/get/rejected":
-            return{
-                ...state,
-                error: action.error
-            }
-        case "onlineMessage":
-            return{
-                ...state,
-                message:[
-                    ...state.message,
-                    action.payload
-                ]
-            }
-        case "newMsg":
-            return{
-                ...state,
-                message: [
-                    ...state.message,
-                    action.payload
-                ]
-            }
+      return {
+        ...state,
+        error: action.error,
+      };
+    case "message/get/pending":
+      return {
+        ...state,
+        loadingMessage: true,
+        error: null,
+      };
+    case "message/get/fullfilled":
+      return {
+        ...state,
+        message: [...action.payload],
+        loadingMessage: false,
+      };
+    case "message/get/rejected":
+      return {
+        ...state,
+        error: action.error,
+      };
+    case "onlineMessage":
+      return {
+        ...state,
+        message: [...state.message, action.payload],
+      };
+    case "newMsg":
+      return {
+        ...state,
+        message: [...state.message, action.payload],
+      };
     default:
       return {
         ...state,
@@ -79,9 +68,8 @@ export const postMessages = (conversationId, text) => {
           Authorization: `Bearer ${state.application.token}`,
           "Content-type": "application/json",
         },
-        body: JSON.stringify({conversationId, text}),
+        body: JSON.stringify({ conversationId, text }),
       });
-      console.log(text)
 
       const message = await data.json();
       dispatch({ type: "message/post/fullfilled", payload: message });
@@ -94,14 +82,14 @@ export const postMessages = (conversationId, text) => {
 export const getMessage = (id) => {
   return async (dispatch, getState) => {
     const state = getState();
-    
+
     dispatch({ type: "message/get/pending" });
     try {
       const data = await fetch(`http://localhost:4000/message/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${state.application.token}`,
-                    "Content-type": "application/json"
-                }
+        headers: {
+          Authorization: `Bearer ${state.application.token}`,
+          "Content-type": "application/json",
+        },
       });
       const message = await data.json();
       dispatch({ type: "message/get/fullfilled", payload: message });

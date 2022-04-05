@@ -18,7 +18,6 @@ const Ribbon = () => {
   const { image, loading, firstname, lastname } = useSelector(
     (state) => state.application
   );
-  console.log(firstname, lastname);
   const [showComments, setShowComments] = useState(false);
   const [savePost, setSavePost] = useState(false);
   const [likePost, setLikePost] = useState(false);

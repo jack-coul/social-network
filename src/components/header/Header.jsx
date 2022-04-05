@@ -17,11 +17,11 @@ const Header = () => {
   }, [dispatch]);
 
   const { users } = useSelector((state) => state.application);
-  const usersList = users.filter((user) => {
-    if (user.login.includes(user.toLowerCase())) {
-      return user;
-    }
-  });
+  // const usersList = users.filter((user) => {
+  //   if (user.login.includes(user.toLowerCase())) {
+  //     return user;
+  //   }
+  // });
   return (
     <header>
       <div className={styles.headerWrapper}>
