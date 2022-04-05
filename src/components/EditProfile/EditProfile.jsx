@@ -29,7 +29,7 @@ const EditProfile = () => {
             <input
               disabled={img}
               type="file"
-              onChange={(e) => setImg(e.target.files)}
+              onChange={(e) => setImg(e.target.files[0])}
             />
           </label>
         )}
