@@ -9,7 +9,6 @@ const SignIn = () => {
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
-    console.log(1);
     dispatch(loginUser(email, password));
   };
   const { loading, message } = useSelector((state) => state.application);

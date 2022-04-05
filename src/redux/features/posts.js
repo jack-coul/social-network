@@ -42,19 +42,19 @@ const posts = (state = initialState, action) => {
         loadingPosts: false,
         error: action.error,
       };
-    case "add/post/pending":
+    case "add/posts/pending":
       return {
         ...state,
         loadingPosts: true,
         error: null,
       };
-    case "add/post/fulfilled":
+    case "add/posts/fulfilled":
       return {
         ...state,
         loadingPosts: false,
         posts: [...state.posts, action.payload],
       };
-    case "add/post/rejected":
+    case "add/posts/rejected":
       return {
         ...state,
         loadingPosts: false,
@@ -112,6 +112,7 @@ export const getPosts = () => {
       } else {
         dispatch({ type: "get/posts/fulfilled", payload: posts });
       }
+      
     } catch (error) {
       dispatch({ type: "get/posts/rejected", error });
     }
@@ -131,7 +132,6 @@ export const getUserPosts = () => {
         },
       });
       const posts = await res.json();
-      console.log(posts);
       if (posts.error) {
         dispatch({ type: "get/userPosts/rejected", error: posts.error });
       } else {
@@ -150,9 +150,6 @@ export const addPost = (text, img) => {
     let formData = new FormData();
     img && formData.append("image", img);
     text && formData.append("text", text);
-
-    console.log(formData);
-
     dispatch({ type: "add/post/pending" });
     try {
       const res = await fetch("http://localhost:4000/post", {

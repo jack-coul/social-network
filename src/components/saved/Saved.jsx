@@ -9,7 +9,6 @@ const Saved = () => {
     dispatch(getSaves());
   }, [dispatch]);
   const savePosts = useSelector((state) => state.saves.saves);
-  console.log(savePosts);
 
   return (
     <div className={styles.main}>

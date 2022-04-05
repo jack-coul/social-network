@@ -22,7 +22,9 @@ const EditProfile = () => {
     <div className="example-1">
       <div className="form-group">
         {img ? (
-          <div className="img"></div>
+          <div className="img">
+            <img src="" alt="" />
+          </div>
         ) : (
           <label className="label">
             <AddAPhotoIcon className="addPhotoIcon" />
