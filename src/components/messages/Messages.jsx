@@ -25,7 +25,7 @@ const Messages = () => {
   // }, [])
 
   useEffect(() => {
-    socket.current = io("http://localhost:9990");
+    socket.current = io("http://localhost:8900");
     socket.current.on("getMessage", (data) => {
       setArrivelMessages({
         sender: data.senderId,
