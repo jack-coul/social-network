@@ -50,16 +50,16 @@ const SignIn = () => {
               <div className="form-group">
                 <label className="form-remember">
                   <input type="checkbox" />
-                  Remember Me
+                  запомнить меня
                 </label>
                 <Link className="form-recovery" to="#">
-                  Forgot Password?
+                  Забыл пароль?
                 </Link>
                 <span>{loading && message}</span>
               </div>
               <div className="form-group">
                 <Link to="#" onClick={handleSignIn}>
-                  Log In
+                  Войти
                 </Link>
               </div>
             </form>
