@@ -21,18 +21,22 @@ const EditProfile = () => {
   return (
     <div className="example-1">
       <div className="form-group">
-        <label className="label">
-          <AddAPhotoIcon className="addPhotoIcon" />
-          <input
-            disabled={img}
-            type="file"
-            onChange={(e) => setImg(e.target.files[0])}
-          />
-        </label>
+        {img ? (
+          <div className="img"></div>
+        ) : (
+          <label className="label">
+            <AddAPhotoIcon className="addPhotoIcon" />
+            <input
+              disabled={img}
+              type="file"
+              onChange={(e) => setImg(e.target.files)}
+            />
+          </label>
+        )}
       </div>
       <div className="inpValue">
         <input
-         placeholder="Введите имя"
+          placeholder="Введите имя"
           type="text"
           value={firstname}
           onChange={(e) => setFirstname(e.target.value)}
@@ -40,7 +44,7 @@ const EditProfile = () => {
       </div>
       <div className="inpValue">
         <input
-         placeholder="Введите фамилию"
+          placeholder="Введите фамилию"
           type="text"
           value={lastname}
           onChange={(e) => setLastname(e.target.value)}
@@ -48,7 +52,7 @@ const EditProfile = () => {
       </div>
       <div className="inpValue">
         <input
-         placeholder="Введите логин"
+          placeholder="Введите логин"
           type="text"
           value={login}
           onChange={(e) => setLogin(e.target.value)}

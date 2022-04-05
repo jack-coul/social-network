@@ -24,6 +24,24 @@ const posts = (state = initialState, action) => {
         loadingPosts: false,
         error: action.error,
       };
+    case "get/userPosts/pending":
+      return {
+        ...state,
+        loadingPosts: true,
+        error: null,
+      };
+    case "get/userPosts/fulfilled":
+      return {
+        ...state,
+        loadingPosts: false,
+        posts: [...action.payload],
+      };
+    case "get/userPosts/rejected":
+      return {
+        ...state,
+        loadingPosts: false,
+        error: action.error,
+      };
     case "add/post/pending":
       return {
         ...state,
@@ -100,13 +118,38 @@ export const getPosts = () => {
   };
 };
 
+export const getUserPosts = () => {
+  return async (dispatch, getState) => {
+    dispatch({ type: "get/userPosts/pending" });
+    const state = getState();
+    const token = state.application.token;
+    try {
+      const res = await fetch("http://localhost:4000/user/posts", {
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      });
+      const posts = await res.json();
+      console.log(posts);
+      if (posts.error) {
+        dispatch({ type: "get/userPosts/rejected", error: posts.error });
+      } else {
+        dispatch({ type: "get/userPosts/fulfilled", payload: posts });
+      }
+    } catch (error) {
+      dispatch({ type: "get/userPosts/rejected", error });
+    }
+  };
+};
+
 export const addPost = (text, img) => {
   return async (dispatch, getState) => {
     const state = getState();
     const token = state.application.token;
     let formData = new FormData();
-    formData.append("image", img);
-    formData.append("text", text);
+    img && formData.append("image", img);
+    text && formData.append("text", text);
 
     console.log(formData);
 
@@ -117,7 +160,7 @@ export const addPost = (text, img) => {
         headers: {
           authorization: `Bearer ${token}`,
         },
-        body: formData
+        body: formData,
       });
       const addedPost = await res.json();
 
