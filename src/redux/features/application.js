@@ -76,6 +76,23 @@ const application = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case "get/users/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "get/users/fullfilled":
+      console.log(action.payload.firstname, action.payload.lastname);
+      return {
+        ...state,
+        userINF: [...action.payload],
+      };
+    case "get/users/rejected":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     case "edit/user/pending":
       return {
         ...state,
@@ -208,6 +225,7 @@ export const editUser = (img, firstname, lastname, login) => {
     const state = getState();
     const token = state.application.token;
     let formData = new FormData();
+    console.log(img);
     img && formData.append("image", img);
     firstname && formData.append("firstname", firstname);
     lastname && formData.append("lastname", lastname);
@@ -229,6 +247,24 @@ export const editUser = (img, firstname, lastname, login) => {
       }
     } catch (error) {
       dispatch({ type: "edit/user/rejected", error });
+    }
+  };
+};
+
+export const getUsers = () => {
+  return async (dispatch) => {
+    dispatch({ type: "get/users/pending" });
+    try {
+      const res = await fetch("http://localhost:4000/users");
+      const users = await res.json();
+
+      if (users.error) {
+        dispatch({ type: "get/users/rejected", error: users.error });
+      } else {
+        dispatch({ type: "get/users/fulfilled", payload: users });
+      }
+    } catch (error) {
+      dispatch({ type: "get/users/rejected", error });
     }
   };
 };
