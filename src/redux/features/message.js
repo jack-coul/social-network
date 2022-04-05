@@ -31,7 +31,6 @@ const message = (state = initialState, action) => {
                 error: null
             }
         case "message/get/fullfilled":
-            console.log(action.payload)
             return{
                 ...state, 
                 message:[
@@ -45,10 +44,17 @@ const message = (state = initialState, action) => {
                 error: action.error
             }
         case "onlineMessage":
-            console.log(action.payload)
             return{
                 ...state,
                 message:[
+                    ...state.message,
+                    action.payload
+                ]
+            }
+        case "newMsg":
+            return{
+                ...state,
+                message: [
                     ...state.message,
                     action.payload
                 ]
