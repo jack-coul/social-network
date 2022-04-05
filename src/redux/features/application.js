@@ -1,5 +1,6 @@
 const initialState = {
   userINF: [],
+  users: [],
   token: localStorage.getItem("token"),
   id: "",
   firstname: "",
@@ -60,7 +61,6 @@ const application = (state = initialState, action) => {
         loading: true,
       };
     case "user/get/fullfilled":
-      console.log(action.payload.firstname, action.payload.lastname);
       return {
         ...state,
         userINF: [...state.userINF, action.payload],
@@ -71,6 +71,22 @@ const application = (state = initialState, action) => {
         image: action.payload.image,
       };
     case "user/get/rejected":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case "get/users/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "get/users/fulfilled":
+      return {
+        ...state,
+        users: [...action.payload],
+      };
+    case "get/users/rejected":
       return {
         ...state,
         loading: false,
@@ -134,7 +150,6 @@ export const registerUser = (firstname, lastname, login, email, password) => {
 
 export const loginUser = (email, password) => {
   return async (dispatch) => {
-    console.log(1);
     dispatch({ type: "login/post/pending" });
     try {
       const data = await fetch("http://localhost:4000/user/signin", {
@@ -162,7 +177,6 @@ export const loginUser = (email, password) => {
           },
         });
       }
-      console.log(token);
     } catch (err) {
       dispatch({ type: "login/post/rejected", error: err.toString() });
     }
@@ -182,7 +196,6 @@ export const getUser = () => {
         },
       });
       const user = await data.json();
-      console.log(user);
       if (user.error) {
         dispatch({ type: "user/get/rejected", error: user.error });
       } else {
@@ -229,6 +242,24 @@ export const editUser = (img, firstname, lastname, login) => {
       }
     } catch (error) {
       dispatch({ type: "edit/user/rejected", error });
+    }
+  };
+};
+
+export const getUsers = () => {
+  return async (dispatch) => {
+    dispatch({ type: "get/users/pending" });
+    try {
+      const res = await fetch("http://localhost:4000/users");
+      const users = await res.json();
+
+      if (users.error) {
+        dispatch({ type: "get/users/rejected", error: users.error });
+      } else {
+        dispatch({ type: "get/users/fulfilled", payload: users });
+      }
+    } catch (error) {
+      dispatch({ type: "get/users/rejected", error });
     }
   };
 };

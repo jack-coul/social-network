@@ -23,6 +23,7 @@ const Ribbon = ({post, loadingPosts}) => {
   }, [dispatch]);
 
   const comments = useSelector(state=> state.comments.comments)
+
   const [showComments, setShowComments] = useState(false);
   const [savePost, setSavePost] = useState(false);
   const [likePost, setLikePost] = useState(false);

@@ -9,7 +9,6 @@ const SignIn = () => {
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
-    console.log(1);
     dispatch(loginUser(email, password));
   };
   const { loading, message } = useSelector((state) => state.application);
@@ -50,16 +49,16 @@ const SignIn = () => {
               <div className="form-group">
                 <label className="form-remember">
                   <input type="checkbox" />
-                  Remember Me
+                  запомнить меня
                 </label>
                 <Link className="form-recovery" to="#">
-                  Forgot Password?
+                  Забыл пароль?
                 </Link>
                 <span>{loading && message}</span>
               </div>
               <div className="form-group">
                 <Link to="#" onClick={handleSignIn}>
-                  Log In
+                  Войти
                 </Link>
               </div>
             </form>

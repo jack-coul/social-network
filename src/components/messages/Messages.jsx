@@ -29,8 +29,7 @@ const Messages = () => {
     setMessages(message);
 
     socket.current.on("getMessage", (data) => {
-      console.log(data)
-      setArrivelMessages ( {
+      setArrivelMessages({
         sender: data.senderId,
         text: data.text,
       });
@@ -54,14 +53,15 @@ const Messages = () => {
 
   useEffect(() => {
     socket.current.emit("addUser", userId);
-    socket.current.on("getUsers", (users) => {
-    });
+    socket.current.on("getUsers", (users) => {});
   }, [dispatch, userId]);
-  
+
   useEffect(() => {
     dispatch(getMessage(currentChat?._id));
+]
   }, [currentChat?._id, dispatch, message]);
   
+
   useEffect(() => {
     dispatch(getConversation());
   }, [dispatch]);
@@ -71,7 +71,7 @@ const Messages = () => {
    
     const receiverId = currentChat?.members.find(
       (member) => member._id !== userId
-      );
+    );
     socket.current.emit("sendMessage", {
       senderId: userId,
       receiverId: receiverId._id,
@@ -111,7 +111,7 @@ const Messages = () => {
           <>
             <div className={styles.dialogues}>
               {messages?.map((m) => {
-                return <Message message={m} userId = {userId} />;
+                return <Message message={m} userId={userId} />;
               })}
 
               <div className={styles.inpWrapper}>

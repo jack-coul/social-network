@@ -1,28 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { fakeDatabase } from "../fakeDatabase";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserPosts } from "../../../../redux/features/posts";
 import Post from "./Post";
 import styles from "./Posts.module.css";
 
 const Posts = () => {
   //   const [posts] = useState(fakeDatabase);
-  const [window, setWindow] = useState(false);
+  const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
-  const handleShowContent = () => {
-    setWindow(true);
-  };
+  useEffect(() => {
+    dispatch(getUserPosts());
+  }, [dispatch]);
+
   return (
     <div>
-      {window && <div>jjkjkjkjhkjh</div>}
       <div className={styles.main}>
         {posts.map((post) => {
-          return (
-            <Post
-              key={post._id}
-              post={post}
-              handleShowContent={handleShowContent}
-            />
-          );
+          return <Post key={post._id} post={post} />;
         })}
       </div>
     </div>
