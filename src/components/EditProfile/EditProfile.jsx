@@ -22,14 +22,16 @@ const EditProfile = () => {
     <div className="example-1">
       <div className="form-group">
         {img ? (
-          <div className="img"></div>
+          <div className="img">
+            <img src="" alt="" />
+          </div>
         ) : (
           <label className="label">
             <AddAPhotoIcon className="addPhotoIcon" />
             <input
               disabled={img}
               type="file"
-              onChange={(e) => setImg(e.target.files)}
+              onChange={(e) => setImg(e.target.files[0])}
             />
           </label>
         )}

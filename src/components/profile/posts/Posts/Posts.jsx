@@ -11,7 +11,7 @@ const Posts = () => {
   const { posts } = useSelector((state) => state.posts);
   useEffect(() => {
     dispatch(getUserPosts());
-  }, [dispatch, posts]);
+  }, [dispatch]);
 
   return (
     <div>
