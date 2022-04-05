@@ -3,7 +3,8 @@
 }
 .header {
   display: flex;
-  margin-bottom: 44px;
+  margin-bottom: 17px;
+  align-items: center;
 }
 .headerImg {
   width: 292px;
@@ -120,4 +121,7 @@
 a {
   text-decoration: none;
   color: unset;
+}
+.followsWrap {
+  margin-right: 10px;
 }
