@@ -27,35 +27,28 @@ const Messages = () => {
   useEffect(() => {
     socket.current = io("http://localhost:9990");
     socket.current.on("getMessage", (data) => {
-      console.log(data)
-      setArrivelMessages ( {
+      setArrivelMessages({
         sender: data.senderId,
         text: data.text,
       });
-    } );
+    });
 
-    if(arrivelMessages &&
-      currentChat?.members.includes(arrivelMessages.sender)) {
-        setMessages([...message, arrivelMessages]);
-      }
-
-      
-      console.log(messages)
-
+    if (
+      arrivelMessages &&
+      currentChat?.members.includes(arrivelMessages.sender)
+    ) {
+      setMessages([...message, arrivelMessages]);
+    }
   }, [arrivelMessages, currentChat, message, messages]);
- 
-  
-
 
   useEffect(() => {
     socket.current.emit("addUser", userId);
-    socket.current.on("getUsers", (users) => {
-    });
+    socket.current.on("getUsers", (users) => {});
   }, [dispatch, userId]);
-  
+
   useEffect(() => {
     dispatch(getMessage(currentChat?._id));
-     setMessages(message);
+    setMessages(message);
   }, [currentChat, dispatch, message]);
 
   useEffect(() => {
@@ -71,7 +64,7 @@ const Messages = () => {
     // }
     const receiverId = currentChat?.members.find(
       (member) => member._id !== userId
-      );
+    );
     socket.current.emit("sendMessage", {
       senderId: userId,
       receiverId: receiverId._id,
@@ -112,7 +105,7 @@ const Messages = () => {
           <>
             <div className={styles.dialogues}>
               {messages?.map((m) => {
-                return <Message message={m} userId = {userId} />;
+                return <Message message={m} userId={userId} />;
               })}
 
               <div className={styles.inpWrapper}>
