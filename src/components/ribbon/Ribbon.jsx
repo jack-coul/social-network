@@ -8,26 +8,33 @@ import Logo1 from "../Images/img2.jpg";
 // import Logo3 from "../Images/bubble-chat.png";
 // import Logo4 from "../Images/send.png";
 import { getUser } from "../../redux/features/application";
+import { addLike } from "../../redux/features/likes";
+import Comments from "./Comments";
+import { addComment, getComments } from "../../redux/features/comments";
 
-const Ribbon = () => {
+const Ribbon = ({post, loadingPosts}) => {
   const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(getComments(post._id))
+  },[dispatch, post._id])
+
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
 
-  const { image, loading, firstname, lastname } = useSelector(
-    (state) => state.application
-  );
-  console.log(firstname, lastname);
+  const comments = useSelector(state=> state.comments.comments)
   const [showComments, setShowComments] = useState(false);
   const [savePost, setSavePost] = useState(false);
   const [likePost, setLikePost] = useState(false);
+  const [text, setText]= useState()
 
   const hundleTakeLike = () => {
     if (likePost) {
       setLikePost(false);
+      dispatch()
     } else {
       setLikePost(true);
+      dispatch(addLike())
     }
   };
 
@@ -38,7 +45,9 @@ const Ribbon = () => {
       setSavePost(true);
     }
   };
-
+  const handlePostComment = (text,id)=>{
+    dispatch(addComment(text,id))
+  }
   const hundleShowComments = () => {
     if (showComments) {
       setShowComments(false);
@@ -50,21 +59,22 @@ const Ribbon = () => {
   return (
     <div className={styles.ribbonWrapper}>
       <div className={styles.feed_foot}>
-        {loading ? (
+        {loadingPosts ? (
           <CircularProgress />
         ) : (
           <img
             width={34}
             height={34}
-            src={image ? `http://localhost:4000/${image}` : Logo}
+            src={post.user.avatar ? `http://localhost:4000/${post.user.avatar}` : Logo}
             alt=""
           />
         )}
-        <h4>{`${firstname} ${lastname}`}</h4>
+        <span>{post.text}</span>
+        <h4>{`${post.user.firstname} ${post.user.lastname}`}</h4>
       </div>
       <div className={styles.feed_main}>
         <div className={styles.feed_file}>
-          <img src={Logo1} alt="" />
+          <img  alt="nf" src={post.imagePost ? `http://localhost:4000/${post.imagePost}` : Logo} />
         </div>
       </div>
       <div className={styles.section_func}>
@@ -158,10 +168,10 @@ const Ribbon = () => {
           </div>
         </div>
         <div className={styles.ig_name}>
-          <h4>{firstname}</h4>
+          <h4>{post.user.firstname}</h4>
         </div>
         <div className={styles.like_sect}>
-          <span className={styles.likes}>7 002</span>
+          <span className={styles.likes}>{post.likes.length}</span>
           <span> отметок "Нравится"</span>
         </div>
 
@@ -170,85 +180,22 @@ const Ribbon = () => {
         ) : (
           <div className={styles.comments_sec}>
             <span onClick={hundleShowComments}>Посмотреть все комментарии</span>
-            <span className={styles.commentCounter}> 925</span>
+            <span className={styles.commentCounter}> {comments.length}</span>
           </div>
         )}
         {showComments ? (
           <div className={styles.commentsWrapper}>
-            <div className={styles.comments}>
-              {" "}
-              <span>
-                <img
-                  width={16}
-                  src="https://cdn-icons.flaticon.com/png/512/1358/premium/1358085.png?token=exp=1648816308~hmac=125d7a9dd17f9be87c78b878ac147fdd"
-                  alt=""
-                />
-              </span>{" "}
-              комментарий1
+            {comments.map((comment)=>{
+              return <Comments comment={comment}/>
+            })}
             </div>
-            <div className={styles.comments}>
-              {" "}
-              <span>
-                <img
-                  width={16}
-                  src="https://cdn-icons.flaticon.com/png/512/1358/premium/1358085.png?token=exp=1648816308~hmac=125d7a9dd17f9be87c78b878ac147fdd"
-                  alt=""
-                />
-              </span>{" "}
-              комментарий1
-            </div>
-            <div className={styles.comments}>
-              {" "}
-              <span>
-                <img
-                  width={16}
-                  src="https://cdn-icons.flaticon.com/png/512/1358/premium/1358085.png?token=exp=1648816308~hmac=125d7a9dd17f9be87c78b878ac147fdd"
-                  alt=""
-                />
-              </span>{" "}
-              комментарий1
-            </div>
-            <div className={styles.comments}>
-              {" "}
-              <span>
-                <img
-                  width={16}
-                  src="https://cdn-icons.flaticon.com/png/512/1358/premium/1358085.png?token=exp=1648816308~hmac=125d7a9dd17f9be87c78b878ac147fdd"
-                  alt=""
-                />
-              </span>{" "}
-              комментарий2
-            </div>
-            <div className={styles.comments}>
-              {" "}
-              <span>
-                <img
-                  width={16}
-                  src="https://cdn-icons.flaticon.com/png/512/1358/premium/1358085.png?token=exp=1648816308~hmac=125d7a9dd17f9be87c78b878ac147fdd"
-                  alt=""
-                />
-              </span>{" "}
-              комментарий3
-            </div>
-            <div className={styles.comments}>
-              {" "}
-              <span>
-                <img
-                  width={16}
-                  src="https://cdn-icons.flaticon.com/png/512/1358/premium/1358085.png?token=exp=1648816308~hmac=125d7a9dd17f9be87c78b878ac147fdd"
-                  alt=""
-                />
-              </span>{" "}
-              комментарий4
-            </div>
-          </div>
         ) : (
           ""
         )}
 
         <div className={styles.footer_sec}>
-          <input type="" placeholder=" Добавить комментарий..." />
-          <button>Опубликовать</button>
+          <input type="" placeholder=" Добавить комментарий..." value = {text} onChange = {(e)=> setText(e.target.value)}/>
+          <button onClick={()=> handlePostComment(text, post._id)}>Опубликовать</button>
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import likes from "./features/likes";
 import message from "./features/message";
 import notification from "./features/notification";
 import saves from "./features/saves";
+import comments from "./features/comments";
 
 const combineRouter = combineReducers({
   application,
@@ -19,6 +20,7 @@ const combineRouter = combineReducers({
   message,
   notification,
   saves,
+  comments
 });
 
 const store = createStore(

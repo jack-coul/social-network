@@ -43,22 +43,6 @@ const message = (state = initialState, action) => {
                 ...state,
                 error: action.error
             }
-        case "onlineMessage":
-            return{
-                ...state,
-                message:[
-                    ...state.message,
-                    action.payload
-                ]
-            }
-        case "newMsg":
-            return{
-                ...state,
-                message: [
-                    ...state.message,
-                    action.payload
-                ]
-            }
     default:
       return {
         ...state,
@@ -99,8 +83,7 @@ export const getMessage = (id) => {
     try {
       const data = await fetch(`http://localhost:4000/message/${id}`, {
                 headers: {
-                    Authorization: `Bearer ${state.application.token}`,
-                    "Content-type": "application/json"
+                    Authorization: `Bearer ${state.application.token}`
                 }
       });
       const message = await data.json();
