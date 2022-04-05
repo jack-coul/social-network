@@ -12,12 +12,9 @@ import { addPost, getUserPosts } from "../../../redux/features/posts";
 import styles from "./AddPosts.module.css";
 
 const AddPosts = () => {
+  const posts = useSelector((state) => state.posts.posts);
   const [img, setImg] = useState(null);
   const [description, setDescription] = useState("");
-
-const posts = useSelector(state => state.posts.posts);
-    const [img, setImg] = useState(null);
-    const [description, setDescription] = useState("");
   const handleAddPost = () => {
     dispatch(addPost(description, img));
     setImg(null);
