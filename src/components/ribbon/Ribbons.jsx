@@ -12,6 +12,7 @@ const Ribbons = () => {
     const {posts, loadingPosts} = useSelector(
         (state) => state.posts
       );
+
     return (
         <div>
             {

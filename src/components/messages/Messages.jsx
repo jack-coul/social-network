@@ -56,10 +56,10 @@ const Messages = () => {
     socket.current.on("getUsers", (users) => {});
   }, [dispatch, userId]);
 
-  useEffect(() => {
-    dispatch(getMessage(currentChat?._id));
-]
-  }, [currentChat?._id, dispatch, message]);
+//   useEffect(() => {
+//     dispatch(getMessage(currentChat?._id));
+// ]
+//   }, [currentChat?._id, dispatch, message]);
   
 
   useEffect(() => {
