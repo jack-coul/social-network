@@ -25,42 +25,45 @@ const Messages = () => {
   // }, [])
 
   useEffect(() => {
-    socket.current = io("ws://localhost:9990");
-    setMessages(message);
+    socket.current = io("http://localhost:8900");
 
-    socket.current.on("getMessage", (data) => {
-      setArrivelMessages({
-        sender: data.senderId,
-        text: data.text,
-      });
-    }, [arrivelMessages]);
+    socket.current.on(
+      "getMessage",
+      (data) => {
+        setArrivelMessages({
+          sender: data.senderId,
+          text: data.text,
+        });
+      },
+      [arrivelMessages]
+    );
 
     // if(arrivelMessages &&
     //   currentChat?.members.includes(arrivelMessages.sender)) {
     //     setMessages([...message, arrivelMessages]);
     //   }
-
   }, [arrivelMessages, message]);
- 
-   useEffect(() => {
-    if(arrivelMessages &&
-      currentChat?.members.includes(arrivelMessages.sender)) {
-        setMessages([...message, arrivelMessages]);
-      }
 
-  }, [arrivelMessages, currentChat?.members, message])
-
+  useEffect(() => {
+    if (
+      arrivelMessages &&
+      currentChat?.members.includes(arrivelMessages.sender)
+    ) {
+      setMessages([...message, arrivelMessages]);
+    }
+  }, [arrivelMessages, currentChat?.members, message]);
 
   useEffect(() => {
     socket.current.emit("addUser", userId);
     socket.current.on("getUsers", (users) => {});
   }, [dispatch, userId]);
 
-//   useEffect(() => {
-//     dispatch(getMessage(currentChat?._id));
-// ]
-//   }, [currentChat?._id, dispatch, message]);
-  
+
+
+  useEffect(() => {
+    dispatch(getMessage(currentChat?._id));
+  }, [currentChat?._id, dispatch, message]);
+
 
   useEffect(() => {
     dispatch(getConversation());
@@ -68,7 +71,7 @@ const Messages = () => {
 
   const handleSubmit = (conversationId, text) => {
     dispatch(postMessages(conversationId, text));
-   
+
     const receiverId = currentChat?.members.find(
       (member) => member._id !== userId
     );

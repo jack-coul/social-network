@@ -12,30 +12,29 @@ import { addLike } from "../../redux/features/likes";
 import Comments from "./Comments";
 import { addComment, getComments } from "../../redux/features/comments";
 
-const Ribbon = ({post, loadingPosts}) => {
+const Ribbon = ({ post, loadingPosts }) => {
   const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(getComments(post._id))
-  },[dispatch, post._id])
+  useEffect(() => {
+    dispatch(getComments());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
 
-  const comments = useSelector(state=> state.comments.comments)
-
+  const comments = useSelector((state) => state.comments.comments);
   const [showComments, setShowComments] = useState(false);
   const [savePost, setSavePost] = useState(false);
   const [likePost, setLikePost] = useState(false);
-  const [text, setText]= useState()
+  const [text, setText] = useState();
 
   const hundleTakeLike = () => {
     if (likePost) {
       setLikePost(false);
-      dispatch()
+      dispatch();
     } else {
       setLikePost(true);
-      dispatch(addLike())
+      dispatch(addLike());
     }
   };
 
@@ -46,9 +45,9 @@ const Ribbon = ({post, loadingPosts}) => {
       setSavePost(true);
     }
   };
-  const handlePostComment = (text,id)=>{
-    dispatch(addComment(text,id))
-  }
+  const handlePostComment = (text, id) => {
+    dispatch(addComment(text, id));
+  };
   const hundleShowComments = () => {
     if (showComments) {
       setShowComments(false);
@@ -66,7 +65,11 @@ const Ribbon = ({post, loadingPosts}) => {
           <img
             width={34}
             height={34}
-            src={post.user.avatar ? `http://localhost:4000/${post.user.avatar}` : Logo}
+            src={
+              post.user.avatar
+                ? `http://localhost:4000/${post.user.avatar}`
+                : Logo
+            }
             alt=""
           />
         )}
@@ -75,7 +78,12 @@ const Ribbon = ({post, loadingPosts}) => {
       </div>
       <div className={styles.feed_main}>
         <div className={styles.feed_file}>
-          <img  alt="nf" src={post.imagePost ? `http://localhost:4000/${post.imagePost}` : Logo} />
+          <img
+            alt="nf"
+            src={
+              post.imagePost ? `http://localhost:4000/${post.imagePost}` : Logo
+            }
+          />
         </div>
       </div>
       <div className={styles.section_func}>
@@ -181,22 +189,34 @@ const Ribbon = ({post, loadingPosts}) => {
         ) : (
           <div className={styles.comments_sec}>
             <span onClick={hundleShowComments}>Посмотреть все комментарии</span>
-            <span className={styles.commentCounter}> {comments.length}</span>
+            <span className={styles.commentCounter}>
+              {" "}
+              {comments.filter((comment) => comment.post === post._id).length}
+            </span>
           </div>
         )}
         {showComments ? (
           <div className={styles.commentsWrapper}>
-            {comments.map((comment)=>{
-              return <Comments comment={comment}/>
+            {comments.map((comment) => {
+              if (comment.post === post._id) {
+                return <Comments comment={comment} />;
+              }
             })}
-            </div>
+          </div>
         ) : (
           ""
         )}
 
         <div className={styles.footer_sec}>
-          <input type="" placeholder=" Добавить комментарий..." value = {text} onChange = {(e)=> setText(e.target.value)}/>
-          <button onClick={()=> handlePostComment(text, post._id)}>Опубликовать</button>
+          <input
+            type=""
+            placeholder=" Добавить комментарий..."
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button onClick={() => handlePostComment(text, post._id)}>
+            Опубликовать
+          </button>
         </div>
       </div>
     </div>

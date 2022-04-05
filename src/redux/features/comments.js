@@ -1,5 +1,6 @@
 const inintialState = {
   comments: [],
+  error: null,
 };
 
 const comments = (state = inintialState, action) => {
@@ -8,6 +9,7 @@ const comments = (state = inintialState, action) => {
       return {
         ...state,
         loadingComments: true,
+        error: null,
       };
     case "get/comments/fullfilled":
       return {
@@ -18,6 +20,7 @@ const comments = (state = inintialState, action) => {
     case "get/comments/rejected":
       return {
         ...state,
+        loadingComments: false,
         error: action.error,
       };
     case "post/comment/pending":
@@ -36,24 +39,26 @@ const comments = (state = inintialState, action) => {
         ...state,
         error: action.error,
       };
-      case "delete/comment/pending":
-        return {
-          ...state,
-          loadingDeleteComments: true,
-        };
-      case "delete/comment/fullfilled":
-        return {
-          ...state,
-          comments: [...state.comments.filter((comment)=>{
-             return comment._id !== action.payload
-          })],
-          loadingDeleteComments: false,
-        };
-      case "delete/comment/rejected":
-        return {
-          ...state,
-          error: action.error,
-        };
+    case "delete/comment/pending":
+      return {
+        ...state,
+        loadingDeleteComments: true,
+      };
+    case "delete/comment/fullfilled":
+      return {
+        ...state,
+        comments: [
+          ...state.comments.filter((comment) => {
+            return comment._id !== action.payload;
+          }),
+        ],
+        loadingDeleteComments: false,
+      };
+    case "delete/comment/rejected":
+      return {
+        ...state,
+        error: action.error,
+      };
     default:
       return {
         ...state,
@@ -63,14 +68,17 @@ const comments = (state = inintialState, action) => {
 
 export default comments;
 
-export const getComments = (id) => {
+export const getComments = () => {
   return async (dispatch) => {
     dispatch({ type: "get/comments/pending" });
     try {
-        const res = await fetch(`http://localhost:4000/comments/${id}`);
-        const data = await res.json();
-        console.log(data)
-      dispatch({ type: "get/comments/fullfilled", payload: data });
+      const res = await fetch("http://localhost:4000/comments");
+      const data = await res.json();
+      if (data.error) {
+        dispatch({ type: "get/comments/rejected", error: data.error });
+      } else {
+        dispatch({ type: "get/comments/fullfilled", payload: data });
+      }
     } catch (err) {
       dispatch({ type: "get/comments/rejected", error: err.toString() });
     }
