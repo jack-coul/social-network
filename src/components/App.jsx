@@ -11,6 +11,7 @@ import SignIn from "./singIn&singUp/signIn/SignIn";
 import SignUp from "./singIn&singUp/signUp/SignUp";
 import { getUser } from "../redux/features/application";
 import EditProfile from "./EditProfile/EditProfile";
+import Ribbons from "./ribbon/Ribbons";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function App() {
             <Routes>
               <Route path="/messages" element={<Messages />} />
               <Route path="/" element={<Profile />} />
-              <Route path="/instafeed" element={<Ribbon />} />
+              <Route path="/instafeed" element={<Ribbons />} />
               <Route path="/signin" element={<Navigate to="/" replace />} />
               <Route path="/editProfile" element={<EditProfile />} />
               <Route

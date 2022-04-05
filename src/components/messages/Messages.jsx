@@ -14,8 +14,8 @@ const Messages = () => {
   const dispatch = useDispatch();
   const [conversation, setConversation] = useState();
   const [currentChat, setCurrentChat] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [newMessages, setNewMessages] = useState("");
+  const [messages, setMessages] = useState();
+  const [newMessages, setNewMessages] = useState(null);
   const [arrivelMessages, setArrivelMessages] = useState({});
 
   const socket = useRef();
@@ -25,21 +25,31 @@ const Messages = () => {
   // }, [])
 
   useEffect(() => {
+
     socket.current = io("http://localhost:8900");
+
     socket.current.on("getMessage", (data) => {
       setArrivelMessages({
         sender: data.senderId,
         text: data.text,
       });
-    });
+    }, [arrivelMessages]);
 
-    if (
-      arrivelMessages &&
-      currentChat?.members.includes(arrivelMessages.sender)
-    ) {
-      setMessages([...message, arrivelMessages]);
-    }
-  }, [arrivelMessages, currentChat, message, messages]);
+    // if(arrivelMessages &&
+    //   currentChat?.members.includes(arrivelMessages.sender)) {
+    //     setMessages([...message, arrivelMessages]);
+    //   }
+
+  }, [arrivelMessages, message]);
+ 
+   useEffect(() => {
+    if(arrivelMessages &&
+      currentChat?.members.includes(arrivelMessages.sender)) {
+        setMessages([...message, arrivelMessages]);
+      }
+
+  }, [arrivelMessages, currentChat?.members, message])
+
 
   useEffect(() => {
     socket.current.emit("addUser", userId);
@@ -48,8 +58,9 @@ const Messages = () => {
 
   useEffect(() => {
     dispatch(getMessage(currentChat?._id));
-    setMessages(message);
-  }, [currentChat, dispatch, message]);
+]
+  }, [currentChat?._id, dispatch, message]);
+  
 
   useEffect(() => {
     dispatch(getConversation());
@@ -57,11 +68,7 @@ const Messages = () => {
 
   const handleSubmit = (conversationId, text) => {
     dispatch(postMessages(conversationId, text));
-    // const messagePost = {
-    //   sender: userId,
-    //   text: text,
-    //   conversationId: currentChat._id
-    // }
+   
     const receiverId = currentChat?.members.find(
       (member) => member._id !== userId
     );
@@ -70,7 +77,6 @@ const Messages = () => {
       receiverId: receiverId._id,
       text: newMessages,
     });
-    // setMessages([...messages, messagePost])
   };
 
   return (
