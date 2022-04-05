@@ -112,6 +112,7 @@ export const getPosts = () => {
       } else {
         dispatch({ type: "get/posts/fulfilled", payload: posts });
       }
+      
     } catch (error) {
       dispatch({ type: "get/posts/rejected", error });
     }
