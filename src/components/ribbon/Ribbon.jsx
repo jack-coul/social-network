@@ -67,7 +67,7 @@ const Ribbon = ({ post, loadingPosts }) => {
             height={34}
             src={
               post.user.avatar
-                ? `http://localhost:4000/${post.user.avatar}`
+                ? post.user.avatar 
                 : Logo
             }
             alt=""
@@ -81,7 +81,7 @@ const Ribbon = ({ post, loadingPosts }) => {
           <img
             alt="nf"
             src={
-              post.imagePost ? `http://localhost:4000/${post.imagePost}` : Logo
+              post.imagePost ? post.imagePost : Logo
             }
           />
         </div>
