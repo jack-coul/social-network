@@ -23,11 +23,6 @@ const comments = (state = inintialState, action) => {
         loadingComments: false,
         error: action.error,
       };
-    case "post/comment/pending":
-      return {
-        ...state,
-        loadingPostComments: true,
-      };
     case "post/comment/fullfilled":
       return {
         ...state,
@@ -84,6 +79,7 @@ export const getComments = () => {
     }
   };
 };
+
 export const addComment = (text, id) => {
   return async (dispatch, getState) => {
     const state = getState();
@@ -97,7 +93,7 @@ export const addComment = (text, id) => {
         },
         body: JSON.stringify({ text }),
       });
-      const data = res.json();
+      const data = await res.json();
       dispatch({ type: "post/comment/fullfilled", payload: data });
     } catch (err) {
       dispatch({ type: "post/comment/rejected", error: err.toString() });

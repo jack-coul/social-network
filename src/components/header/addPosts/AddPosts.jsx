@@ -8,8 +8,9 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, getUserPosts } from "../../../redux/features/posts";
+import { addPost} from "../../../redux/features/posts";
 import styles from "./AddPosts.module.css";
+import logo from '../../../images/2040520.png'
 
 const AddPosts = () => {
 
@@ -46,7 +47,7 @@ const posts = useSelector(state => state.posts.posts);
         style={{ cursor: "pointer" }}
         width={24}
         height={24}
-        src="https://cdn-icons.flaticon.com/png/512/3161/premium/3161837.png?token=exp=1649063899~hmac=9f58a67ff702ee35ec2a895f838509eb"
+        src={logo}
         alt=""
       />
       <Dialog
