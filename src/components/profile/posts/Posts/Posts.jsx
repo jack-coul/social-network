@@ -9,6 +9,8 @@ const Posts = () => {
   //   const [posts] = useState(fakeDatabase);
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
+  const comments = useSelector((state) => state.comments.comments);
+
   useEffect(() => {
     dispatch(getUserPosts());
   }, [dispatch]);
@@ -17,7 +19,7 @@ const Posts = () => {
     <div>
       <div className={styles.main}>
         {posts.map((post) => {
-          return <Post key={post._id} post={post} />;
+          return <Post comments={comments} key={post._id} post={post} />;
         })}
       </div>
     </div>

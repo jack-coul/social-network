@@ -1,10 +1,28 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { addComment } from "../../redux/features/comments";
 import styles from "./Content.module.css";
-import { fakeComments } from "./fakeComments";
 
-const Content = ({ post, img }) => {
-  const [comments] = useState(fakeComments);
+const Content = ({ comments, setWindow, post, img }) => {
+
+  const [text, setText] = React.useState("");
+
+  
+
+  const hundleGetCommentText = (e) => {
+    setText(e.target.value);
+
+  };
+
+  const dispatch = useDispatch();
+
+  const hundleAddComments = () => {
+    dispatch(addComment(text, post._id));
+  };
+
+  const hundleCloseWindow = () => {
+    setWindow(false);
+  };
 
   return (
     <div className={styles.content}>
@@ -17,14 +35,14 @@ const Content = ({ post, img }) => {
         <div className={styles.commentsHeader}>
           <div className={styles.commentsHeaderTitle}>
             <div className={styles.commentsHeaderImg}>
-              <img
-                src= {post.user.avatar}
-                alt="user imag"
-              />
+              <img src={post.user.avatar} alt="user imag" />
             </div>
             <div className={styles.commentsHeaderUserTitle}>
               <div className={styles.userLogin}>{post.user.login}</div>
             </div>
+            <button onClick={hundleCloseWindow} className={styles.buttonClose}>
+              x
+            </button>
           </div>
           <div className={styles.postText}>{post.text}</div>
         </div>
@@ -33,14 +51,13 @@ const Content = ({ post, img }) => {
             return (
               <div className={styles.mainCommentsShow}>
                 <div className={styles.mainCommentsUserLogo}>
-                  <img src={comment.userLogo} alt="user Logo" />
+                  <img src={post.user.avatar} alt="user Logo" />
                 </div>
                 <div>
                   <div className={styles.userInfo}>
-                    <div className={styles.userName}>{comment.userName}</div>
-                    <div className={styles.userComment}>{comment.comment}</div>
+                    <div className={styles.userName}>userName</div>
+                    <div className={styles.userComment}>{comment.text}</div>
                   </div>
-                  <div className={styles.commentTime}>{comment.time}</div>
                 </div>
               </div>
             );
@@ -135,9 +152,11 @@ const Content = ({ post, img }) => {
           </div>
         </div>
         <div>
-          <form className={styles.commentForm} method="post">
+          <div className={styles.commentForm}>
             <div className={styles.commentInput}>
               <input
+                onChange={hundleGetCommentText}
+                value={text}
                 name=""
                 id=""
                 placeholder="Добавьте комментарий..."
@@ -146,9 +165,9 @@ const Content = ({ post, img }) => {
               />
             </div>
             <div className={styles.commentSend}>
-              <a href="hjkl">Опубликовать</a>
+              <button onClick={hundleAddComments}>Опубликовать</button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

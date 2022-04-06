@@ -236,3 +236,38 @@ body {
  font-size: 24px;
  font-weight: 700;
 }
+.form-two .form-group button {
+  width: 45%;
+}
+.form-two .form-group a {
+  outline: none;
+  background: #4285f4;
+  width: 45%;
+  border: 0;
+  text-align: center;
+  border-radius: 4px;
+  padding: 12px 20px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  line-height: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.form-group1 a {
+  outline: none;
+  background: #4285f4;
+  width: 45%;
+  border: 0;
+  text-align: center;
+  border-radius: 4px;
+  padding: 12px 20px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  line-height: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+}
