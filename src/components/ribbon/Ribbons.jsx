@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPosts } from '../../redux/features/posts';
-import Ribbon from './Ribbon';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "../../redux/features/posts";
+import Ribbon from "./Ribbon";
 
 const Ribbons = () => {
+
     
     const dispatch = useDispatch()
     useEffect(()=>{
@@ -25,6 +26,7 @@ const Ribbons = () => {
             }
         </div>
     );
+
 };
 
 export default Ribbons;
