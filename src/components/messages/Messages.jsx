@@ -48,10 +48,13 @@ const Messages = () => {
     // });
   }, [userId]);
 
+
+
   useEffect(() => {
       dispatch(getConversation());
 
   }, [dispatch, userId]);
+
 
   useEffect(() => {
         dispatch(getMessage(currentChat?._id));

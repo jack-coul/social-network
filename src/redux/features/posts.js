@@ -151,6 +151,7 @@ export const addPost = (text, img) => {
     img && formData.append("image", img);
     text && formData.append("text", text);
     dispatch({ type: "add/post/pending" });
+
     try {
       const res = await fetch("http://localhost:4000/post", {
         method: "POST",

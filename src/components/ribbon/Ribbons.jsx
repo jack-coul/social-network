@@ -4,18 +4,29 @@ import { getPosts } from "../../redux/features/posts";
 import Ribbon from "./Ribbon";
 
 const Ribbons = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
-  const { posts, loadingPosts } = useSelector((state) => state.posts);
-  return (
-    <div>
-      {posts.map((post) => {
-        return <Ribbon post={post} loadingPosts={loadingPosts} />;
-      })}
-    </div>
-  );
+
+    
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(getPosts())
+    }, [dispatch])
+    const {posts, loadingPosts} = useSelector(
+        (state) => state.posts
+      );
+
+    return (
+        <div>
+            {
+                posts.map((post)=>{
+                    return(
+                        <Ribbon post = {post} loadingPosts = {loadingPosts}/>
+
+                    )
+                })
+            }
+        </div>
+    );
+
 };
 
 export default Ribbons;
