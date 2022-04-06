@@ -10,74 +10,79 @@ import { useRef } from "react";
 
 const Messages = () => {
   const state = useSelector((state) => state.conversation.conversation);
-  const message = useSelector((state) => state.message.message);
+  const messagess = useSelector((state) => state.message.message);
   const dispatch = useDispatch();
   const [conversation, setConversation] = useState();
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState();
-  const [newMessages, setNewMessages] = useState(null);
-  const [arrivelMessages, setArrivelMessages] = useState({});
+  const [newMessage, setNewMessage] = useState(null);
+  const [arrivalMessage, setArrivalMessage] = useState({});
 
   const socket = useRef();
   const userId = useSelector((state) => state.application.id);
-  // useEffect(() => {
-  //   socket.current = io("http://localhost:9990");
-  // }, [])
+
 
   useEffect(() => {
-    socket.current = io("http://localhost:8900");
-
-    socket.current.on(
-      "getMessage",
-      (data) => {
-        setArrivelMessages({
-          sender: data.senderId,
-          text: data.text,
-        });
-      },
-      [arrivelMessages]
-    );
-
-    // if(arrivelMessages &&
-    //   currentChat?.members.includes(arrivelMessages.sender)) {
-    //     setMessages([...message, arrivelMessages]);
-    //   }
-  }, [arrivelMessages, message]);
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
 
   useEffect(() => {
-    if (
-      arrivelMessages &&
-      currentChat?.members.includes(arrivelMessages.sender)
-    ) {
-      setMessages([...message, arrivelMessages]);
-    }
-  }, [arrivelMessages, currentChat?.members, message]);
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
     socket.current.emit("addUser", userId);
-    socket.current.on("getUsers", (users) => {});
+    // socket.current.on("getUsers", (users) => {
+    //   setOnlineUsers(
+    //     user.followings.filter((f) => users.some((u) => u.userId === f))
+    //   );
+    // });
+  }, [userId]);
+
+  useEffect(() => {
+      dispatch(getConversation());
+
   }, [dispatch, userId]);
 
   useEffect(() => {
-    dispatch(getMessage(currentChat?._id));
-  }, [currentChat?._id, dispatch, message]);
+        dispatch(getMessage(currentChat?._id));
+        setMessages(messagess)
 
-  useEffect(() => {
-    dispatch(getConversation());
-  }, [dispatch]);
+  }, [currentChat, dispatch, messagess]);
 
-  const handleSubmit = (conversationId, text) => {
-    dispatch(postMessages(conversationId, text));
+  const handleSubmit =  (conversationId, text) => {
+    const message = {
+      sender: userId,
+      text: newMessage,
+      conversationId: currentChat._id,
+    };
 
-    const receiverId = currentChat?.members.find(
+    const receiverId = currentChat.members.find(
       (member) => member._id !== userId
     );
+
     socket.current.emit("sendMessage", {
       senderId: userId,
-      receiverId: receiverId._id,
-      text: newMessages,
+      receiverId,
+      text: newMessage,
     });
+
+    
+   dispatch(postMessages(conversationId, text));
+  setMessages([...messages, message]);
+      setNewMessage("");
+   
   };
+
 
   return (
     <>
@@ -119,11 +124,11 @@ const Messages = () => {
                   <input
                     placeholder="Введите сообщение.."
                     type="text"
-                    value={newMessages}
-                    onChange={(e) => setNewMessages(e.target.value)}
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
                   />
                   <button
-                    onClick={() => handleSubmit(currentChat._id, newMessages)}
+                    onClick={() => handleSubmit(currentChat._id, newMessage)}
                   >
                     Отправить
                   </button>
@@ -137,6 +142,6 @@ const Messages = () => {
       </div>
     </>
   );
-};
+  }
 
 export default Messages;
