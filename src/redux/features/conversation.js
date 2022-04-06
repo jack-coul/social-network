@@ -60,7 +60,7 @@ export const getConversation = ()=>{
         const state = getState()
         dispatch({type:"conversation/get/pending"})
         try{
-            const data = await fetch("http://localhost:4000/conversation",{
+            const data = await fetch(`http://localhost:4000/conversation`,{
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${state.application.token}`,
