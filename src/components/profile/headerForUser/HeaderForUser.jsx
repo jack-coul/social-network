@@ -79,12 +79,11 @@ const HeaderForUser = () => {
               <b>194</b> подписок
             </div>
           </div>
-
         </div>
       </div>
       <div className={styles.menu}>
         <div className={styles.menuMain}>
-          <a className={styles.menuLink} href="kjkj">
+          <Link className={styles.menuLink} to="/public">
             <svg
               aria-label=""
               className="_8-yf5 "
@@ -152,7 +151,7 @@ const HeaderForUser = () => {
               ></line>
             </svg>
             <div className={styles.menuText}>ПУБЛИКАЦИИ</div>
-          </a>
+          </Link>
         </div>
         <div className={styles.menuMain}>
           <a className={styles.menuLink} href="sdfg">
