@@ -21,7 +21,6 @@ const SignIn = () => {
             <h1>Авторизация</h1>
           </div>
           <div className="form-content">
-            <form>
               <div className="form-group">
                 <label for="username">Email Address</label>
                 <input
@@ -61,7 +60,6 @@ const SignIn = () => {
                   Войти
                 </Link>
               </div>
-            </form>
           </div>
         </div>
       </div>

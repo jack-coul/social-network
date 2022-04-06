@@ -27,7 +27,7 @@ const SignUp = () => {
             <h1>Регистрация</h1>
           </div>
           <div className="form-content">
-            <form>
+        
               <div className="form-group">
                 <label for="username">Имя</label>
                 <input
@@ -108,7 +108,6 @@ const SignUp = () => {
                   Register
                 </button>
               </div>
-            </form>
           </div>
         </div>
       </div>

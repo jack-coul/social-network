@@ -130,7 +130,7 @@ body {
   text-decoration: none;
 }
 .form-panel {
-  padding: 60px calc(5% + 60px) 60px 60px;
+  padding: 60px;
   box-sizing: border-box;
 }
 .form-panel.one:before {
@@ -153,7 +153,6 @@ body {
   background: #4285f4;
   width: 100%;
   min-height: 100%;
-  padding: 60px calc(10% + 60px) 60px 60px;
   transition: 0.3s ease;
   cursor: pointer;
 }
@@ -224,7 +223,6 @@ body {
   box-shadow: 0 0 30px rgb(0 0 0 / 10%);
   width: 100%;
   min-height: 100%;
-  padding: 60px calc(10% + 60px) 60px 60px;
   transition: 0.3s ease;
   cursor: pointer;
 }
