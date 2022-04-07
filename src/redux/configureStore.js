@@ -5,7 +5,6 @@ import application from "./features/application";
 import posts from "./features/posts";
 import conversation from "./features/conversation";
 import group from "./features/group";
-import likes from "./features/likes";
 import message from "./features/message";
 import notification from "./features/notification";
 import saves from "./features/saves";
@@ -16,7 +15,6 @@ const combineRouter = combineReducers({
   posts,
   conversation,
   group,
-  likes,
   message,
   notification,
   saves,
