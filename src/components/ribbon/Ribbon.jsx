@@ -18,16 +18,16 @@ import Comments from "./Comments";
 import { addComment, getComments } from "../../redux/features/comments";
 import { Link } from "react-router-dom";
 
-const Ribbon = ({ post, loadingPosts , postLikes}) => {
+const Ribbon = ({ post, loadingPosts, postLikes }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getComments());
     dispatch(getUser());
   }, [dispatch]);
 
-  const userId = useSelector((state)=> state.application.id)
+  const userId = useSelector((state) => state.application.id);
 
-  const liked = postLikes.find(post => post._id === userId)
+  const liked = postLikes.find((post) => post._id === userId);
 
   const host = "http://localhost:4000/";
 
@@ -36,30 +36,26 @@ const Ribbon = ({ post, loadingPosts , postLikes}) => {
   const [savePost, setSavePost] = useState(false);
   const [likePost, setLikePost] = useState(!!liked);
   const [text, setText] = useState();
-  const [likeCount, setLikeCount] = useState(post.likes.length)
-
-  
-
+  const [likeCount, setLikeCount] = useState(post.likes.length);
 
   const hundleTakeLike = (id) => {
     // console.log(postLikes.map((like)=> like._id ))
-    
+
     if (likePost) {
       setLikePost(false);
       dispatch(removeLike(id));
-      setLikeCount(likeCount-1)
+      setLikeCount(likeCount - 1);
     } else {
       setLikePost(true);
       dispatch(addLike(id));
-      setLikeCount(likeCount+1)
-
+      setLikeCount(likeCount + 1);
     }
   };
 
   const hundleSavePost = () => {
     if (savePost) {
       setSavePost(false);
-      dispatch()
+      dispatch();
     } else {
       setSavePost(true);
     }
@@ -92,7 +88,7 @@ const Ribbon = ({ post, loadingPosts , postLikes}) => {
             alt=""
           />
         )}
-        <span>{post.text}</span>
+
         <h4>{`${post.user.firstname} ${post.user.lastname}`}</h4>
       </div>
       <div className={styles.feed_main}>
@@ -103,7 +99,10 @@ const Ribbon = ({ post, loadingPosts , postLikes}) => {
       <div className={styles.section_func}>
         <div className={styles.likes_comms}>
           <div class={styles.likes_controller}>
-            <div onClick={()=>hundleTakeLike(post._id)} className={styles.likeIcon}>
+            <div
+              onClick={() => hundleTakeLike(post._id)}
+              className={styles.likeIcon}
+            >
               {likePost ? (
                 <svg
                   aria-label="Не нравится"
@@ -197,6 +196,9 @@ const Ribbon = ({ post, loadingPosts , postLikes}) => {
           >
             {post.user.firstname}
           </Link>
+        </div>
+        <div className={styles.postText}>
+          {post.text}
         </div>
         <div className={styles.like_sect}>
           <span className={styles.likes}>{likeCount}</span>

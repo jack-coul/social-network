@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "../../redux/features/comments";
-import { addLike, removeLike } from "../../redux/features/likes";
+import { addLike, removeLike } from "../../redux/features/posts";
 import styles from "./Content.module.css";
 
 const Content = ({ comments, setWindow, post, img}) => {
