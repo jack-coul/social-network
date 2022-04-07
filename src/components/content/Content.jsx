@@ -1,15 +1,16 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "../../redux/features/comments";
 import { addLike, removeLike } from "../../redux/features/likes";
 import styles from "./Content.module.css";
 
-const Content = ({ comments, setWindow, post, img }) => {
+const Content = ({ comments, setWindow, post, img}) => {
+  const userId = useSelector((state)=> state.application.id)
   const [text, setText] = React.useState("");
-  const [like, setLike] = React.useState(false);
-
-  console.log(post.likes);
-  console.log(post.likes.length);
+  const liked = post.likes.find(post => post._id === userId)
+  const [like, setLike] = React.useState(!!liked);
+  const [likesCount, setLikesCount]= useState(post.likes.length)
+  
 
   const hundleGetCommentText = (e) => {
     setText(e.target.value);
@@ -29,9 +30,12 @@ const Content = ({ comments, setWindow, post, img }) => {
     if (like) {
       dispatch(removeLike(post._id));
       setLike(false);
+      setLikesCount(likesCount - 1)
     } else {
       setLike(true);
       dispatch(addLike(post._id));
+      setLikesCount(likesCount + 1)
+
     }
   };
 
@@ -114,7 +118,7 @@ const Content = ({ comments, setWindow, post, img }) => {
         <div className={styles.mainLike}>
           <div className={styles.likeCount}>
             <div>Нравится</div>
-            <div>0</div>
+            <div>{likesCount}</div>
           </div>
         </div>
         <div>
