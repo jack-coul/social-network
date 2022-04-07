@@ -1,14 +1,18 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUser } from "../../../redux/features/application";
+import { getUserPosts } from "../../../redux/features/posts";
 import styles from "./LogoHomePage.module.css";
 
 const LogoHomePage = () => {
   const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.application);
   const handleGetUser = () => {
     dispatch(getUser());
+    dispatch(getUserPosts(id));
   };
+
   return (
     <>
       <Link to="/">
