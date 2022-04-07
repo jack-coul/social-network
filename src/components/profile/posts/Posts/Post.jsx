@@ -4,7 +4,7 @@ import Content from "../../../content/Content";
 import { useDispatch } from "react-redux";
 import { getComments } from "../../../../redux/features/comments";
 
-const Post = ({ comments, post, handleShowContent }) => {
+const Post = ({ comments, post, handleShowContent}) => {
   const [window, setWindow] = useState(false);
   const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ const Post = ({ comments, post, handleShowContent }) => {
       <div className={styles.mainPostsImg} onClick={handleOpenPost}>
         <img src={`${host}${img}`} alt="postImage" />
       </div>
-      {window && <Content comments={commentsList} setWindow={setWindow} post={post} img={img} />}
+      {window && <Content comments={commentsList} setWindow={setWindow} post={post} img={img}/>}
     </div>
   );
 };
