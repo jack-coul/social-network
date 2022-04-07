@@ -4,6 +4,7 @@ import { getPosts } from "../../redux/features/posts";
 import Ribbon from "./Ribbon";
 
 const Ribbons = () => {
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts());
@@ -17,6 +18,7 @@ const Ribbons = () => {
       })}
     </div>
   );
+
 };
 
 export default Ribbons;

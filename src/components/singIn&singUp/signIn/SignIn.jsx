@@ -21,7 +21,6 @@ const SignIn = () => {
             <h1>Авторизация</h1>
           </div>
           <div className="form-content">
-            <form>
               <div className="form-group">
                 <label for="username">Email Address</label>
                 <input
@@ -56,12 +55,11 @@ const SignIn = () => {
                 </Link>
                 <span>{loading && message}</span>
               </div>
-              <div className="form-group">
+              <div className="form-group1">
                 <Link to="#" onClick={handleSignIn}>
                   Войти
                 </Link>
               </div>
-            </form>
           </div>
         </div>
       </div>

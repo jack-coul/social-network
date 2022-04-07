@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../redux/features/application";
 import AddPosts from "./addPosts/AddPosts";
+import ExitUser from "./exitPage/ExitUser";
 import styles from "./Header.module.css";
 import RibbonPage from "./homePage/RibbonPage";
 import LogoHomePage from "./logoPage/LogoHomePage";
@@ -38,6 +39,7 @@ const Header = () => {
           <RibbonPage />
           <MessagePage />
           <NotificationsPage />
+          <ExitUser />
           <UserPage />
         </div>
       </div>
