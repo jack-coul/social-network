@@ -51,6 +51,7 @@ const likes = (state = initialState, action) => {
 };
 
 export const addLike = (id) => {
+  console.log(id);
   return async (dispatch, getState) => {
     const state = getState();
     const token = state.application.token;
