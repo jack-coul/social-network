@@ -96,60 +96,60 @@ const posts = (state = initialState, action) => {
         loadingPosts: false,
         error: action.error,
       };
-      // case "add/like/pending":
-      //   return {
-      //     ...state,
-      //     loadingLikes: true,
-      //     error: null,
-      //   };
-      // case "add/like/fulfilled":
-      //   return {
-      //     ...state,
-      //     loadingLikes: false,
-      //     posts: [
-      //       ...state.posts.filter((post)=> {
-      //         if(post._id === action.payload.post._id){
-      //           return post.likes.push(action.payload.user)
-      //         }
-      //       })
-      //     ],
-      //     message: "Успешное добавление",
-      //   };
-      // case "add/like/rejected":
-      //   return {
-      //     ...state,
-      //     loadingLikes: false,
-      //     error: action.error,
-      //   };
-      // case "remove/like/pending":
-      //   return {
-      //     ...state,
-      //     loadingLikes: true,
-      //     error: null,
-      //   };
-      // case "remove/like/fulfilled":
-      //   return {
-      //     ...state,
-      //     loadingLikes: false,
-      //     posts: [
-      //       ...state.posts.forEach((post)=> {
-      //         console.log(post._id)
-      //         if(post._id === action.payload.post._id){
-      //           if(post.likes.includes(action.payload.user)){
-      //             return  post.likes.filter((like)=> like === post.user )
-      //           }
-      //         }
-      //       })
-      //     ],
-      //     message: "Успешное удаление",
-      //   };
-      case "remove/like/rejected":
-        return {
-          ...state,
-          loadingLikes: false,
-          error: action.error,
-        };
-  
+    // case "add/like/pending":
+    //   return {
+    //     ...state,
+    //     loadingLikes: true,
+    //     error: null,
+    //   };
+    // case "add/like/fulfilled":
+    //   return {
+    //     ...state,
+    //     loadingLikes: false,
+    //     posts: [
+    //       ...state.posts.filter((post)=> {
+    //         if(post._id === action.payload.post._id){
+    //           return post.likes.push(action.payload.user)
+    //         }
+    //       })
+    //     ],
+    //     message: "Успешное добавление",
+    //   };
+    // case "add/like/rejected":
+    //   return {
+    //     ...state,
+    //     loadingLikes: false,
+    //     error: action.error,
+    //   };
+    // case "remove/like/pending":
+    //   return {
+    //     ...state,
+    //     loadingLikes: true,
+    //     error: null,
+    //   };
+    // case "remove/like/fulfilled":
+    //   return {
+    //     ...state,
+    //     loadingLikes: false,
+    //     posts: [
+    //       ...state.posts.forEach((post)=> {
+    //         console.log(post._id)
+    //         if(post._id === action.payload.post._id){
+    //           if(post.likes.includes(action.payload.user)){
+    //             return  post.likes.filter((like)=> like === post.user )
+    //           }
+    //         }
+    //       })
+    //     ],
+    //     message: "Успешное удаление",
+    //   };
+    case "remove/like/rejected":
+      return {
+        ...state,
+        loadingLikes: false,
+        error: action.error,
+      };
+
     default:
       return state;
   }
@@ -184,6 +184,7 @@ export const getUserPosts = (id) => {
           authorization: `Bearer ${token}`,
         },
       });
+      console.log(res);
       const posts = await res.json();
       if (posts.error) {
         dispatch({ type: "get/userPosts/rejected", error: posts.error });
@@ -293,14 +294,15 @@ export const addLike = (id) => {
       });
 
       const post = await res.json();
-      console.log(post)
-     
+      console.log(post);
+
       if (post.error) {
         dispatch({ type: "add/like/rejected", error: post.error });
       } else {
-        
-
-        dispatch({ type: "add/like/fulfilled", payload: {post: post, user: state.application.id} });
+        dispatch({
+          type: "add/like/fulfilled",
+          payload: { post: post, user: state.application.id },
+        });
       }
     } catch (error) {
       dispatch({ type: "add/like/rejected", error });
@@ -321,18 +323,20 @@ export const removeLike = (id) => {
           "Content-type": "application/json",
         },
       });
-      
+
       const post = await res.json();
       if (post.error) {
         dispatch({ type: "remove/like/rejected", error: post.error });
       } else {
-        dispatch({ type: "remove/like/fulfilled", payload: {post: post, user: state.application.id }});
+        dispatch({
+          type: "remove/like/fulfilled",
+          payload: { post: post, user: state.application.id },
+        });
       }
     } catch (error) {
       dispatch({ type: "remove/like/rejected", error });
     }
   };
 };
-
 
 export default posts;
