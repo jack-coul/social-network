@@ -14,7 +14,7 @@ const Posts = ({ id }) => {
   useEffect(() => {
     dispatch(getUserPosts(id));
   }, [dispatch, id]);
-
+  console.log(posts);
   return (
     <div>
       <div className={styles.main}>
