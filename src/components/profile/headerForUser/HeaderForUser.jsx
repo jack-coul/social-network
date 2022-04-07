@@ -4,16 +4,9 @@ import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../../Images/user.png";
 import styles from "../Profile.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserPosts } from "../../../redux/features/posts";
+import { useSelector } from "react-redux";
 
 const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getUserPosts(id));
-  }, [dispatch, id]);
-
   const { posts } = useSelector((state) => state.posts);
   return (
     <>

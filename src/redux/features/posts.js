@@ -172,16 +172,37 @@ export const getPosts = () => {
   };
 };
 
-export const getUserPosts = (id) => {
+export const getMyPosts = () => {
   return async (dispatch, getState) => {
     dispatch({ type: "get/userPosts/pending" });
     const state = getState();
     const token = state.application.token;
     try {
-      const res = await fetch(`http://localhost:4000/user/posts/${id}`, {
+      const res = await fetch(`http://localhost:4000/my/posts/`, {
         headers: {
           "Content-type": "application/json",
           authorization: `Bearer ${token}`,
+        },
+      });
+      const posts = await res.json();
+      if (posts.error) {
+        dispatch({ type: "get/userPosts/rejected", error: posts.error });
+      } else {
+        dispatch({ type: "get/userPosts/fulfilled", payload: posts });
+      }
+    } catch (error) {
+      dispatch({ type: "get/userPosts/rejected", error });
+    }
+  };
+};
+
+export const getUserPosts = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: "get/userPosts/pending" });
+    try {
+      const res = await fetch(`http://localhost:4000/user/posts/${id}`, {
+        headers: {
+          "Content-type": "application/json",
         },
       });
       const posts = await res.json();
