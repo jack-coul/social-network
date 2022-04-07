@@ -5,15 +5,15 @@ import { getUserPosts } from "../../../../redux/features/posts";
 import Post from "./Post";
 import styles from "./Posts.module.css";
 
-const Posts = () => {
+const Posts = ({ id }) => {
   //   const [posts] = useState(fakeDatabase);
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
   const comments = useSelector((state) => state.comments.comments);
 
   useEffect(() => {
-    dispatch(getUserPosts());
-  }, [dispatch]);
+    dispatch(getUserPosts(id));
+  }, [dispatch, id]);
 
   return (
     <div>

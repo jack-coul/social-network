@@ -7,24 +7,29 @@ import Logo1 from "../Images/img2.jpg";
 // import Logo2 from "../Images/heart.png";
 // import Logo3 from "../Images/bubble-chat.png";
 // import Logo4 from "../Images/send.png";
-import { getUser } from "../../redux/features/application";
+import {
+  getUser,
+  getUserOne,
+  getUsers,
+} from "../../redux/features/application";
+
 import { addLike, removeLike } from "../../redux/features/posts";
 import Comments from "./Comments";
 import { addComment, getComments } from "../../redux/features/comments";
+import { Link } from "react-router-dom";
 
 const Ribbon = ({ post, loadingPosts , postLikes}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getComments());
-
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
+
   const userId = useSelector((state)=> state.application.id)
 
   const liked = postLikes.find(post => post._id === userId)
+
+  const host = "http://localhost:4000/";
 
   const comments = useSelector((state) => state.comments.comments);
   const [showComments, setShowComments] = useState(false);
@@ -70,6 +75,10 @@ const Ribbon = ({ post, loadingPosts , postLikes}) => {
     }
   };
 
+  const handleGetUser = (id) => {
+    dispatch(getUserOne(id));
+  };
+
   return (
     <div className={styles.ribbonWrapper}>
       <div className={styles.feed_foot}>
@@ -79,11 +88,7 @@ const Ribbon = ({ post, loadingPosts , postLikes}) => {
           <img
             width={34}
             height={34}
-            src={
-              post.user.avatar
-                ? post.user.avatar 
-                : Logo
-            }
+            src={post.user.avatar ? host + post.user.avatar : Logo}
             alt=""
           />
         )}
@@ -92,12 +97,7 @@ const Ribbon = ({ post, loadingPosts , postLikes}) => {
       </div>
       <div className={styles.feed_main}>
         <div className={styles.feed_file}>
-          <img
-            alt="nf"
-            src={
-              post.imagePost ? post.imagePost : Logo
-            }
-          />
+          <img alt="nf" src={post.imagePost ? host + post.imagePost : Logo} />
         </div>
       </div>
       <div className={styles.section_func}>
@@ -191,7 +191,12 @@ const Ribbon = ({ post, loadingPosts , postLikes}) => {
           </div>
         </div>
         <div className={styles.ig_name}>
-          <h4>{post.user.firstname}</h4>
+          <Link
+            onClick={() => handleGetUser(post.user._id)}
+            to={`/one/user/${post.user._id}`}
+          >
+            {post.user.firstname}
+          </Link>
         </div>
         <div className={styles.like_sect}>
           <span className={styles.likes}>{likeCount}</span>

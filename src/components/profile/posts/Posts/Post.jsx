@@ -16,10 +16,12 @@ const Post = ({ comments, post, handleShowContent }) => {
 
   const img = post.imagePost;
 
+  const host = "http://localhost:4000/";
+
   return (
     <div onClick={handleShowContent} className={styles.mainPosts}>
       <div className={styles.mainPostsImg} onClick={handleOpenPost}>
-        <img src={img} alt="postImage" />
+        <img src={`${host}${img}`} alt="postImage" />
       </div>
       {window && <Content comments={commentsList} setWindow={setWindow} post={post} img={img} />}
     </div>
