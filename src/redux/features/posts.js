@@ -184,7 +184,6 @@ export const getUserPosts = (id) => {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log(res);
       const posts = await res.json();
       if (posts.error) {
         dispatch({ type: "get/userPosts/rejected", error: posts.error });
@@ -294,8 +293,6 @@ export const addLike = (id) => {
       });
 
       const post = await res.json();
-      console.log(post);
-
       if (post.error) {
         dispatch({ type: "add/like/rejected", error: post.error });
       } else {

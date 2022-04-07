@@ -8,18 +8,26 @@ import styles from "./Posts.module.css";
 const Posts = ({ id }) => {
   //   const [posts] = useState(fakeDatabase);
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, loadingPosts } = useSelector((state) => state.posts);
   const comments = useSelector((state) => state.comments.comments);
 
   useEffect(() => {
     dispatch(getUserPosts(id));
   }, [dispatch, id]);
-  console.log(posts);
-  return (
+  return loadingPosts ? (
+    "loading..."
+  ) : (
     <div>
       <div className={styles.main}>
         {posts.map((post) => {
-          return <Post comments={comments} key={post._id} post={post} />;
+          return (
+            <Post
+              comments={comments}
+              loadingPosts={loadingPosts}
+              key={post._id}
+              post={post}
+            />
+          );
         })}
       </div>
     </div>

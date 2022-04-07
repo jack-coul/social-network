@@ -6,7 +6,6 @@ const Comments = ({ comment }) => {
 
   const avatar = port + comment.user.avatar;
 
-  console.log(avatar);
   return (
     <div>
       <div className={styles.comments}>
