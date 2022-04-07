@@ -2,7 +2,7 @@ const initialState = {
   userINF: [],
   users: [],
   token: localStorage.getItem("token"),
-  id: "",
+  id: localStorage.getItem("id"),
   firstname: "",
   lastname: "",
   image: "",
@@ -63,7 +63,8 @@ const application = (state = initialState, action) => {
     case "user/get/fullfilled":
       return {
         ...state,
-        userINF: [...state.userINF, action.payload],
+        userINF: [...state.userINF, action.payload.user],
+        user: action.payload.user,
         id: action.payload.id,
         firstname: action.payload.firstname,
         lastname: action.payload.lastname,
@@ -71,6 +72,27 @@ const application = (state = initialState, action) => {
         image: action.payload.image,
       };
     case "user/get/rejected":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case "user/one/get/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "user/one/get/fullfilled":
+      return {
+        ...state,
+        searchID: action.payload.user._id,
+        searchFirstname: action.payload.firstname,
+        searchLastname: action.payload.lastname,
+        searchLogin: action.payload.login,
+        loading: false,
+        searchImage: action.payload.image,
+      };
+    case "user/one/get/rejected":
       return {
         ...state,
         loading: false,
@@ -199,9 +221,12 @@ export const getUser = () => {
       if (user.error) {
         dispatch({ type: "user/get/rejected", error: user.error });
       } else {
+        localStorage.setItem("id", user.id);
+
         dispatch({
           type: "user/get/fullfilled",
           payload: {
+            user,
             id: user.id,
             firstname: user.firstname,
             lastname: user.lastname,
@@ -211,6 +236,38 @@ export const getUser = () => {
       }
     } catch (err) {
       dispatch({ type: "user/get/rejected", error: err.toString() });
+    }
+  };
+};
+
+export const getUserOne = (id) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    dispatch({ type: "user/one/get/pending" });
+    try {
+      const data = await fetch(`http://localhost:4000/user/one/${id}`, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${state.application.token}`,
+        },
+      });
+      const user = await data.json();
+      if (user.error) {
+        dispatch({ type: "user/one/get/rejected", error: user.error });
+      } else {
+        dispatch({
+          type: "user/one/get/fullfilled",
+          payload: {
+            user: user.user,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            image: user.image,
+            login: user.login,
+          },
+        });
+      }
+    } catch (err) {
+      dispatch({ type: "user/one/get/rejected", error: err.toString() });
     }
   };
 };

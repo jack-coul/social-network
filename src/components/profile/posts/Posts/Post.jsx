@@ -8,10 +8,11 @@ const Post = ({ post, handleShowContent }) => {
     setWindow(true);
   };
   const img = post.imagePost;
+  const host = "http://localhost:4000/";
   return (
     <div onClick={handleShowContent} className={styles.mainPosts}>
       <div className={styles.mainPostsImg} onClick={handleOpenPost}>
-        <img src={img} alt="postImage" />
+        <img src={`${host}${img}`} alt="postImage" />
       </div>
       {window && <Content post={post} img={img} />}
     </div>

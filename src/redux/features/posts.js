@@ -112,20 +112,19 @@ export const getPosts = () => {
       } else {
         dispatch({ type: "get/posts/fulfilled", payload: posts });
       }
-      
     } catch (error) {
       dispatch({ type: "get/posts/rejected", error });
     }
   };
 };
 
-export const getUserPosts = () => {
+export const getUserPosts = (id) => {
   return async (dispatch, getState) => {
     dispatch({ type: "get/userPosts/pending" });
     const state = getState();
     const token = state.application.token;
     try {
-      const res = await fetch("http://localhost:4000/user/posts", {
+      const res = await fetch(`http://localhost:4000/user/posts/${id}`, {
         headers: {
           "Content-type": "application/json",
           authorization: `Bearer ${token}`,

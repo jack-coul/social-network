@@ -1,15 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../../Images/user.png";
 import styles from "../Profile.module.css";
 
-const HeaderForUser = () => {
-  const { image, loading, firstname, lastname } = useSelector(
-    (state) => state.application
-  );
-
+const HeaderForUser = ({ image, loading, firstname, lastname }) => {
   return (
     <>
       <div className={styles.header}>
