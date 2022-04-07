@@ -10,6 +10,7 @@ const Ribbons = () => {
   }, [dispatch]);
   const { posts, loadingPosts } = useSelector((state) => state.posts);
 
+
   return (
     <div>
       {posts.map((post) => {
@@ -17,6 +18,7 @@ const Ribbons = () => {
       })}
     </div>
   );
+
 };
 
 export default Ribbons;

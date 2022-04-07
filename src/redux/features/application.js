@@ -130,6 +130,17 @@ const application = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case "exitUser": 
+       return {
+        userINF: [],
+        users: [],
+        token: localStorage.removeItem("token"),
+        id: "",
+        firstname: "",
+        lastname: "",
+        image: "",
+        error: null,
+      }
     default:
       return {
         ...state,

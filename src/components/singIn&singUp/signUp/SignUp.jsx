@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { registerUser } from "../../../redux/features/application";
 
 const SignUp = () => {
@@ -105,8 +106,11 @@ const SignUp = () => {
               </div>
               <div className="form-group">
                 <button type="submit" onClick={handleSignUp}>
-                  Register
+                  Регистрация
                 </button>
+                <Link to='/signin' type="submit">
+                  есть аккаунт
+                </Link>
               </div>
           </div>
         </div>

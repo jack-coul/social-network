@@ -55,7 +55,7 @@ const SignIn = () => {
                 </Link>
                 <span>{loading && message}</span>
               </div>
-              <div className="form-group">
+              <div className="form-group1">
                 <Link to="#" onClick={handleSignIn}>
                   Войти
                 </Link>
