@@ -159,3 +159,6 @@ form{
     background-color: unset;
     cursor: pointer;
 }
+.commentForm {
+    display: flex;
+}

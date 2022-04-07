@@ -51,12 +51,13 @@ const likes = (state = initialState, action) => {
 };
 
 export const addLike = (id) => {
+  console.log(id);
   return async (dispatch, getState) => {
     const state = getState();
     const token = state.application.token;
     dispatch({ type: "add/like/pending" });
     try {
-      const res = await fetch(`http://localhost:4000/add/like${id}`, {
+      const res = await fetch(`http://localhost:4000/add/like/${id}`, {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
@@ -83,7 +84,7 @@ export const removeLike = (id) => {
     const token = state.application.token;
     dispatch({ type: "remove/like/pending" });
     try {
-      const res = await fetch(`http://localhost:4000/remove/like${id}`, {
+      const res = await fetch(`http://localhost:4000/remove/like/${id}`, {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
