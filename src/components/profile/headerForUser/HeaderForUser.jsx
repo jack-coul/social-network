@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../../Images/user.png";
 import styles from "../Profile.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserPosts } from "../../../redux/features/posts";
 
-const HeaderForUser = ({ image, loading, firstname, lastname }) => {
+const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
+
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    dispatch(getUserPosts(id));
+  }, [dispatch, id]);
+  
+  const { posts } = useSelector((state) => state.posts);
   return (
     <>
       <div className={styles.header}>
@@ -66,7 +76,7 @@ const HeaderForUser = ({ image, loading, firstname, lastname }) => {
           </div>
           <div className={styles.descriptionPosts}>
             <div className={styles.followsWrap}>
-              <b>36</b> публикаций
+              <b>{posts.length}</b> публикаций
             </div>
             <div className={styles.followsWrap}>
               <b>184</b> подписчиков
