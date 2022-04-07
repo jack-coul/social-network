@@ -33,13 +33,14 @@ const conversation = (state= initialState, action)=>{
 
 export default conversation
 
-export const postConversation = ()=>{
+export const postConversation = (reciverID)=>{
     return async (dispatch, getState)=>{
+        console.log(reciverID)
         const state = getState()
         dispatch({type:"conversation/get/pending"})
         try{
-            const data = await fetch("http://localhost:4000/conversation",{
-                method: "GET",
+            const data = await fetch(`http://localhost:4000/conversation/${reciverID}`,{
+                method: "POST",
                 headers: {
                     Authorization: `Bearer ${state.application.token}`,
                     "Content-type": "application/json"

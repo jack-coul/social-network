@@ -15,7 +15,7 @@ const Conversation = ({conversations, setConversation, userId}) => {
         setUser(userID)
         
 setConversation(userID)
-        dispatch(getUser(userID._id))
+        dispatch(getUser(userID?._id))
     },[dispatch])
     
 

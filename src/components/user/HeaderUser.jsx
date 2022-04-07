@@ -4,8 +4,14 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
 import style from "../profile/Profile.module.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { postConversation } from "../../redux/features/conversation";
 
 const HeaderUser = ({ image, loading, firstname, lastname, id, freind }) => {
+  const dispatch = useDispatch()
+  const handleSendMess = (id)=>{
+    dispatch(postConversation(id))
+  }
   return (
     <>
       <div className={styles.header}>
@@ -41,15 +47,15 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, freind }) => {
           {freind ? (
             <>
               <button className={styles.otpiska}>Отписаться</button>
-              <button style={{ marginLeft: "10px" }} className={styles.otpiska}>
-                Отправить сообщение
+              <button onClick={(()=> handleSendMess(id))} style={{ marginLeft: "10px" }} className={styles.otpiska}>
+               <Link to="/messages">Отправить сообщение</Link>
               </button>
             </>
           ) : (
             <>
               <button className={styles.otpiska}>Подписаться</button>
-              <button style={{ marginLeft: "10px" }} className={styles.otpiska}>
-                Отправить сообщение
+              <button onClick={(()=> handleSendMess(id))} style={{ marginLeft: "10px" }} className={styles.otpiska}>
+               Отправить сообщение
               </button>
             </>
           )}
