@@ -21,7 +21,7 @@ function App() {
         <div>
           <Header />
           <div className="App">
-            <Routes>
+            <Routes> 
               <Route path="/messages" element={<Messages />} />
               <Route path="/" element={<Profile />} />
               <Route path="/instafeed" element={<Ribbons />} />
