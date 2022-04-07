@@ -14,7 +14,7 @@ const Ribbons = () => {
   return (
     <div>
       {posts.map((post) => {
-        return <Ribbon post={post} loadingPosts={loadingPosts} />;
+        return <Ribbon post={post} loadingPosts={loadingPosts} postLikes={post.likes} />;
       })}
     </div>
   );

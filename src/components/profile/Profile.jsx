@@ -10,6 +10,8 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
+
+  
   const { image, loading, firstname, lastname, id } = useSelector(
     (state) => state.application
   );
