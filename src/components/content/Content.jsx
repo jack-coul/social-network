@@ -4,13 +4,14 @@ import { addComment } from "../../redux/features/comments";
 import { addLike, removeLike } from "../../redux/features/posts";
 import styles from "./Content.module.css";
 
-const Content = ({ comments, setWindow, post, img}) => {
+const Content = ({ comments, setWindow, post, img, host}) => {
   const userId = useSelector((state)=> state.application.id)
   const [text, setText] = React.useState("");
   const liked = post.likes.find(post => post._id === userId)
   const [like, setLike] = React.useState(!!liked);
   const [likesCount, setLikesCount]= useState(post.likes.length)
   
+
 
   const hundleGetCommentText = (e) => {
     setText(e.target.value);
@@ -38,19 +39,21 @@ const Content = ({ comments, setWindow, post, img}) => {
 
     }
   };
+  const avatar = host + post.user.avatar;
+  const image = host + img;
 
   return (
     <div className={styles.content}>
       <div className={styles.contentMedia}>
         <div className={styles.mediaWrap}>
-          <img src={img} alt="content pictur" />
+          <img src={image} alt="content pictur" />
         </div>
       </div>
       <div className={styles.contentComments}>
         <div className={styles.commentsHeader}>
           <div className={styles.commentsHeaderTitle}>
             <div className={styles.commentsHeaderImg}>
-              <img src={post.user.avatar} alt="user imag" />
+              <img src={avatar} alt="user imag" />
             </div>
             <div className={styles.commentsHeaderUserTitle}>
               <div className={styles.userLogin}>{post.user.login}</div>

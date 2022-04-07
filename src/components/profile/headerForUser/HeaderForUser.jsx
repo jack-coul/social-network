@@ -7,14 +7,13 @@ import styles from "../Profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserPosts } from "../../../redux/features/posts";
 
-const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
+const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-  
   useEffect(() => {
     dispatch(getUserPosts(id));
   }, [dispatch, id]);
-  
+
   const { posts } = useSelector((state) => state.posts);
   return (
     <>
@@ -44,7 +43,7 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
             <div className={styles.descriptionEditSettings}>
               <Link to="/editProfile">
                 <svg
-                  aria-label="Параметры"
+                  ariaLabel="Параметры"
                   className="_8-yf5 "
                   color="#262626"
                   fill="#262626"
@@ -59,16 +58,16 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
                     fill="none"
                     r="8.635"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                   ></circle>
                   <path
                     d="M14.232 3.656a1.269 1.269 0 01-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 01-.796.66m-.001 16.688a1.269 1.269 0 01.796.66l.505.996h1.862l.505-.996a1.269 1.269 0 01.796-.66M3.656 9.768a1.269 1.269 0 01-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 01.66.796m16.688-.001a1.269 1.269 0 01.66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 01-.66-.796M7.678 4.522a1.269 1.269 0 01-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 01-.096 1.03m11.8 11.799a1.269 1.269 0 011.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 01.096-1.03m-14.956.001a1.269 1.269 0 01.096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 011.03.096m11.799-11.8a1.269 1.269 0 01-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 01-1.03-.096"
                     fill="none"
                     stroke="currentColor"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                   ></path>
                 </svg>
               </Link>
@@ -91,7 +90,7 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
         <div className={styles.menuMain}>
           <Link className={styles.menuLink} to="/public">
             <svg
-              aria-label=""
+              ariaLabel=""
               className="_8-yf5 "
               color="#262626"
               fill="#262626"
@@ -104,9 +103,9 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
                 fill="none"
                 height="18"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 width="18"
                 x="3"
                 y="3"
@@ -114,9 +113,9 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
               <line
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 x1="9.015"
                 x2="9.015"
                 y1="3"
@@ -125,9 +124,9 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
               <line
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 x1="14.985"
                 x2="14.985"
                 y1="3"
@@ -136,9 +135,9 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
               <line
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 x1="21"
                 x2="3"
                 y1="9.015"
@@ -147,9 +146,9 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
               <line
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 x1="21"
                 x2="3"
                 y1="14.985"
@@ -160,9 +159,9 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
           </Link>
         </div>
         <div className={styles.menuMain}>
-          <a className={styles.menuLink} href="sdfg">
+          <Link className={styles.menuLink} to="/saves">
             <svg
-              aria-label=""
+              ariaLabel=""
               className="_8-yf5 "
               color="#8e8e8e"
               fill="#8e8e8e"
@@ -175,15 +174,15 @@ const HeaderForUser = ({ image, loading, firstname, lastname , id}) => {
                 fill="none"
                 points="20 21 12 13.44 4 21 4 3 20 3 20 21"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
               ></polygon>
             </svg>
             <Link to="/saves">
               <div className={styles.menuText}>СОХРАНЕННОЕ</div>
             </Link>
-          </a>
+          </Link>
         </div>
       </div>
     </>
