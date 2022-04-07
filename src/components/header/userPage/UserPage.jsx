@@ -6,14 +6,13 @@ import Logo from "../../Images/user.png";
 import { getUser } from "../../../redux/features/application";
 
 const UserPage = () => {
-  const { loading, users, image } = useSelector((state) => state.application);
+  const { loading, image } = useSelector((state) => state.application);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
   const host = "http://localhost:4000/";
-  const img = host + image;
-  console.log(image);
+  const img = image && host + image;
   return (
     <div className={styles.userPage}>
       {loading ? (

@@ -4,26 +4,36 @@ import Content from "../../../content/Content";
 import { useDispatch } from "react-redux";
 import { getComments } from "../../../../redux/features/comments";
 
-const Post = ({ comments, post, handleShowContent }) => {
+const Post = ({ comments, post, handleShowContent, loadingPosts }) => {
   const [window, setWindow] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleOpenPost = () => {
     setWindow(true);
-    dispatch(getComments())
+    dispatch(getComments());
   };
-  const commentsList = comments.filter(comment => comment.post === post._id)
+  const commentsList = comments.filter((comment) => comment.post === post._id);
 
   const img = post.imagePost;
 
   const host = "http://localhost:4000/";
+
+  const image = host + img;
 
   return (
     <div onClick={handleShowContent} className={styles.mainPosts}>
       <div className={styles.mainPostsImg} onClick={handleOpenPost}>
         <img src={`${host}${img}`} alt="postImage" />
       </div>
-      {window && <Content comments={commentsList} setWindow={setWindow} post={post} img={img} />}
+      {window && (
+        <Content
+          comments={commentsList}
+          setWindow={setWindow}
+          post={post}
+          host={host}
+          img={img}
+        />
+      )}
     </div>
   );
 };

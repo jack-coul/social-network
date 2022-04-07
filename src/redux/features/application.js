@@ -64,12 +64,12 @@ const application = (state = initialState, action) => {
       return {
         ...state,
         userINF: [...state.userINF, action.payload.user],
-        user: action.payload.user,
-        id: action.payload.id,
+        user: action.payload,
+        id: action.payload._id,
         firstname: action.payload.firstname,
         lastname: action.payload.lastname,
         loading: false,
-        image: action.payload.image,
+        image: action.payload.avatar,
       };
     case "user/get/rejected":
       return {
@@ -85,12 +85,13 @@ const application = (state = initialState, action) => {
     case "user/one/get/fullfilled":
       return {
         ...state,
-        searchID: action.payload.user._id,
+        user: action.payload,
+        searchID: action.payload._id,
         searchFirstname: action.payload.firstname,
         searchLastname: action.payload.lastname,
         searchLogin: action.payload.login,
         loading: false,
-        searchImage: action.payload.image,
+        searchImage: action.payload.avatar,
       };
     case "user/one/get/rejected":
       return {
@@ -130,8 +131,9 @@ const application = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
-    case "exitUser": 
-       return {
+    case "exitUser":
+      return {
+        ...state,
         userINF: [],
         users: [],
         token: localStorage.removeItem("token"),
@@ -140,11 +142,45 @@ const application = (state = initialState, action) => {
         lastname: "",
         image: "",
         error: null,
-      }
-    default:
+      };
+    case "add/follow/pending":
       return {
         ...state,
+        adding: true,
+        error: null,
       };
+    case "add/follow/fulfilled":
+      return {
+        ...state,
+        user: action.payload,
+        adding: false,
+      };
+    case "add/follow/rejected":
+      return {
+        ...state,
+        adding: false,
+        error: action.payload,
+      };
+    case "remove/follow/pending":
+      return {
+        ...state,
+        adding: true,
+        error: null,
+      };
+    case "remove/follow/fulfilled":
+      return {
+        ...state,
+        user: action.payload,
+        adding: false,
+      };
+    case "remove/follow/rejected":
+      return {
+        ...state,
+        adding: false,
+        error: action.payload,
+      };
+    default:
+      return state;
   }
 };
 
@@ -236,13 +272,7 @@ export const getUser = () => {
 
         dispatch({
           type: "user/get/fullfilled",
-          payload: {
-            user,
-            id: user.id,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            image: user.image,
-          },
+          payload: user,
         });
       }
     } catch (err) {
@@ -268,13 +298,7 @@ export const getUserOne = (id) => {
       } else {
         dispatch({
           type: "user/one/get/fullfilled",
-          payload: {
-            user: user.user,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            image: user.image,
-            login: user.login,
-          },
+          payload: user.user,
         });
       }
     } catch (err) {
@@ -310,6 +334,58 @@ export const editUser = (img, firstname, lastname, login) => {
       }
     } catch (error) {
       dispatch({ type: "edit/user/rejected", error });
+    }
+  };
+};
+
+export const addFollow = (id) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const token = state.application.token;
+    dispatch({ type: "add/follow/pending" });
+    try {
+      const res = await fetch("http://localhost:4000/add/freind", {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id }),
+      });
+      const message = await res.json();
+      if (message.error) {
+        dispatch({ type: "add/follow/rejected", error: message.error });
+      } else {
+        dispatch({ type: "add/follow/fulfilled", payload: message });
+      }
+    } catch (error) {
+      dispatch({ type: "add/follow/rejected", error });
+    }
+  };
+};
+
+export const removeFollow = (id) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const token = state.application.token;
+    dispatch({ type: "remove/follow/pending" });
+    try {
+      const res = await fetch("http://localhost:4000/remove/freind", {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id }),
+      });
+      const message = await res.json();
+      if (message.error) {
+        dispatch({ type: "remove/follow/rejected", error: message.error });
+      } else {
+        dispatch({ type: "remove/follow/fulfilled", payload: message });
+      }
+    } catch (error) {
+      dispatch({ type: "remove/follow/rejected", error });
     }
   };
 };

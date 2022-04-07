@@ -4,8 +4,21 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
 import style from "../profile/Profile.module.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addFollow, removeFollow } from "../../redux/features/application";
 
-const HeaderUser = ({ image, loading, firstname, lastname, id, freind }) => {
+const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
+  const dispatch = useDispatch();
+  const handleRemoveFollow = () => {
+    dispatch(removeFollow(userId));
+  };
+  const handleAddFreind = () => {
+    dispatch(addFollow(userId));
+  };
+  const { user } = useSelector((state) => state.application);
+  const follows = user?.follows;
+  const follow = follows?.includes(userId.id);
+
   return (
     <>
       <div className={styles.header}>
@@ -38,16 +51,20 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, freind }) => {
               <b>194</b> подписок
             </div>
           </div>
-          {freind ? (
+          {follow ? (
             <>
-              <button className={styles.otpiska}>Отписаться</button>
+              <button className={styles.otpiska} onClick={handleRemoveFollow}>
+                Отписаться
+              </button>
               <button style={{ marginLeft: "10px" }} className={styles.otpiska}>
                 Отправить сообщение
               </button>
             </>
           ) : (
             <>
-              <button className={styles.otpiska}>Подписаться</button>
+              <button className={styles.otpiska} onClick={handleAddFreind}>
+                Подписаться
+              </button>
               <button style={{ marginLeft: "10px" }} className={styles.otpiska}>
                 Отправить сообщение
               </button>

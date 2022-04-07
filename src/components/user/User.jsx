@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
-import styles from "./User.module.css";
-import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getUserOne } from "../../redux/features/application";
-import HeaderForUser from "../profile/headerForUser/HeaderForUser";
 import Posts from "../profile/posts/Posts/Posts";
 import HeaderUser from "./HeaderUser";
 
@@ -16,9 +13,8 @@ const User = () => {
     dispatch(getUserOne(userId.id));
   }, [dispatch, userId.id]);
 
-  const { searchImage, loading, searchFirstname, searchLastname, user } =
+  const { searchImage, loading, searchFirstname, searchLastname, id, user } =
     useSelector((state) => state.application);
-  // const freind = user?.freinds.find((freind) => freind === id);
   return (
     <>
       {loading ? (
@@ -30,8 +26,9 @@ const User = () => {
             loading={loading}
             firstname={searchFirstname}
             lastname={searchLastname}
-            id={userId.id}
-            // freind={freind}
+            id={id}
+            user={user}
+            userId={userId}
           />
           <Posts
             image={searchImage}
