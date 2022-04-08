@@ -4,6 +4,7 @@ header {
   width: 100%;
   border-bottom: 1px solid rgb(212, 212, 212);
   background-color: #fff;
+  z-index: 99999;
 }
 .headerWrapper {
   display: flex;
@@ -22,4 +23,29 @@ header input {
 }
 .iconsWrapper {
   display: flex;
+}
+.searchUsers {
+  width: 250px;
+  height: 300px;
+  position: absolute;
+  background-color: #fafafa;
+  overflow-y: scroll;
+}
+.inpWrapper {
+  position: relative;
+}
+.userWrapper {
+  display: flex;
+  padding: 5px 15px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+.searchUsers {
+  background-color: #efefef;
+}
+.nickNameUser {
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 10px;
+  margin-bottom: 5px;
 }

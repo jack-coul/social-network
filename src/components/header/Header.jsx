@@ -12,6 +12,7 @@ import UserPage from "./userPage/UserPage";
 
 const Header = () => {
   const [user, setUser] = useState("");
+  const [window, setWindow] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
@@ -23,16 +24,51 @@ const Header = () => {
   //     return user;
   //   }
   // });
+
+  console.log(users);
+
+  const path = 'http://localhost:4000/'
+
+  const handleOpenWindow = () => {
+    setWindow(true);
+  };
+
+  const handleCloseWindow = () => {
+    setWindow(false);
+  };
+
   return (
     <header>
       <div className={styles.headerWrapper}>
         <LogoHomePage />
-        <input
-          placeholder="Поиск"
-          type="text"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
-        />
+
+        <div className={styles.inpWrapper}>
+          <input
+            placeholder="Поиск"
+            type="text"
+            value={user}
+            onChange={(e) => setUser(e.target.value)}
+            onClick={handleOpenWindow}
+            onBlur={handleCloseWindow}
+          />
+
+          {window && (
+            <div className={styles.searchUsers}>
+              {users.map((user) => {
+                return (
+                  <div className={styles.userWrapper}>
+                    <div className={styles.logoUser}>
+                      <img style={{borderRadius: 100}} width={30} height={30} src={path+user.avatar} alt="лого юзера" />
+                    </div>
+                    <div className={styles.nickNameUser}>
+                      {user.login}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
 
         <div className={styles.iconsWrapper}>
           <AddPosts />

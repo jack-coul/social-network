@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -6,8 +6,24 @@ import Logo from "../../Images/user.png";
 import styles from "../Profile.module.css";
 import { useSelector } from "react-redux";
 
+import Followers from '../followers/Followers';
+import Subscribers from '../followers/Subscribers';
+
+
 const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
   const { posts } = useSelector((state) => state.posts);
+
+  const [subscription, setSubscription] = React.useState(false);
+  const [follows, setFollows] = React.useState(false);
+
+  const handleGetSubscription = () => {
+    setSubscription(!subscription)
+  }
+
+  const handleGetFollows = () => {
+    setFollows(!follows)
+  }
+
   return (
     <>
       <div className={styles.header}>
@@ -68,14 +84,20 @@ const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
           </div>
           <div className={styles.descriptionPosts}>
             <div className={styles.followsWrap}>
-              <b>{posts.length}</b> публикаций
+              <b>{posts.length}</b> публикаций 
             </div>
-            <div className={styles.followsWrap}>
+            <div onClick={handleGetFollows} className={styles.followsWrap}>
               <b>184</b> подписчиков
             </div>
-            <div className={styles.followsWrap}>
+            <div  onClick={handleGetSubscription}  className={styles.followsWrap}>
               <b>194</b> подписок
             </div>
+            {
+              follows && <div className={styles.followComponentWrap}><Followers setFollows={setFollows} /></div>
+              } 
+              {
+                subscription && <div className={styles.subscriptionComponentWrap}><Subscribers setSubscription={setSubscription} /></div>
+              }
           </div>
         </div>
       </div>

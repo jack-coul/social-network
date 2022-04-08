@@ -67,6 +67,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .descriptionName {
@@ -126,7 +127,28 @@ a {
   margin-right: 10px;
 }
 .loadingWrap {
-  width: 200px;
-  height: 200px;
+  width: 223px;
+  height: 223px;
+  margin: 10px 10px;
   background-color: #e6e6e6;
+}
+.followsWrap {
+  cursor: pointer;
+  position: relative;
+}
+.followComponentWrap {
+  position: absolute;
+  z-index: 100;
+  right: -300px;
+  top: 30px;
+}
+.subscriptionComponentWrap {
+  position: absolute;
+  z-index: 100;
+  right: -480px;
+  top: 30px;
+}
+.loadingWrapper {
+  display: flex;
+  flex-wrap: wrap;
 }

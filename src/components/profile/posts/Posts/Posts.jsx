@@ -1,5 +1,4 @@
 import React from "react";
-// import { fakeDatabase } from "../fakeDatabase";
 import { useSelector } from "react-redux";
 import Post from "./Post";
 import styles from "./Posts.module.css";
