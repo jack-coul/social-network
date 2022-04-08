@@ -1,3 +1,13 @@
 .imgLogo {
     cursor: pointer;
 }
+.logo svg {
+    position: relative;
+    top: -90%;
+    width: 153px;
+    height: 153px;
+}
+.logo {
+    width: 103px;
+    height: 50px;
+}
