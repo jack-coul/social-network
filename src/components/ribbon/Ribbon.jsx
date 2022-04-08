@@ -3,14 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Ribbon.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
-import Logo1 from "../Images/img2.jpg";
-// import Logo2 from "../Images/heart.png";
-// import Logo3 from "../Images/bubble-chat.png";
-// import Logo4 from "../Images/send.png";
 import {
   getUser,
   getUserOne,
-  getUsers,
 } from "../../redux/features/application";
 
 import { addLike, removeLike } from "../../redux/features/posts";
@@ -211,7 +206,6 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
           <div className={styles.comments_sec}>
             <span onClick={hundleShowComments}>Посмотреть все комментарии</span>
             <span className={styles.commentCounter}>
-              {" "}
               {comments.filter((comment) => comment.post === post._id).length}
             </span>
           </div>
