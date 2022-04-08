@@ -4,7 +4,7 @@ import Posts from "./posts/Posts/Posts";
 import HeaderForUser from "./headerForUser/HeaderForUser";
 import { getUser } from "../../redux/features/application";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyPosts, getUserPosts } from "../../redux/features/posts";
+import { getMyPosts } from "../../redux/features/posts";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,9 @@ const Profile = () => {
   const { image, loading, firstname, lastname, id } = useSelector(
     (state) => state.application
   );
+
   const { posts, loadingPosts } = useSelector((state) => state.posts);
+  console.log(posts);
 
   return (
     <div className={styles.profile}>
@@ -28,7 +30,9 @@ const Profile = () => {
         id={id}
       />
       {loadingPosts ? (
-        "loading..."
+        <div className={styles.loadingWrapper}>
+          <div className={styles.loadingWrap}></div>
+        </div>
       ) : (
         <Posts
           image={image}

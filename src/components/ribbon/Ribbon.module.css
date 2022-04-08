@@ -87,6 +87,7 @@
   overflow-y: scroll;
   height: 150px;
 }
+
 .ig_name {
   cursor: pointer;
   padding-left: 15px;
@@ -122,8 +123,7 @@
   border: 1px solid #d4d4d4;
   border-right: 0;
   font-size: 18px;
-  border-bottom-left-radius: 25px;
-  border-top-left-radius: 25px;
+
 }
 .footer_sec button {
   width: 20%;
@@ -134,31 +134,30 @@
   font-size: 16px;
   font-weight: 600;
   border-left: 0;
-  border-bottom-right-radius: 25px;
-  border-top-right-radius: 25px;
 }
+
 .postText {
   font-size: 17px;
   font-weight: 600;
   color: rgb(68, 68, 68);
   margin: 10px 0;
-  background-color: white;
-  border: 1px solid #d4d4d4;
-  padding: 15px 15px;
-  border-radius: 25px;
+  padding-left: 15px;
   width: 40%;
-  text-align: center;
 }
+
 .ig_name a {
   font-size: 26px;
   font-weight: 700;
 }
+
 .userNickName {
   display: flex;
 }
+
 .userNickName img {
   border-radius: 100px;
 }
+
 .userLogin {
   margin-right: 10px;
   margin-left: 10px;

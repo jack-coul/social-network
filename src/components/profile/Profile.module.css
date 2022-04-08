@@ -125,3 +125,8 @@ a {
 .followsWrap {
   margin-right: 10px;
 }
+.loadingWrap {
+  width: 200px;
+  height: 200px;
+  background-color: #e6e6e6;
+}
