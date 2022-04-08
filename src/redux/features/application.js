@@ -85,7 +85,7 @@ const application = (state = initialState, action) => {
     case "user/one/get/fullfilled":
       return {
         ...state,
-        user: action.payload,
+        searchUser: action.payload,
         searchID: action.payload._id,
         searchFirstname: action.payload.firstname,
         searchLastname: action.payload.lastname,

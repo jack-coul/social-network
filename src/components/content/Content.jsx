@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { addComment } from "../../redux/features/comments";
 import { addLike, removeLike } from "../../redux/features/posts";
 import styles from "./Content.module.css";
 
-const Content = ({ comments, setWindow, post, img, host}) => {
-  const userId = useSelector((state)=> state.application.id)
+const Content = ({ comments, setWindow, post, img, host, user }) => {
+  const userId = useSelector((state) => state.application.id);
   const [text, setText] = React.useState("");
-  const liked = post.likes.find(post => post._id === userId)
+  const liked = post.likes.find((post) => post._id === userId);
   const [like, setLike] = React.useState(!!liked);
-  const [likesCount, setLikesCount]= useState(post.likes.length)
-  
-
+  const [likesCount, setLikesCount] = useState(post.likes.length);
 
   const hundleGetCommentText = (e) => {
     setText(e.target.value);
@@ -31,17 +30,15 @@ const Content = ({ comments, setWindow, post, img, host}) => {
     if (like) {
       dispatch(removeLike(post._id));
       setLike(false);
-      setLikesCount(likesCount - 1)
+      setLikesCount(likesCount - 1);
     } else {
       setLike(true);
       dispatch(addLike(post._id));
-      setLikesCount(likesCount + 1)
-
+      setLikesCount(likesCount + 1);
     }
   };
   const avatar = host + post.user.avatar;
   const image = host + img;
-
   return (
     <div className={styles.content}>
       <div className={styles.contentMedia}>
@@ -66,14 +63,23 @@ const Content = ({ comments, setWindow, post, img, host}) => {
         </div>
         <div className={styles.mainComments}>
           {comments.map((comment) => {
+            const avatar = comment.user.avatar
+              ? host + comment.user.avatar
+              : host + user.avatar;
+            const login = comment.user.login ? comment.user.login : user.login;
             return (
               <div className={styles.mainCommentsShow}>
                 <div className={styles.mainCommentsUserLogo}>
-                  <img src={post.user.avatar} alt="user Logo" />
+                  <img src={avatar} alt="user Logo" />
                 </div>
                 <div>
                   <div className={styles.userInfo}>
-                    <div className={styles.userName}>userName</div>
+                    <Link
+                      to={`/one/user/${comment.user._id}`}
+                      className={styles.userName}
+                    >
+                      {login}
+                    </Link>
                     <div className={styles.userComment}>{comment.text}</div>
                   </div>
                 </div>

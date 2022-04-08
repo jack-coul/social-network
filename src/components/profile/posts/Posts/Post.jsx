@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Posts.module.css";
 import Content from "../../../content/Content";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../../../redux/features/comments";
-
 
 const Post = ({ comments, post, handleShowContent, loadingPosts }) => {
   const [window, setWindow] = useState(false);
@@ -18,8 +17,7 @@ const Post = ({ comments, post, handleShowContent, loadingPosts }) => {
   const img = post.imagePost;
 
   const host = "http://localhost:4000/";
-
-  const image = host + img;
+  const { user } = useSelector((state) => state.application);
 
   return (
     <div onClick={handleShowContent} className={styles.mainPosts}>
@@ -34,6 +32,7 @@ const Post = ({ comments, post, handleShowContent, loadingPosts }) => {
           post={post}
           host={host}
           img={img}
+          user={user}
         />
       )}
     </div>
