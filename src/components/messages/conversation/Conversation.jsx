@@ -7,16 +7,16 @@ import styles from "./../Messages.module.css";
 
 
 
-const Conversation = ({conversations, setConversation, userId}) => {
+const Conversation = ({conversation, userId}) => {
     const dispatch = useDispatch()
     const [user, setUser] = useState(null)
     useEffect(()=>{
-        const userID = conversations.members.find((m) => m._id !== userId )
+        const userID = conversation.members.find((m) => m._id !== userId )
+        // eslint-disable-next-line no-console
         setUser(userID)
         
-setConversation(userID)
         dispatch(getUser(userID?._id))
-    },[dispatch])
+    },[conversation.members, dispatch, userId])
     
 
     

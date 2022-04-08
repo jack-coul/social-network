@@ -35,6 +35,7 @@ export default conversation
 
 export const postConversation = (reciverID)=>{
     return async (dispatch, getState)=>{
+        // eslint-disable-next-line no-console
         console.log(reciverID)
         const state = getState()
         dispatch({type:"conversation/get/pending"})
