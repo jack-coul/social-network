@@ -25,9 +25,9 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
     dispatch(getUser());
   }, [dispatch]);
 
-  const userId = useSelector((state) => state.application.id);
+  const { id, user } = useSelector((state) => state.application);
 
-  const liked = postLikes.find((post) => post._id === userId);
+  const liked = postLikes.find((post) => post._id === id);
 
   const host = "http://localhost:4000/";
 
@@ -197,9 +197,7 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
             {post.user.firstname}
           </Link>
         </div>
-        <div className={styles.postText}>
-          {post.text}
-        </div>
+        <div className={styles.postText}>{post.text}</div>
         <div className={styles.like_sect}>
           <span className={styles.likes}>{likeCount}</span>
           <span> отметок "Нравится"</span>
@@ -220,7 +218,7 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
           <div className={styles.commentsWrapper}>
             {comments.map((comment) => {
               if (comment.post === post._id) {
-                return <Comments comment={comment} />;
+                return <Comments user={user} comment={comment} />;
               }
             })}
           </div>
