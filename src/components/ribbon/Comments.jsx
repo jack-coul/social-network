@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Ribbon.module.css";
 
 const Comments = ({ comment, user }) => {
@@ -19,7 +20,12 @@ const Comments = ({ comment, user }) => {
           <div className={styles.userImg}>
             <img width={24} height={24} src={avatar} alt="Аватарка юзера" />
           </div>
-          <div className={styles.userLogin}>{login}:</div>
+          <Link
+            to={`/one/user/${comment.user._id}`}
+            className={styles.userLogin}
+          >
+            {login}:
+          </Link>
           <div className={styles.userComment}>{comment.text}</div>
         </div>
       </div>

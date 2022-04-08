@@ -89,7 +89,9 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
           />
         )}
 
-        <h4>{`${post.user.firstname} ${post.user.lastname}`}</h4>
+        <Link
+          to={`/one/user/${post.user._id}`}
+        >{`${post.user.firstname} ${post.user.lastname}`}</Link>
       </div>
       <div className={styles.feed_main}>
         <div className={styles.feed_file}>
