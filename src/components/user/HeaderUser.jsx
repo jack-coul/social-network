@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFollow, removeFollow } from "../../redux/features/application";
 import { postConversation } from "../../redux/features/conversation";
+import Followers from "../profile/followers/Followers";
+import Subscribers from "../profile/followers/Subscribers";
 
 const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const dispatch = useDispatch();
@@ -22,6 +24,17 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const { user } = useSelector((state) => state.application);
   const follows = user?.follows;
   const follow = follows?.includes(userId.id);
+
+  const [subscription, setSubscription] = React.useState(false);
+  const [getFollows, setGetFollows] = React.useState(false);
+
+  const handleGetSubscription = () => {
+    setSubscription(!subscription)
+  }
+
+  const handleGetFollows = () => {
+    setGetFollows(!getFollows)
+  }
 
   return (
     <>
@@ -46,14 +59,20 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
           </div>
           <div className={styles.descriptionPosts}>
             <div className={styles.followsWrap}>
-              <b>36</b> публикаций
+              <b>0</b> публикаций 
             </div>
-            <div className={styles.followsWrap}>
+            <div onClick={handleGetFollows} className={styles.followsWrap}>
               <b>184</b> подписчиков
             </div>
-            <div className={styles.followsWrap}>
+            <div  onClick={handleGetSubscription}  className={styles.followsWrap}>
               <b>194</b> подписок
             </div>
+              {
+              getFollows && <div className={styles.followComponentWrap}><Followers setFollows={setGetFollows} /></div>
+              } 
+              {
+                subscription && <div className={styles.subscriptionComponentWrap}><Subscribers setSubscription={setSubscription} /></div>
+              }
           </div>
           {follow ? (
             <>
@@ -65,7 +84,6 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
             </>
           ) : (
             <>
-
               <button className={styles.otpiska} onClick={handleAddFreind}>Подписаться</button>
               <button onClick={(()=> handleSendMess(id))} style={{ marginLeft: "10px" }} className={styles.otpiska}>
                Отправить сообщение

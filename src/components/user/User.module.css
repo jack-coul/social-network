@@ -67,6 +67,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    position: relative;
   }
   
   .descriptionName {
@@ -136,4 +137,19 @@
   }
   .otpiska:hover {
       background-color: rgb(36, 94, 217);
+  }
+  .followsWrap {
+    cursor: pointer;
+  }
+  .followComponentWrap {
+    position: absolute;
+    z-index: 111;
+    right: -300px;
+    top: 30px;
+  }
+  .subscriptionComponentWrap {
+    position: absolute;
+    z-index: 111;
+    right: -480px;
+    top: 30px;
   }

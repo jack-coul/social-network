@@ -164,3 +164,8 @@
   font-weight: 600;
   font-size: 16px;
 }
+.feed_foot a {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 15px;
+}

@@ -2,10 +2,11 @@
     width: 600px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #e5ebf1;
+    background-color: #eeeeee;
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-radius: 6px;
+    border: 1px solid #d4d4d4;
 }
 
 .header {
@@ -22,9 +23,13 @@
 }
 .follow {
     margin-right: 10px;
+    font-weight: 600;
+    font-size: 16px;
 }
 .followCount {
     opacity: .6;
+    font-weight: 600;
+    font-size: 16px;
 }
 .mainSearch {
     border-bottom: 1px solid #dce1e6;
@@ -78,4 +83,7 @@
     background-color: #b1b5b8;
     cursor: pointer;
     border: none;
+}
+.closeButton {
+    cursor: pointer;
 }

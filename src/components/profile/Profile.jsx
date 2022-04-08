@@ -18,7 +18,6 @@ const Profile = () => {
   );
 
   const { posts, loadingPosts } = useSelector((state) => state.posts);
-  console.log(posts);
 
   return (
     <div className={styles.profile}>
@@ -31,6 +30,9 @@ const Profile = () => {
       />
       {loadingPosts ? (
         <div className={styles.loadingWrapper}>
+          <div className={styles.loadingWrap}></div>
+          <div className={styles.loadingWrap}></div>
+          <div className={styles.loadingWrap}></div>
           <div className={styles.loadingWrap}></div>
         </div>
       ) : (
