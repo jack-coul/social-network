@@ -1,10 +1,13 @@
 import React from "react";
 import styles from "./Ribbon.module.css";
 
-const Comments = ({ comment }) => {
+const Comments = ({ comment, user }) => {
   const port = "http://localhost:4000/";
 
-  const avatar = port + comment.user.avatar;
+  const avatar = comment.user.avatar
+    ? port + comment.user.avatar
+    : port + user.avatar;
+  const login = comment.user.login ? comment.user.login : user.login;
 
   return (
     <div>
@@ -16,7 +19,7 @@ const Comments = ({ comment }) => {
           <div className={styles.userImg}>
             <img width={24} height={24} src={avatar} alt="Аватарка юзера" />
           </div>
-          <div className={styles.userLogin}>{comment.user.login}:</div>
+          <div className={styles.userLogin}>{login}:</div>
           <div className={styles.userComment}>{comment.text}</div>
         </div>
       </div>
