@@ -1,0 +1,40 @@
+.main {
+    max-height: 362px;
+    min-height: 100px;
+    overflow-y: auto;
+    width: 500px;
+    background-color: #e5ebf1;
+    border-radius: 5px;
+    margin-left: auto;
+}
+.user{
+    display: flex;
+    padding: 12px 15px;
+    border-bottom: 1px solid #b4b8bb;
+    justify-content: space-between;
+}
+.userInfo{
+    display: flex;
+   
+}
+.userInfo img{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+.userName{
+    margin-left: 15px;
+    font-weight: 700;
+}
+.like{
+    font-weight: 300;
+    margin-left: 15px;
+}
+.userName, .like{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.postImg img {
+    width: 44px;
+    height: 44px;
+}
