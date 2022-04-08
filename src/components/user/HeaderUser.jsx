@@ -13,6 +13,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const handleRemoveFollow = () => {
     dispatch(removeFollow(userId));
   };
+  console.log(id, userId)
   const handleAddFreind = () => {
     dispatch(addFollow(userId));
   };
@@ -58,7 +59,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
           {follow ? (
             <>
               <button className={styles.otpiska} onClick={handleRemoveFollow}>Отписаться</button>
-              <button onClick={(()=> handleSendMess(id))} style={{ marginLeft: "10px" }} className={styles.otpiska}>
+              <button onClick={(()=> handleSendMess(userId.id))} style={{ marginLeft: "10px" }} className={styles.otpiska}>
                <Link to="/messages">Отправить сообщение</Link>
                </button>
 
@@ -67,7 +68,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
             <>
 
               <button className={styles.otpiska} onClick={handleAddFreind}>Подписаться</button>
-              <button onClick={(()=> handleSendMess(id))} style={{ marginLeft: "10px" }} className={styles.otpiska}>
+              <button onClick={(()=> handleSendMess(userId.id))} style={{ marginLeft: "10px" }} className={styles.otpiska}>
                Отправить сообщение
               </button>
             </>

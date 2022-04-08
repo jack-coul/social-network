@@ -7,7 +7,7 @@ import styles from "./../Messages.module.css";
 
 
 
-const Conversation = ({conversation, userId}) => {
+const Conversation = ({conversation, userId }) => {
     const dispatch = useDispatch()
     const [user, setUser] = useState(null)
     useEffect(()=>{
@@ -15,8 +15,10 @@ const Conversation = ({conversation, userId}) => {
         // eslint-disable-next-line no-console
         setUser(userID)
         
+
+        
         dispatch(getUser(userID?._id))
-    },[conversation.members, dispatch, userId])
+    },[conversation.members, dispatch, user?.firstname, userId])
     
 
     
@@ -24,7 +26,7 @@ const Conversation = ({conversation, userId}) => {
         <>
             <div className={styles.userMessageSend}>
                 <div className={styles.userAvatar}>
-                <img width={37} height={37} src="https://img9.floraexpress.ru/img/products/4019_320.jpg" alt="" />
+                <img width={37} height={37} src={`http://localhost:4000/${user?.avatar}`} alt="" />
                 </div>
                 <div className={styles.userNicknameSendMessage}>
                     {user?.firstname}
