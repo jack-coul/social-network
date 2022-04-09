@@ -3,12 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Ribbon.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
-import {
-  getUser,
-  getUserOne,
-} from "../../redux/features/application";
+import { getUser, getUserOne } from "../../redux/features/application";
 
-import { addLike, removeLike } from "../../redux/features/posts";
+import { addLike, deletePost, removeLike } from "../../redux/features/posts";
 import Comments from "./Comments";
 import { addComment, getComments } from "../../redux/features/comments";
 import { Link } from "react-router-dom";
@@ -69,6 +66,9 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
   const handleGetUser = (id) => {
     dispatch(getUserOne(id));
   };
+  const handleDeletePost = (id) => {
+    dispatch(deletePost(id));
+  };
 
   return (
     <div className={styles.ribbonWrapper}>
@@ -87,6 +87,9 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
         <Link
           to={`/one/user/${post.user._id}`}
         >{`${post.user.firstname} ${post.user.lastname}`}</Link>
+        {user?.role === "admin" && (
+          <div onClick={() => handleDeletePost(post._id)}>Удалить пост</div>
+        )}
       </div>
       <div className={styles.feed_main}>
         <div className={styles.feed_file}>

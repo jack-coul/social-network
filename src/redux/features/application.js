@@ -137,7 +137,7 @@ const application = (state = initialState, action) => {
         userINF: [],
         users: [],
         token: localStorage.removeItem("token"),
-        id: "",
+        id: localStorage.removeItem("id"),
         firstname: "",
         lastname: "",
         image: "",
