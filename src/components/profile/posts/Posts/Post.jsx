@@ -27,7 +27,9 @@ const Post = ({ comments, post, handleShowContent, loadingPosts }) => {
     <div onClick={handleShowContent} className={styles.mainPosts}>
       <div className={styles.mainPostsImg} onClick={handleOpenPost}>
         <img src={`${host}${img}`} alt="postImage" />
-        <div onClick={() => handleDeletePost(post._id)}>Удалить пост</div>
+        {user?._id === post?.user?._id && (
+          <div onClick={() => handleDeletePost(post._id)}>Удалить пост</div>
+        )}
       </div>
 
       {window && (
