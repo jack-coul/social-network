@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import Followers from "../followers/Followers";
 import Subscribers from "../followers/Subscribers";
 
+
 const HeaderForUser = () => {
   const { posts } = useSelector((state) => state.posts);
 
@@ -93,8 +94,10 @@ const HeaderForUser = () => {
             <div onClick={handleGetFollows} className={styles.followsWrap}>
               <b>184</b> подписчиков
             </div>
-            <div onClick={handleGetSubscription} className={styles.followsWrap}>
-              <b>194</b> подписок
+
+            <div  onClick={handleGetSubscription}  className={styles.followsWrap}>
+              <b>{user?.follows?.length}</b> подписок
+
             </div>
             {follows && (
               <div className={styles.followComponentWrap}>

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./User.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
 import style from "../profile/Profile.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   addFollow,
   blockUser,
@@ -19,13 +20,44 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const handleRemoveFollow = () => {
     dispatch(removeFollow(userId));
   };
-  console.log(id, userId);
+
+
+  console.log(id, userId.id);
+
+  useEffect(() => {
+    dispatch(getConversations(id));
+  }, [userId]);
   const handleAddFreind = () => {
     dispatch(addFollow(userId));
   };
+  const conversations = useSelector((state) => state.conversation.conversation);
+  console.log(
+    conversations.map((conversation) => {
+      return conversation.members.filter((user) => user._id === userId.id) 
+
+    })
+  );
+
   const handleSendMess = (id) => {
-    dispatch(postConversation(id));
+    const valid = conversations.map((conversation) => {
+      if(conversation.members.find((user) => user._id === userId.id)){
+        return true
+      }
+      else {
+       return false
+      }
+    });
+    const v = !!valid
+    if(v){
+      console.log(v)
+    }
+    else{
+      console.log(v)
+      dispatch(postConversation(id))
+    }
   };
+
+
   const { user } = useSelector((state) => state.application);
   const follows = user?.follows;
   const follow = follows?.includes(userId.id);
@@ -40,6 +72,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const handleGetFollows = () => {
     setGetFollows(!getFollows);
   };
+
 
   const handleUserBlock = () => {
     dispatch(blockUser(userId.id));
@@ -74,7 +107,8 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
               <b>184</b> подписчиков
             </div>
             <div onClick={handleGetSubscription} className={styles.followsWrap}>
-              <b>194</b> подписок
+              <b>{follows?.length}</b> подписок
+
             </div>
             {getFollows && (
               <div className={styles.followComponentWrap}>
@@ -89,6 +123,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
           </div>
           {user?.role === "admin" ? (
             <>
+
               <button className={styles.otpiska} onClick={handleUserBlock}>
                 Заблокировать пользователя
               </button>
