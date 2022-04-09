@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { editUser } from "../../redux/features/application";

@@ -21,13 +21,7 @@ const Profile = () => {
 
   return (
     <div className={styles.profile}>
-      <HeaderForUser
-        image={image}
-        loading={loading}
-        firstname={firstname}
-        lastname={lastname}
-        id={id}
-      />
+      <HeaderForUser />
       {loadingPosts ? (
         <div className={styles.loadingWrapper}>
           <div className={styles.loadingWrap}></div>
