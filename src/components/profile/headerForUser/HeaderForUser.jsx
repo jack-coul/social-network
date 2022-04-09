@@ -25,6 +25,9 @@ const HeaderForUser = () => {
     setFollows(!follows);
   };
 
+//  const userSubscriptionsCount = user.freinds.length;
+//  const userFollowersCount = user.follows.length;
+
   return loading ? (
     "loading..."
   ) : (

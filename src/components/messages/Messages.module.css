@@ -76,9 +76,8 @@
   width: 600px;
 }
 .userSendWrapper {
-  display: flex;
   width: 300px;
-  align-items: right;
+  margin-left: 30px;
 }
 .userRecWrapper {
   display: flex;

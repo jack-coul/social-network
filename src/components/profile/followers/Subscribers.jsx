@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Followers.module.css';
 
-const Followers = ({ setSubscription }) => {
+const Followers = ({ subscriptions, setSubscription }) => {
 
     const handleCloseWindow = () => {
         setSubscription(false)
