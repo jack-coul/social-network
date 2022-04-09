@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "./header/Header";
 import Messages from "./messages/Messages";
 import HeaderForUser from "./profile/headerForUser/HeaderForUser";
@@ -11,8 +11,14 @@ import EditProfile from "./EditProfile/EditProfile";
 import Ribbons from "./ribbon/Ribbons";
 import Posts from "./profile/posts/Posts/Posts";
 import User from "./user/User";
+import { useEffect } from "react";
+import { getUser } from "../redux/features/application";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
   const { token } = useSelector((state) => state.application);
 
   if (token) {

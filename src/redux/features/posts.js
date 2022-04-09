@@ -67,9 +67,11 @@ const posts = (state = initialState, action) => {
         error: null,
       };
     case "delete/post/fulfilled":
+      console.log(action.payload);
       return {
         ...state,
         loadingPosts: false,
+        posts: [...state.posts.filter((post) => post._id !== action.payload)],
         message: "Успешное удаление",
       };
     case "delete/post/rejected":
@@ -253,7 +255,7 @@ export const deletePost = (id) => {
     const token = state.application.token;
     dispatch({ type: "delete/post/pending" });
     try {
-      const res = await fetch(`http://localhost:4000/post${id}`, {
+      const res = await fetch(`http://localhost:4000/post/${id}`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
@@ -262,12 +264,12 @@ export const deletePost = (id) => {
       });
       const error = await res.json();
       if (error.error) {
-        dispatch({ type: "add/posts/rejected", error: error.error });
+        dispatch({ type: "delete/post/rejected", error: error.error });
       } else {
-        dispatch({ type: "add/posts/fulfilled" });
+        dispatch({ type: "delete/post/fulfilled", payload: id });
       }
     } catch (error) {
-      dispatch({ type: "add/posts/rejected", error });
+      dispatch({ type: "delete/post/rejected", error });
     }
   };
 };
@@ -278,7 +280,7 @@ export const editPost = (id, text) => {
     const token = state.application.token;
     dispatch({ type: "edit/post/pending" });
     try {
-      const res = await fetch(`http://localhost:4000/post${id}`, {
+      const res = await fetch(`http://localhost:4000/post/${id}`, {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
