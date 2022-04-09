@@ -39,6 +39,7 @@ const Content = ({ comments, setWindow, post, img, host, user }) => {
   };
   const avatar = host + post.user.avatar;
   const image = host + img;
+
   return (
     <div className={styles.content}>
       <div className={styles.contentMedia}>

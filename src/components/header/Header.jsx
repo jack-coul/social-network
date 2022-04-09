@@ -26,8 +26,6 @@ const Header = () => {
       return user;
     }
   });
-  console.log(usersList);
-  console.log(users);
 
   const path = "http://localhost:4000/";
 
@@ -58,7 +56,22 @@ const Header = () => {
           />
 
           {window && (
-            <div className={styles.searchUsers}>
+            <div
+              style={
+                usersList.length > 5
+                  ? {
+                      position: "absolute",
+                      backgroundColor: "#fafafa",
+                      overflowY: "scroll",
+                      height: 300,
+                    }
+                  : {
+                      width: "250px",
+                      position: "absolute",
+                      backgroundColor: "#fafafa",
+                    }
+              }
+            >
               {usersList.map((user) => {
                 return (
                   <div className={styles.userWrapper}>

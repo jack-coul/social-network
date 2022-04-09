@@ -83,10 +83,10 @@
   margin-bottom: 5px;
   border-radius: 5px;
 }
-.commentsWrapper {
+/* .commentsWrapper {
   overflow-y: scroll;
   height: 150px;
-}
+} */
 
 .ig_name {
   cursor: pointer;
