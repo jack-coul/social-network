@@ -11,6 +11,8 @@ import Subscribers from '../followers/Subscribers';
 
 
 const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
+  const { user } = useSelector((state) => state.application);
+
   const { posts } = useSelector((state) => state.posts);
 
   const [subscription, setSubscription] = React.useState(false);
@@ -90,7 +92,7 @@ const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
               <b>184</b> подписчиков
             </div>
             <div  onClick={handleGetSubscription}  className={styles.followsWrap}>
-              <b>194</b> подписок
+              <b>{user?.follows?.length}</b> подписок
             </div>
             {
               follows && <div className={styles.followComponentWrap}><Followers setFollows={setFollows} /></div>
