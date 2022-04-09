@@ -5,11 +5,13 @@ import Logo from "../Images/user.png";
 import style from "../profile/Profile.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addFollow, removeFollow } from "../../redux/features/application";
+
 import {
-  getConversations,
-  postConversation,
-} from "../../redux/features/conversation";
+  addFollow,
+  blockUser,
+  removeFollow,
+} from "../../redux/features/application";
+import { postConversation } from "../../redux/features/conversation";
 import Followers from "../profile/followers/Followers";
 import Subscribers from "../profile/followers/Subscribers";
 
@@ -18,6 +20,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const handleRemoveFollow = () => {
     dispatch(removeFollow(userId));
   };
+
 
   console.log(id, userId.id);
 
@@ -54,6 +57,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
     }
   };
 
+
   const { user } = useSelector((state) => state.application);
   const follows = user?.follows;
   const follow = follows?.includes(userId.id);
@@ -67,6 +71,11 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
 
   const handleGetFollows = () => {
     setGetFollows(!getFollows);
+  };
+
+
+  const handleUserBlock = () => {
+    dispatch(blockUser(userId.id));
   };
 
   return (
@@ -99,6 +108,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
             </div>
             <div onClick={handleGetSubscription} className={styles.followsWrap}>
               <b>{follows?.length}</b> подписок
+
             </div>
             {getFollows && (
               <div className={styles.followComponentWrap}>
@@ -111,7 +121,14 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
               </div>
             )}
           </div>
-          {follow ? (
+          {user?.role === "admin" ? (
+            <>
+
+              <button className={styles.otpiska} onClick={handleUserBlock}>
+                Заблокировать пользователя
+              </button>
+            </>
+          ) : follow ? (
             <>
               <button className={styles.otpiska} onClick={handleRemoveFollow}>
                 Отписаться

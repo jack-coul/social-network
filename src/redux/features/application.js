@@ -364,6 +364,31 @@ export const addFollow = (id) => {
   };
 };
 
+export const blockUser = (id) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const token = state.application.token;
+    dispatch({ type: "block/user/pending" });
+    try {
+      const res = await fetch(`http://localhost:4000/admin/user/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const message = await res.json();
+      if (message.error) {
+        dispatch({ type: "block/user/rejected", error: message.error });
+      } else {
+        dispatch({ type: "block/user/fulfilled" });
+      }
+    } catch (error) {
+      dispatch({ type: "block/user/rejected", error: error.toString() });
+    }
+  };
+};
+
 export const removeFollow = (id) => {
   return async (dispatch, getState) => {
     const state = getState();
