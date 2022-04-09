@@ -6,25 +6,27 @@ import Logo from "../../Images/user.png";
 import styles from "../Profile.module.css";
 import { useSelector } from "react-redux";
 
-import Followers from '../followers/Followers';
-import Subscribers from '../followers/Subscribers';
+import Followers from "../followers/Followers";
+import Subscribers from "../followers/Subscribers";
 
-
-const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
+const HeaderForUser = () => {
   const { posts } = useSelector((state) => state.posts);
 
   const [subscription, setSubscription] = React.useState(false);
   const [follows, setFollows] = React.useState(false);
 
   const handleGetSubscription = () => {
-    setSubscription(!subscription)
-  }
+    setSubscription(!subscription);
+  };
+  const { user, loading } = useSelector((state) => state.application);
 
   const handleGetFollows = () => {
-    setFollows(!follows)
-  }
+    setFollows(!follows);
+  };
 
-  return (
+  return loading ? (
+    "loading..."
+  ) : (
     <>
       <div className={styles.header}>
         <div className={styles.headerImg}>
@@ -35,7 +37,9 @@ const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
           ) : (
             <div className={styles.headerImgWrap}>
               <img
-                src={image ? `http://localhost:4000/${image}` : Logo}
+                src={
+                  user?.avatar ? `http://localhost:4000/${user?.avatar}` : Logo
+                }
                 alt="profile"
               />
             </div>
@@ -43,7 +47,7 @@ const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
         </div>
         <div className={styles.headerDescription}>
           <div className={styles.descriptionEdit}>
-            <h2>{`${firstname} ${lastname}`}</h2>
+            <h2>{`${user?.firstname} ${user?.lastname}`}</h2>
             <div className={styles.descriptionEditButton}>
               <Link className={styles.editButton} to="/editProfile">
                 Редактировать профиль
@@ -84,20 +88,24 @@ const HeaderForUser = ({ image, loading, firstname, lastname, id }) => {
           </div>
           <div className={styles.descriptionPosts}>
             <div className={styles.followsWrap}>
-              <b>{posts.length}</b> публикаций 
+              <b>{posts.length}</b> публикаций
             </div>
             <div onClick={handleGetFollows} className={styles.followsWrap}>
               <b>184</b> подписчиков
             </div>
-            <div  onClick={handleGetSubscription}  className={styles.followsWrap}>
+            <div onClick={handleGetSubscription} className={styles.followsWrap}>
               <b>194</b> подписок
             </div>
-            {
-              follows && <div className={styles.followComponentWrap}><Followers setFollows={setFollows} /></div>
-              } 
-              {
-                subscription && <div className={styles.subscriptionComponentWrap}><Subscribers setSubscription={setSubscription} /></div>
-              }
+            {follows && (
+              <div className={styles.followComponentWrap}>
+                <Followers setFollows={setFollows} />
+              </div>
+            )}
+            {subscription && (
+              <div className={styles.subscriptionComponentWrap}>
+                <Subscribers setSubscription={setSubscription} />
+              </div>
+            )}
           </div>
         </div>
       </div>

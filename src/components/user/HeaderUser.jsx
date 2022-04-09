@@ -5,7 +5,11 @@ import Logo from "../Images/user.png";
 import style from "../profile/Profile.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addFollow, removeFollow } from "../../redux/features/application";
+import {
+  addFollow,
+  blockUser,
+  removeFollow,
+} from "../../redux/features/application";
 import { postConversation } from "../../redux/features/conversation";
 import Followers from "../profile/followers/Followers";
 import Subscribers from "../profile/followers/Subscribers";
@@ -15,13 +19,13 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const handleRemoveFollow = () => {
     dispatch(removeFollow(userId));
   };
-  console.log(id, userId)
+  console.log(id, userId);
   const handleAddFreind = () => {
     dispatch(addFollow(userId));
   };
-  const handleSendMess = (id)=>{
-    dispatch(postConversation(id))
-  }
+  const handleSendMess = (id) => {
+    dispatch(postConversation(id));
+  };
   const { user } = useSelector((state) => state.application);
   const follows = user?.follows;
   const follow = follows?.includes(userId.id);
@@ -30,12 +34,16 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const [getFollows, setGetFollows] = React.useState(false);
 
   const handleGetSubscription = () => {
-    setSubscription(!subscription)
-  }
+    setSubscription(!subscription);
+  };
 
   const handleGetFollows = () => {
-    setGetFollows(!getFollows)
-  }
+    setGetFollows(!getFollows);
+  };
+
+  const handleUserBlock = () => {
+    dispatch(blockUser(userId.id));
+  };
 
   return (
     <>
@@ -60,34 +68,55 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
           </div>
           <div className={styles.descriptionPosts}>
             <div className={styles.followsWrap}>
-              <b>0</b> публикаций 
+              <b>0</b> публикаций
             </div>
             <div onClick={handleGetFollows} className={styles.followsWrap}>
               <b>184</b> подписчиков
             </div>
-            <div  onClick={handleGetSubscription}  className={styles.followsWrap}>
+            <div onClick={handleGetSubscription} className={styles.followsWrap}>
               <b>194</b> подписок
             </div>
-              {
-              getFollows && <div className={styles.followComponentWrap}><Followers setFollows={setGetFollows} /></div>
-              } 
-              {
-                subscription && <div className={styles.subscriptionComponentWrap}><Subscribers setSubscription={setSubscription} /></div>
-              }
+            {getFollows && (
+              <div className={styles.followComponentWrap}>
+                <Followers setFollows={setGetFollows} />
+              </div>
+            )}
+            {subscription && (
+              <div className={styles.subscriptionComponentWrap}>
+                <Subscribers setSubscription={setSubscription} />
+              </div>
+            )}
           </div>
-          {follow ? (
+          {user?.role === "admin" ? (
             <>
-              <button className={styles.otpiska} onClick={handleRemoveFollow}>Отписаться</button>
-              <button onClick={(()=> handleSendMess(userId.id))} style={{ marginLeft: "10px" }} className={styles.otpiska}>
-               <Link to="/messages">Отправить сообщение</Link>
-               </button>
-
+              <button className={styles.otpiska} onClick={handleUserBlock}>
+                Заблокировать пользователя
+              </button>
+            </>
+          ) : follow ? (
+            <>
+              <button className={styles.otpiska} onClick={handleRemoveFollow}>
+                Отписаться
+              </button>
+              <button
+                onClick={() => handleSendMess(userId.id)}
+                style={{ marginLeft: "10px" }}
+                className={styles.otpiska}
+              >
+                <Link to="/messages">Отправить сообщение</Link>
+              </button>
             </>
           ) : (
             <>
-              <button className={styles.otpiska} onClick={handleAddFreind}>Подписаться</button>
-              <button onClick={(()=> handleSendMess(userId.id))} style={{ marginLeft: "10px" }} className={styles.otpiska}>
-               Отправить сообщение
+              <button className={styles.otpiska} onClick={handleAddFreind}>
+                Подписаться
+              </button>
+              <button
+                onClick={() => handleSendMess(userId.id)}
+                style={{ marginLeft: "10px" }}
+                className={styles.otpiska}
+              >
+                Отправить сообщение
               </button>
             </>
           )}
