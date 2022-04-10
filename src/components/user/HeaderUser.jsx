@@ -3,7 +3,7 @@ import styles from "./User.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
 import style from "../profile/Profile.module.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -11,7 +11,7 @@ import {
   blockUser,
   removeFollow,
 } from "../../redux/features/application";
-import { postConversation } from "../../redux/features/conversation";
+import { getConversations, postConversation } from "../../redux/features/conversation";
 import Followers from "../profile/followers/Followers";
 import Subscribers from "../profile/followers/Subscribers";
 
@@ -38,23 +38,23 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
     })
   );
 
-  const handleSendMess = (id) => {
-    const valid = conversations.map((conversation) => {
-      if(conversation.members.find((user) => user._id === userId.id)){
-        return true
+  const handleSendMess = (id1) => {
+
+    for (let j = 0; j < conversations.length; j++){
+      for(let i = 0; i< conversations[j].members.length; i++){
+        if(conversations[j].members[i]._id === id1||conversations[j].members[i]._id === id )
+          if(conversations[j].members[i+1]?._id === id||conversations[j].members[i+1]?._id === id1){
+            return true
+          }
       }
-      else {
-       return false
-      }
-    });
-    const v = !!valid
-    if(v){
-      console.log(v)
     }
-    else{
-      console.log(v)
-      dispatch(postConversation(id))
-    }
+    
+      dispatch(postConversation(id1))
+      
+
+ 
+
+
   };
 
 
@@ -138,7 +138,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
                 style={{ marginLeft: "10px" }}
                 className={styles.otpiska}
               >
-                <Link to="/messages">Отправить сообщение</Link>
+              <Link to='/messages'>Отправить сообщение</Link> 
               </button>
             </>
           ) : (
@@ -151,7 +151,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
                 style={{ marginLeft: "10px" }}
                 className={styles.otpiska}
               >
-                Отправить сообщение
+              <Link to='/messages'>Отправить сообщение</Link> 
               </button>
             </>
           )}

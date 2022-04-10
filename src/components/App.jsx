@@ -13,6 +13,7 @@ import Posts from "./profile/posts/Posts/Posts";
 import User from "./user/User";
 import { useEffect } from "react";
 import { getUser } from "../redux/features/application";
+import Conversation from "./messages/conversation/Conversation";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ function App() {
           <div className="App">
             <Routes>
               <Route path="/messages" element={<Messages />} />
+              <Route path="/conversation/:id" element={<Messages />} />
+
               <Route path="/" element={<Profile />} />
               <Route path="/instafeed" element={<Ribbons />} />
               <Route path="/signin" element={<Navigate to="/" replace />} />
