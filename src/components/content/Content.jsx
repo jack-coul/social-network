@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addComment } from "../../redux/features/comments";
+import { addComment, deleteComment } from "../../redux/features/comments";
 import { addLike, removeLike } from "../../redux/features/posts";
 import styles from "./Content.module.css";
 
@@ -26,6 +26,9 @@ const Content = ({ comments, setWindow, post, img, host, user }) => {
     setWindow(false);
   };
 
+  const handleDeleteComment = (id, admin) => {
+    dispatch(deleteComment(id, admin));
+  };
   const handlePostLike = () => {
     if (like) {
       dispatch(removeLike(post._id));
@@ -37,7 +40,10 @@ const Content = ({ comments, setWindow, post, img, host, user }) => {
       setLikesCount(likesCount + 1);
     }
   };
-  const avatar = host + post.user.avatar;
+  const imgUser = post.user.avatar ? post.user.avatar : user.avatar;
+  const avatar = host + imgUser;
+  const login = post.user.login ? post.user.login : user.login;
+
   const image = host + img;
 
   return (
@@ -54,7 +60,7 @@ const Content = ({ comments, setWindow, post, img, host, user }) => {
               <img src={avatar} alt="user imag" />
             </div>
             <div className={styles.commentsHeaderUserTitle}>
-              <div className={styles.userLogin}>{post.user.login}</div>
+              <div className={styles.userLogin}>{login}</div>
             </div>
             <button onClick={hundleCloseWindow} className={styles.buttonClose}>
               x
@@ -81,7 +87,19 @@ const Content = ({ comments, setWindow, post, img, host, user }) => {
                     >
                       {login}
                     </Link>
-                    <div className={styles.userComment}>{comment.text}</div>
+                    <div>
+                      <div className={styles.userComment}>{comment.text}</div>
+                      {user?.role === "admin" ||
+                        (comment?.user._id === user?._id && (
+                          <div
+                            onClick={() =>
+                              handleDeleteComment(comment._id, user?.role)
+                            }
+                          >
+                            x
+                          </div>
+                        ))}
+                    </div>
                   </div>
                 </div>
               </div>

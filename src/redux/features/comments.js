@@ -101,12 +101,16 @@ export const addComment = (text, id) => {
   };
 };
 
-export const deleteComment = (id) => {
+export const deleteComment = (id, role) => {
   return async (dispatch, getState) => {
     const state = getState();
     dispatch({ type: "delete/comment/pending" });
     try {
-      const res = await fetch(`http://localhost:4000/comment/${id}`, {
+      const request =
+        role === "admin"
+          ? `http://localhost:4000/admin/comment/${id}`
+          : `http://localhost:4000/comment/${id}`;
+      const res = await fetch(request, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${state.application.token}`,
