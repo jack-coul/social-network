@@ -54,7 +54,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+.mainUsers::-webkit-scrollbar{
+    width: 10px;
+}
+.mainUsers::-webkit-scrollbar-thumb{
+    background: #b4b8bb;
+    border-radius: 10px;
 }
 .user {
     padding: 16px 10px;
