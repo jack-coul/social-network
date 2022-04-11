@@ -17,12 +17,16 @@ const HeaderForUser = () => {
   const [follows, setFollows] = React.useState(false);
 
   const handleGetSubscription = () => {
+    setFollows(false)
     setSubscription(!subscription);
+    console.log(follows)
   };
   const { user, loading } = useSelector((state) => state.application);
 
   const handleGetFollows = () => {
+    setSubscription(false)
     setFollows(!follows);
+    console.log(subscription)
   };
 
 //  const userSubscriptionsCount = user.freinds.length;
@@ -108,7 +112,7 @@ const HeaderForUser = () => {
               </div>
             )}
             {subscription && (
-              <div className={styles.subscriptionComponentWrap}>
+              <div  className={styles.subscriptionComponentWrap}>
                 <Subscribers setSubscription={setSubscription} />
               </div>
             )}

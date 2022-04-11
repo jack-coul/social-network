@@ -282,9 +282,11 @@ export const getUser = () => {
 };
 
 export const getUserOne = (id) => {
+  console.log(id)
   return async (dispatch, getState) => {
     const state = getState();
     dispatch({ type: "user/one/get/pending" });
+
     try {
       const data = await fetch(`http://localhost:4000/user/one/${id}`, {
         headers: {

@@ -198,11 +198,14 @@ export const getMyPosts = () => {
   };
 };
 
-export const getUserPosts = (id) => {
+export const getUserPosts = (id, admin) => {
   return async (dispatch) => {
     dispatch({ type: "get/userPosts/pending" });
     try {
-      const res = await fetch(`http://localhost:4000/user/posts/${id}`, {
+      const request = admin
+        ? `http://localhost:4000/admin/posts/${id}`
+        : `http://localhost:4000/user/posts/${id}`;
+      const res = await fetch(request, {
         headers: {
           "Content-type": "application/json",
         },
