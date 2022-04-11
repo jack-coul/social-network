@@ -5,7 +5,7 @@ import { addComment } from "../../redux/features/comments";
 import { addLike, removeLike } from "../../redux/features/posts";
 import styles from "./Content.module.css";
 
-const Content = ({ comments, setWindow, post, img, host, user }) => {
+const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user }) => {
   const userId = useSelector((state) => state.application.id);
   const [text, setText] = React.useState("");
   const liked = post.likes.find((post) => post._id === userId);
@@ -148,6 +148,9 @@ const Content = ({ comments, setWindow, post, img, host, user }) => {
               <button onClick={hundleAddComments}>Опубликовать</button>
             </div>
           </div>
+          {user?._id === post?.user?._id && (
+          <div className={styles.postDelete} onClick={() => handleDeletePost(post._id)}><b>Удалить пост</b></div>
+        )}
         </div>
       </div>
     </div>

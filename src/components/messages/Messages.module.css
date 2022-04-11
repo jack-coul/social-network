@@ -59,6 +59,7 @@
   background-color: #fff;
   overflow-y: scroll;
   overflow-x:hidden;  /*для горизонтального*/
+  padding-bottom: 70px;
 }
 .dialogues input {
   width: 550px;
@@ -69,19 +70,17 @@
   outline: none;
 }
 .inpBtn {
-  position: absolute;
-  display: flex;
-  border: 1px solid rgb(187, 187, 187);
-  border-radius: 40px;
-  width: 600px;
+  position: fixed;
+    display: flex;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 40px;
+    width: 600px;
+    top: 688px;
+    background-color: white;
 }
-.userSendWrapper {
-  width: 300px;
-  margin-left: 30px;
-}
+
 .userRecWrapper {
   display: flex;
-  width: 300px;
   padding: 10px;
   justify-content: flex-end;
 }
@@ -92,9 +91,8 @@
 }
 .inpWrapper {
   position: relative;
-  bottom: -162px;
-  left: 15px;
-
+  left: 8px;
+  top: -684px;
 }
 .inpWrapper button {
   font-size: 16px;
@@ -109,4 +107,20 @@
     border: 1px solid rgb(187, 187, 187);
     padding: 10px;
     border-radius: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.userSendWrapper {
+  width: 300px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+.userAvatar img {
+  border-radius: 100%;
+}
+.timeOut {
+  font-size: 10px;
+  color: rgb(157 157 157);
 }

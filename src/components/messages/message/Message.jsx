@@ -9,6 +9,11 @@ const Message = ({message, userId}) => {
     {message.sender._id === userId
     ?
     <div className={styles.userRecWrapper}>
+      <div className={styles.messagesSend}>
+        {message.text}
+        <div className={styles.timeOut}>{format(message.createdAt)}</div>
+
+      </div>
       <div className={styles.userAvatar}>
         <img
           width={37}
@@ -16,11 +21,6 @@ const Message = ({message, userId}) => {
           src={`http://localhost:4000/${message.sender?.avatar}`}
           alt=""
         />
-      </div>
-      <div className={styles.messagesSend}>
-        {message.text}
-        <div>{format(message.createdAt)}</div>
-
       </div>
     </div>
     :
@@ -35,7 +35,7 @@ const Message = ({message, userId}) => {
       </div>
       <div className={styles.messagesSend}>
         {message.text}
-        <div>{format(message.createdAt)}</div>
+        <div className={styles.timeOut}>{format(message.createdAt)}</div>
 
       </div>
     </div>

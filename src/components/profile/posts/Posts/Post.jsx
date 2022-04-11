@@ -9,6 +9,11 @@ const Post = ({ comments, post, handleShowContent, loadingPosts }) => {
   const [window, setWindow] = useState(false);
   const dispatch = useDispatch();
 
+  const handleGetNat = () => {
+    setWindow(!window)
+  }
+
+
   const handleOpenPost = () => {
     setWindow(true);
     dispatch(getComments());
@@ -27,13 +32,11 @@ const Post = ({ comments, post, handleShowContent, loadingPosts }) => {
     <div onClick={handleShowContent} className={styles.mainPosts}>
       <div className={styles.mainPostsImg} onClick={handleOpenPost}>
         <img src={`${host}${img}`} alt="postImage" />
-        {user?._id === post?.user?._id && (
-          <div onClick={() => handleDeletePost(post._id)}>Удалить пост</div>
-        )}
       </div>
 
       {window && (
         <Content
+          handleDeletePost={handleDeletePost}
           comments={commentsList}
           setWindow={setWindow}
           post={post}
