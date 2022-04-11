@@ -54,6 +54,7 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
   };
   const handlePostComment = (text, id) => {
     dispatch(addComment(text, id));
+    setText('')
   };
   const hundleShowComments = () => {
     if (showComments) {
@@ -221,8 +222,9 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
           </div>
         )}
         {showComments ? (
-          <div style={commetsCurrent >= 3 ? commentStylesScroll : ""}>
-            {comments.map((comment) => {
+          <div style={commetsCurrent >= 3 ? commentStylesScroll : {color: "black"}}>
+            {comments?.map((comment) => {
+
               if (comment.post === post._id) {
                 return <Comments user={user} comment={comment} />;
               }
