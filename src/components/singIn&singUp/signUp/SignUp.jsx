@@ -13,6 +13,8 @@ const SignUp = () => {
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const handleSignUp = () => {
+
+    
     if (password === passwordTwo) {
       dispatch(registerUser(firstname, lastname, login, email, password));
       setMessage("Регистрация прошла успешно");
