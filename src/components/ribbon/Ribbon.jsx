@@ -67,15 +67,17 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
     dispatch(getUserOne(id));
   };
   const handleDeletePost = (id) => {
-    dispatch(deletePost(id));
+    dispatch(deletePost(id, "admin"));
   };
 
   const commentStylesScroll = {
     height: 150,
-    overflowY: 'scroll'
-  }
+    overflowY: "scroll",
+  };
 
-  const commetsCurrent = comments.filter((comment) => comment.post === post._id).length
+  const commetsCurrent = comments.filter(
+    (comment) => comment.post === post._id
+  ).length;
 
   return (
     <div className={styles.ribbonWrapper}>
@@ -215,13 +217,11 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
         ) : (
           <div className={styles.comments_sec}>
             <span onClick={hundleShowComments}>Посмотреть все комментарии</span>
-            <span className={styles.commentCounter}>
-              {commetsCurrent}
-            </span>
+            <span className={styles.commentCounter}>{commetsCurrent}</span>
           </div>
         )}
         {showComments ? (
-          <div style={commetsCurrent >= 3 ? commentStylesScroll : ''}>
+          <div style={commetsCurrent >= 3 ? commentStylesScroll : ""}>
             {comments.map((comment) => {
               if (comment.post === post._id) {
                 return <Comments user={user} comment={comment} />;
