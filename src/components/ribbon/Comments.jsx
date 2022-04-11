@@ -27,20 +27,16 @@ const Comments = ({ comment, user }) => {
           <div className={styles.userImg}>
             <img width={24} height={24} src={avatar} alt="Аватарка юзера" />
           </div>
-          <Link
-            to={`/one/user/${comment.user._id}`}
-            className={styles.userLogin}
-          >
+          <Link to={`/one/user/${comment.user._id}`}
+            className={styles.userLogin}>
             {login}:
           </Link>
-          <div>
-            <div className={styles.userComment}>{comment.text}</div>
+          <div className={styles.userComment}>
+            <div>{comment.text}</div>
             {user?.role === "admin" ||
               (comment?.user?._id === user?._id && (
-                <div
-                  onClick={() => handleDeleteComment(comment._id, user?.role)}
-                >
-                  x
+                <div className={styles.commentDelete} onClick={() => handleDeleteComment(comment._id, user?.role)}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="cancel_24__Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="cancel_24__cancel_24"><path id="cancel_24__Bounds" d="M0 0h24v24H0z"></path><path d="M18.3 5.7a.99.99 0 00-1.4 0L12 10.6 7.1 5.7a.99.99 0 00-1.4 1.4l4.9 4.9-4.9 4.9a.99.99 0 001.4 1.4l4.9-4.9 4.9 4.9a.99.99 0 001.4-1.4L13.4 12l4.9-4.9a.99.99 0 000-1.4z" id="cancel_24__Mask" fill="currentColor"></path></g></g></svg>
                 </div>
               ))}
           </div>

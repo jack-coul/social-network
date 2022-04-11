@@ -33,10 +33,25 @@
     width: 100%;
     align-items: center;
     padding: 15px;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #b4b8bb;
 }
 .commentsHeaderTitle {
     display: flex;
+}
+.buttonClose {
+    font-size: 24px;
+    color: rgb(83, 83, 83);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: 1px solid #b4b8bb;
+    border-radius: 10px;
+    background-color: unset;
+    cursor: pointer;
+    padding: 5px 5px 0 5px;
+}
+.buttonClose:hover{
+    background-color: #b4b8bb;
 }
 
 .commentsHeaderImg img{
@@ -47,10 +62,15 @@
 
 .mainComments{
     height: 225px;
-    border-bottom: 1px solid #efefef;
-    overflow-y: scroll;
-    scrollbar-color: rebeccapurple green;
-    scrollbar-width: thin;
+    border-bottom: 1px solid #b4b8bb;
+    overflow-y: auto;
+}
+.mainComments::-webkit-scrollbar{
+    width: 10px;
+}
+.mainComments::-webkit-scrollbar-thumb{
+    background: #b4b8bb;
+    border-radius: 10px;
 }
 .mainCommentsShow {
     display: flex;
@@ -63,15 +83,26 @@
     height: 32px;
     border-radius: 50%;
 }
-
+.userInfoMain{
+    width: 100%;
+}
 .userInfo {
     display: flex;
     margin-left: 14px;
 }
 .userName {
     margin-right: 10px;
+    font-weight: 650;
 }
-
+.userComment{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.userCommentButton{
+    text-align: right;
+    cursor: pointer;
+}
 .commentTime{
     color: #8e8e8e;
     font-size: 10px;
@@ -94,7 +125,7 @@
 
 .mainLike{
     padding: 0 0 10px 15px;
-    border-bottom: 1px solid #efefef;;
+    border-bottom: 1px solid #b4b8bb;
 }
 .likeCount {
     display: flex;
@@ -137,21 +168,13 @@ form{
 .postText {
     font-weight: 600;
     font-size: 16px;
-    background-color: #efefef;
-    border: 1px solid #d4d4d4;
+    font-style: italic;
+    /* background-color: #efefef;
+    border: 1px solid #d4d4d4; */
     margin-top: 10px;
     padding: 15px;
 }
-.buttonClose {
-    font-size: 24px;
-    color: rgb(83, 83, 83);
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    border: 0;
-    background-color: unset;
-    cursor: pointer;
-}
+
 .commentSend button {
     color: #0095f6;
     font-size: 12px;
@@ -163,8 +186,12 @@ form{
     display: flex;
 }
 .postDelete {
-    font-size: 20px;
-    color: red;
-    text-align: center;
+    display: flex;
+}
+.postDelete img{
+    margin-left: auto;
+    margin-right: 10px;
+    height: 40px;
+    width: 40px;
     cursor: pointer;
 }

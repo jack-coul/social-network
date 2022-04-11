@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { addComment, deleteComment } from "../../redux/features/comments";
 import { addLike, removeLike } from "../../redux/features/posts";
 import styles from "./Content.module.css";
+import deleteImg from './forever.png';
 
 const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user }) => {
   const userId = useSelector((state) => state.application.id);
@@ -63,7 +64,7 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
               <div className={styles.userLogin}>{login}</div>
             </div>
             <button onClick={hundleCloseWindow} className={styles.buttonClose}>
-              x
+              <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="cancel_24__Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="cancel_24__cancel_24"><path id="cancel_24__Bounds" d="M0 0h24v24H0z"></path><path d="M18.3 5.7a.99.99 0 00-1.4 0L12 10.6 7.1 5.7a.99.99 0 00-1.4 1.4l4.9 4.9-4.9 4.9a.99.99 0 001.4 1.4l4.9-4.9 4.9 4.9a.99.99 0 001.4-1.4L13.4 12l4.9-4.9a.99.99 0 000-1.4z" id="cancel_24__Mask" fill="currentColor"></path></g></g></svg>
             </button>
           </div>
           <div className={styles.postText}>{post.text}</div>
@@ -79,7 +80,7 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
                 <div className={styles.mainCommentsUserLogo}>
                   <img src={avatar} alt="user Logo" />
                 </div>
-                <div>
+                <div className={styles.userInfoMain}>
                   <div className={styles.userInfo}>
                     <Link
                       to={`/one/user/${comment.user._id}`}
@@ -87,16 +88,13 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
                     >
                       {login}
                     </Link>
-                    <div>
-                      <div className={styles.userComment}>{comment.text}</div>
+                    <div className={styles.userComment}>
+                      <div>{comment.text}</div>
                       {user?.role === "admin" ||
                         (comment?.user._id === user?._id && (
-                          <div
-                            onClick={() =>
-                              handleDeleteComment(comment._id, user?.role)
-                            }
-                          >
-                            x
+                          <div className={styles.userCommentButton}
+                            onClick={() => handleDeleteComment(comment._id, user?.role)}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="cancel_24__Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="cancel_24__cancel_24"><path id="cancel_24__Bounds" d="M0 0h24v24H0z"></path><path d="M18.3 5.7a.99.99 0 00-1.4 0L12 10.6 7.1 5.7a.99.99 0 00-1.4 1.4l4.9 4.9-4.9 4.9a.99.99 0 001.4 1.4l4.9-4.9 4.9 4.9a.99.99 0 001.4-1.4L13.4 12l4.9-4.9a.99.99 0 000-1.4z" id="cancel_24__Mask" fill="currentColor"></path></g></g></svg>
                           </div>
                         ))}
                     </div>
@@ -167,7 +165,10 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
             </div>
           </div>
           {user?._id === post?.user?._id && (
-          <div className={styles.postDelete} onClick={() => handleDeletePost(post._id)}><b>Удалить пост</b></div>
+          <div className={styles.postDelete} onClick={() => handleDeletePost(post._id)}>
+            {/* <b>Удалить пост</b> */}
+            <img src={deleteImg} alt="deltepicture"/>
+          </div>
         )}
         </div>
       </div>

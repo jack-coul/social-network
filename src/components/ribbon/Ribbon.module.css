@@ -83,10 +83,18 @@
   margin-bottom: 5px;
   border-radius: 5px;
 }
-/* .commentsWrapper {
-  overflow-y: scroll;
-  height: 150px;
-} */
+.commentsWrapper {
+  overflow-y: auto;
+  
+}
+
+.commentsWrapper::-webkit-scrollbar{
+  width: 10px;
+}
+.commentsWrapper::-webkit-scrollbar-thumb{
+  background: #b4b8bb;
+  border-radius: 10px;
+}
 
 .ig_name {
   cursor: pointer;
@@ -139,6 +147,7 @@
 .postText {
   font-size: 17px;
   font-weight: 600;
+  font-style: italic;
   color: rgb(68, 68, 68);
   margin: 10px 0;
   padding-left: 15px;
@@ -152,12 +161,21 @@
 
 .userNickName {
   display: flex;
+  width: 100%;
 }
 
 .userNickName img {
   border-radius: 100px;
 }
-
+.userComment{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.commentDelete{
+  cursor: pointer;
+  margin-right: 10px;
+}
 .userLogin {
   margin-right: 10px;
   margin-left: 10px;
