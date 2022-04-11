@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./Notifications.module.css";
+import NotificationPage from "../notificationPage/NotificationPage";
 
 const NotificationsPage = () => {
+  const [window, setWindow] = useState(false);
+  const handleNotification = () => {
+    setWindow(!window);
+  } 
   const { notification } = useSelector((state) => state.notification);
   return (
-    <div className={styles.notificationsPage}>
+    <div onClick={handleNotification} className={styles.notificationsPage}>
       <div className={styles.numberOfNotification}>{notification.length}</div>
       <img
         width={24}
@@ -13,6 +18,9 @@ const NotificationsPage = () => {
         src="https://cdn-icons-png.flaticon.com/512/77/77682.png"
         alt=""
       />
+      {window &&  (
+        <NotificationPage/>
+      )}
     </div>
   );
 };

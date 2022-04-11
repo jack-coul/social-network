@@ -1,11 +1,36 @@
+.cover {
+    position:absolute;
+    top: 15px;
+}
 .main {
+    position: absolute;
+    right: -70px;
+    top: 27px;
     max-height: 362px;
     min-height: 100px;
     overflow-y: auto;
+    scrollbar-width: thin;
     width: 500px;
-    background-color: #e5ebf1;
+    background-color: #eeeeee;
     border-radius: 5px;
-    margin-left: auto;
+    margin-left: auto;   
+}
+.main::-webkit-scrollbar{
+    width: 10px;
+}
+.main::-webkit-scrollbar-thumb{
+    background: #b4b8bb;
+    border-radius: 10px;
+}
+.corner {
+    height: 14px;
+    width: 14px;
+    background: #eeeeee;
+    border: 1px solid #eeeeee;
+    position:relative;
+    transform: rotate(45deg);
+    top: 20px;
+    right: -5px;
 }
 .user{
     display: flex;
