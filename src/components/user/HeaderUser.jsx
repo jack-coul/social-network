@@ -34,10 +34,12 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const [getFollows, setGetFollows] = React.useState(false);
 
   const handleGetSubscription = () => {
+    setGetFollows(false)
     setSubscription(!subscription);
   };
 
   const handleGetFollows = () => {
+    setSubscription(false)
     setGetFollows(!getFollows);
   };
 
@@ -73,17 +75,20 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
             <div onClick={handleGetFollows} className={styles.followsWrap}>
               <b>184</b> подписчиков
             </div>
-            <div onClick={handleGetSubscription} className={styles.followsWrap}>
-              <b>194</b> подписок
+
+            <div  onClick={handleGetSubscription} className={styles.followsWrap}>
+              <b>{follows?.length}</b> подписок
+
+
             </div>
             {getFollows && (
               <div className={styles.followComponentWrap}>
-                <Followers setFollows={setGetFollows} />
+                <Followers id = {userId._id} setFollows={setGetFollows}  />
               </div>
             )}
             {subscription && (
               <div className={styles.subscriptionComponentWrap}>
-                <Subscribers setSubscription={setSubscription} />
+                <Subscribers id = {userId._id} setSubscription={setSubscription}  />
               </div>
             )}
           </div>
