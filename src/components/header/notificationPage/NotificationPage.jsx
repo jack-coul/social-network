@@ -45,7 +45,10 @@ const NotificationPage = () => {
         },
     ]
     return (
+        <div className={style.cover}>
+        <div className={style.corner}></div>
         <div className={style.main}>
+            
             {data.map((item)=> {
                 return(
                     <div className={style.user}>
@@ -60,6 +63,7 @@ const NotificationPage = () => {
                     </div>
                 )
             })}
+        </div>
         </div>
     );
 };
