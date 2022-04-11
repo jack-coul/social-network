@@ -26,8 +26,15 @@
 }
 .chats {
   width: 33%;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-right: 1px solid rgb(226, 226, 226);
+}
+.chats::-webkit-scrollbar{
+  width: 10px;
+}
+.chats::-webkit-scrollbar-thumb{
+  background: #b4b8bb;
+  border-radius: 10px;
 }
 .notic {
   width: 10px;
@@ -57,9 +64,16 @@
   width: 67%;
   padding: 10px;
   background-color: #fff;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x:hidden;  /*для горизонтального*/
   padding-bottom: 70px;
+}
+.dialogues::-webkit-scrollbar{
+  width: 10px;
+}
+.dialogues::-webkit-scrollbar-thumb{
+  background: #b4b8bb;
+  border-radius: 10px;
 }
 .dialogues input {
   width: 550px;

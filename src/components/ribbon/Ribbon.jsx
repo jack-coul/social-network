@@ -222,7 +222,7 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
           </div>
         )}
         {showComments ? (
-          <div style={commetsCurrent >= 3 ? commentStylesScroll : {color: "black"}}>
+          <div className={styles.commentsWrapper} style={commetsCurrent >= 3 ? commentStylesScroll : {color: "black"}}>
             {comments?.map((comment) => {
 
               if (comment.post === post._id) {
