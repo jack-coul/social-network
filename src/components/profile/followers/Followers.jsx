@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserOne } from '../../../redux/features/application';
 import style from './Followers.module.css';
+import logo from "../../Images/user.png";
+
 
 const Followers = ( {setFollows , id }) => {
     const dispatch = useDispatch()
@@ -96,7 +98,7 @@ const Followers = ( {setFollows , id }) => {
                     return(
                         <div className={style.user}>
                             {console.log(item)}
-                            <div className={style.userImg}><img src={`http://localhost:4000/${item.avatar}`} alt='userImg'/></div>
+                            <div className={style.userImg}><img src={item.avatar?`http://localhost:4000/${item.avatar}`:logo} alt='userImg'/></div>
                             <div className={style.userDescription}>
                                 <div className={style.userName}>{item.login}</div>
                                 <div className={style.description}>{item.firstname}</div>

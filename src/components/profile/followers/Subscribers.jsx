@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import style from './Followers.module.css';
+import logo from "../../Images/user.png";
+
 
 const Followers = ({ subscriptions, setSubscription }) => {
 
@@ -89,7 +91,7 @@ const Followers = ({ subscriptions, setSubscription }) => {
                 {user?.follows?.map((item)=>{
                     return(
                         <div className={style.user}>
-                            <div className={style.userImg}><img src={`http://localhost:4000/${item.avatar}`} alt='userImg'/></div>
+                            <div className={style.userImg}><img src={item.avatar?`http://localhost:4000/${item.avatar}`: logo} alt='userImg'/></div>
                             <div className={style.userDescription}>
                                 <div className={style.userName}>{item.login}</div>
                                 <div className={style.description}>{item.firstname}</div>
