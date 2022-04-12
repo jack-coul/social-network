@@ -282,7 +282,7 @@ export const getUser = () => {
 };
 
 export const getUserOne = (id) => {
-  console.log(id)
+  console.log(id);
   return async (dispatch, getState) => {
     const state = getState();
     dispatch({ type: "user/one/get/pending" });
@@ -319,6 +319,7 @@ export const editUser = (img, firstname, lastname, login) => {
     firstname && formData.append("firstname", firstname);
     lastname && formData.append("lastname", lastname);
     login && formData.append("login", login);
+    console.log(formData.get("image"));
     try {
       const res = await fetch("http://localhost:4000/user", {
         method: "PATCH",
