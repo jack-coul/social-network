@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./User.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
@@ -10,7 +10,7 @@ import {
   blockUser,
   removeFollow,
 } from "../../redux/features/application";
-import { postConversation } from "../../redux/features/conversation";
+import { getConversations, postConversation } from "../../redux/features/conversation";
 import Followers from "../profile/followers/Followers";
 import Subscribers from "../profile/followers/Subscribers";
 
@@ -19,12 +19,31 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   const handleRemoveFollow = () => {
     dispatch(removeFollow(userId));
   };
+  useEffect(() => {
+    dispatch(getConversations(id));
+  }, [userId]);
   console.log(id, userId);
   const handleAddFreind = () => {
     dispatch(addFollow(userId));
   };
-  const handleSendMess = (id) => {
-    dispatch(postConversation(id));
+  const conversations = useSelector((state) => state.conversation.conversation);
+  const handleSendMess = (id1) => {
+
+    for (let j = 0; j < conversations.length; j++){
+      for(let i = 0; i< conversations[j].members.length; i++){
+        if(conversations[j].members[i]._id === id1||conversations[j].members[i]._id === id )
+          if(conversations[j].members[i+1]?._id === id||conversations[j].members[i+1]?._id === id1){
+            return true
+          }
+      }
+    }
+    
+      dispatch(postConversation(id1))
+      
+
+ 
+
+
   };
   const { user } = useSelector((state) => state.application);
   const follows = user?.follows;
@@ -103,26 +122,26 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
               <button className={styles.otpiska} onClick={handleRemoveFollow}>
                 Отписаться
               </button>
-              <button
+              <Link to="/messages"
                 onClick={() => handleSendMess(userId.id)}
                 style={{ marginLeft: "10px" }}
                 className={styles.otpiska}
               >
-                <Link to="/messages">Отправить сообщение</Link>
-              </button>
+                Отправить сообщение
+              </Link>
             </>
           ) : (
             <>
               <button className={styles.otpiska} onClick={handleAddFreind}>
                 Подписаться
               </button>
-              <button
+              <Link to="/messages"
                 onClick={() => handleSendMess(userId.id)}
                 style={{ marginLeft: "10px" }}
                 className={styles.otpiska}
               >
                 Отправить сообщение
-              </button>
+              </Link>
             </>
           )}
         </div>
