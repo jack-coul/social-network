@@ -99,7 +99,7 @@ const HeaderForUser = () => {
               <b>{posts.length}</b> публикаций
             </div>
             <div onClick={handleGetFollows} className={styles.followsWrap}>
-              <b>184</b> подписчиков
+              <b>{user?.freinds?.length}</b> подписчиков
             </div>
 
             <div  onClick={handleGetSubscription}  className={styles.followsWrap}>

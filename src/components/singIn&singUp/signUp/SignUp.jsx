@@ -11,7 +11,33 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
   const [message, setMessage] = useState("");
+  const [validEmail, setValidEmail]= useState('')
+  const [validPassword, setValidPassword] = useState('')
   const dispatch = useDispatch();
+
+  const handleValidPassword = (e)=>{
+    setPassword(e.target.value)
+    const re1 = /(?=.*[!@#$%^&*])/; //- строка содержит хотя бы один спецсимвол;
+    const re2 = /[0-9a-zA-Z!@#$%^&*]{6,}/; // - не меньше шести символов
+    if (!re2.test(e.target.value)) {
+      setValidPassword("Пароль должен не меньше шести символов");
+    } else if (!re1.test(String(e.target.value))) {
+      setValidPassword("Пароль должен содержать хотя бы один спецсимвол");
+    } else {
+      setValidPassword("");
+    }
+  }
+
+  const handleValidEmail = (e)=>{
+    setEmail(e.target.value);
+    const emailValid =
+      /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u;
+    if (!emailValid.test(String(e.target.value))) {
+      setValidEmail("Недопустимый майл");
+    } else {
+      setValidEmail("");
+    }
+  }
   const handleSignUp = () => {
 
     
@@ -41,7 +67,7 @@ const SignUp = () => {
                   value={firstname}
                   onChange={(e) => setFirstname(e.target.value)}
                 />
-                <span className="validLog">неверное что-то там</span>
+              
               </div>
               <div className="form-group">
                 <label for="password">фамилия</label>
@@ -53,7 +79,6 @@ const SignUp = () => {
                   value={lastname}
                   onChange={(e) => setLastname(e.target.value)}
                 />
-                <span className="validLog">неверное что-то там</span>
               </div>
               <div className="form-group">
                 <label for="cpassword">логин</label>
@@ -65,7 +90,6 @@ const SignUp = () => {
                   value={login}
                   onChange={(e) => setLogin(e.target.value)}
                 />
-                <span className="validLog">неверное что-то там</span>
               </div>
               <div className="form-group">
                 <label for="email">Email Address</label>
@@ -75,9 +99,9 @@ const SignUp = () => {
                   name="email"
                   required="required"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => handleValidEmail(e)}
                 />
-                <span className="validLog">неверное что-то там</span>
+                <span className="validLog">{validEmail}</span>
               </div>
               <div className="form-group">
                 <label for="email">пароль</label>
@@ -87,9 +111,9 @@ const SignUp = () => {
                   name="email"
                   required="required"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handleValidPassword(e)}
                 />
-                <span className="validLog">неверное что-то там</span>
+                <span className="validLog">{validPassword}</span>
               </div>
               <div className="form-group">
                 <label for="email">подтвердите пароль</label>
@@ -101,11 +125,9 @@ const SignUp = () => {
                   value={passwordTwo}
                   onChange={(e) => setPasswordTwo(e.target.value)}
                 />
-                <span className="validLog">неверное что-то там</span>
+                <span className="validLog">{message}</span>
               </div>
-              <div>
-                <span>{message}</span>
-              </div>
+              
               <div className="form-group">
                 <button type="submit" onClick={handleSignUp}>
                   Регистрация

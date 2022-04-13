@@ -6,7 +6,34 @@ import { loginUser } from "../../../redux/features/application";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [validEmail, setValidEmail]= useState('')
+  const [validPassword, setValidPassword] = useState('')
   const dispatch = useDispatch();
+
+  const handleValidPassword = (e)=>{
+    setPassword(e.target.value)
+    const re1 = /(?=.*[!@#$%^&*])/; //- строка содержит хотя бы один спецсимвол;
+    const re2 = /[0-9a-zA-Z!@#$%^&*]{6,}/; // - не меньше шести символов
+    if (!re2.test(e.target.value)) {
+      setValidPassword("Пароль должен не меньше шести символов");
+    } else if (!re1.test(String(e.target.value))) {
+      setValidPassword("Пароль должен содержать хотя бы один спецсимвол");
+    } else {
+      setValidPassword("");
+    }
+  }
+
+  const handleValidEmail = (e)=>{
+    setEmail(e.target.value);
+    const emailValid =
+      /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u;
+    if (!emailValid.test(String(e.target.value))) {
+      setValidEmail("Недопустимый майл");
+    } else {
+      setValidEmail("");
+    }
+  }
+
 
   const handleSignIn = () => {
     dispatch(loginUser(email, password));
@@ -29,9 +56,9 @@ const SignIn = () => {
                   name="username"
                   required="required"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => handleValidEmail(e)}
                 />
-                <span className="validLog">неверное что-то там</span>
+                <span className="validLog">{validEmail}</span>
               </div>
               <div className="form-group">
                 <label for="password">Пароль</label>
@@ -41,9 +68,9 @@ const SignIn = () => {
                   name="password"
                   required="required"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handleValidPassword(e)}
                 />
-                <span className="validLog">неверное что-то там</span>
+                <span className="validLog">{validPassword}</span>
               </div>
               <div className="form-group">
                 <label className="form-remember">

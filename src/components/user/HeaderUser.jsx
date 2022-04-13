@@ -14,7 +14,7 @@ import { getConversations, postConversation } from "../../redux/features/convers
 import Followers from "../profile/followers/Followers";
 import Subscribers from "../profile/followers/Subscribers";
 
-const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
+const HeaderUser = ({ image, loading, firstname, lastname, id, userId , posts}) => {
   const dispatch = useDispatch();
   const handleRemoveFollow = () => {
     dispatch(removeFollow(userId));
@@ -22,7 +22,7 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
   useEffect(() => {
     dispatch(getConversations(id));
   }, [userId]);
-  console.log(id, userId);
+  console.log(posts);
   const handleAddFreind = () => {
     dispatch(addFollow(userId));
   };
@@ -89,14 +89,14 @@ const HeaderUser = ({ image, loading, firstname, lastname, id, userId }) => {
           </div>
           <div className={styles.descriptionPosts}>
             <div className={styles.followsWrap}>
-              <b>0</b> публикаций
+              <b>{posts.length}</b> публикаций
             </div>
             <div onClick={handleGetFollows} className={styles.followsWrap}>
-              <b>184</b> подписчиков
+              <b>{posts[0]?.user?.freinds?.length}</b> подписчиков
             </div>
 
             <div  onClick={handleGetSubscription} className={styles.followsWrap}>
-              <b>{follows?.length}</b> подписок
+              <b>{posts[0]?.user?.follows?.length}</b> подписок
 
 
             </div>
