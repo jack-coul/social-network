@@ -17,7 +17,6 @@ const User = () => {
     dispatch(getUserPosts(userId.id));
   }, [dispatch, userId.id]);
   const { posts } = useSelector((state) => state.posts);
-
   return (
     <>
       {loading ? (
@@ -32,6 +31,7 @@ const User = () => {
             id={id}
             user={user}
             userId={userId}
+            posts = {posts}
           />
           <Posts
             image={searchImage}

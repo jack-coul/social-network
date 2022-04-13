@@ -11,67 +11,6 @@ const Followers = ({ subscriptions, setSubscription }) => {
         setSubscription(false)
     }
 
-    const users = [
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдунasdasdas',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-        {
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },{
-            image: 'https://i.pinimg.com/originals/37/51/a4/3751a49bba6d4ccff20a5074c843e6cc.png',
-            name: 'Мао Цзэдун',
-            description: 'Crazy мяу',
-        },
-    ]
     return (
         <div className={style.mainFollower}>
             <div className={style.header}>
