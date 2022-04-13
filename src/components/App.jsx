@@ -13,7 +13,6 @@ import Posts from "./profile/posts/Posts/Posts";
 import User from "./user/User";
 import { useEffect } from "react";
 import { getUser } from "../redux/features/application";
-import Conversation from "./messages/conversation/Conversation";
 
 function App() {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Conversation from "./conversation/Conversation";
 import styles from "./Messages.module.css";
 import Message from "./message/Message";
@@ -8,6 +8,8 @@ import { io } from "socket.io-client";
 
 const Messages = () => {
   // подгружение чатов
+
+  const dispatch = useDispatch();
   const [conversations, setConversations] = useState([]);
 
   const [currentChat, setCurrentChat] = useState(null);
@@ -46,9 +48,7 @@ const Messages = () => {
 
   useEffect(() => {
     socket.current.emit("addUser", user);
-    socket.current.on("getUsers", (users) => {
-      console.log(users);
-    });
+    socket.current.on("getUsers", (users) => {});
     console.log(user);
   }, [user]);
 
@@ -58,6 +58,7 @@ const Messages = () => {
         const res = await axios.get(
           `http://localhost:4000/conversation/${user}`
         );
+        dispatch({ type: "conversation/get/fullfilled", payload: res.data });
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -78,6 +79,7 @@ const Messages = () => {
             },
           }
         );
+        dispatch({ type: "message/get/fullfilled", payload: res.data });
         setMessages(res.data);
       } catch (err) {
         console.log(err.toString());
@@ -116,7 +118,6 @@ const Messages = () => {
         },
       });
       setMessages([...messages, res.data]);
-      console.log(res.data);
       setNewMessage("");
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -159,7 +160,9 @@ const Messages = () => {
           <>
             <div className={styles.dialogues}>
               {messages?.map((m) => {
-                return <Message message={m} userId={user} />;
+                return (
+                  <Message message={m} convers={conversations} userId={user} />
+                );
               })}
 
               <div className={styles.inpWrapper}>
