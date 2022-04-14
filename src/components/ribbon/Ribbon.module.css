@@ -1,8 +1,9 @@
+
 .ribbonWrapper {
   width: 600px;
   margin-bottom: 50px;
   background-color: #fff;
-  margin: 50px auto;
+  margin: 20px auto;
   border: 1px solid #dbdbdb;
   border-radius: 10px;
 }
@@ -13,14 +14,23 @@
   display: flex;
   align-items: center;
 }
+.feed_foot_delete{
+  margin-left: auto;
+  padding-right: 5px;
+}
+.feed_foot_delete img{
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
 .feed_foot h4 {
   font-size: 22px;
   margin: 0;
   margin-left: 15px;
 }
-.feed_foot img {
-  margin-left: 10px;
-  border-radius: 50%;
+.userLogo {
+    margin-left: 10px;
+    border-radius: 50%;
 }
 
 .feed_img {

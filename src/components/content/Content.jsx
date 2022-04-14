@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { addComment, deleteComment } from "../../redux/features/comments";
 import { addLike, removeLike } from "../../redux/features/posts";
 import styles from "./Content.module.css";
-import deleteImg from './forever.png';
+import Logo from "./forever.png";
 
 const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user }) => {
   const userId = useSelector((state) => state.application.id);
@@ -167,7 +167,7 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
           {user?._id === post?.user?._id && (
           <div className={styles.postDelete} onClick={() => handleDeletePost(post._id)}>
             {/* <b>Удалить пост</b> */}
-            <img src={deleteImg} alt="deltepicture"/>
+            <img src={Logo} alt="deltepicture" title="Удалить пост"/>
           </div>
         )}
         </div>

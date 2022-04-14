@@ -9,6 +9,7 @@ import { addLike, deletePost, removeLike } from "../../redux/features/posts";
 import Comments from "./Comments";
 import { addComment, getComments } from "../../redux/features/comments";
 import { Link } from "react-router-dom";
+import Del from './forever.png';
 
 const Ribbon = ({ post, loadingPosts, postLikes }) => {
   const dispatch = useDispatch();
@@ -87,6 +88,7 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
           <CircularProgress />
         ) : (
           <img
+            className={styles.userLogo}
             width={34}
             height={34}
             src={post.user.avatar ? host + post.user.avatar : Logo}
@@ -98,7 +100,9 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
           to={`/one/user/${post.user._id}`}
         >{`${post.user.firstname} ${post.user.lastname}`}</Link>
         {user?.role === "admin" && (
-          <div onClick={() => handleDeletePost(post._id)}>Удалить пост</div>
+          <div className={styles.feed_foot_delete} onClick={() => handleDeletePost(post._id)}>
+            <img src={Del} alt="deletePost" title="Удалить пост" />
+            </div>
         )}
       </div>
       <div className={styles.feed_main}>

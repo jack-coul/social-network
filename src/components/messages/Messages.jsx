@@ -179,7 +179,7 @@ const Messages = () => {
             </div>
           </>
         ) : (
-          <span>Открыть беседу и начать чат</span>
+          <div className={styles.openDialog}>Начать беседу</div>
         )}
       </div>
     </>
