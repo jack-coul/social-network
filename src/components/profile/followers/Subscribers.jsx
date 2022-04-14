@@ -4,9 +4,8 @@ import style from './Followers.module.css';
 import logo from "../../Images/user.png";
 
 
-const Followers = ({ subscriptions, setSubscription }) => {
+const Subscribers = ({ subscriptions, setSubscription, user }) => {
 
-    const user = useSelector(state=> state.application.searchUser)
     const handleCloseWindow = () => {
         setSubscription(false)
     }
@@ -26,7 +25,7 @@ const Followers = ({ subscriptions, setSubscription }) => {
                 <div className={style.searchSvg}></div>
                 <input className={style.search} type="search" autoComplete='on' placeholder='Поиск по страницам'/>
             </div>
-            <div className={style.mainUsers}>
+            <div className={user.freinds > 8 ? style.mainUsersScroll : style.mainUsers}>
                 {user?.follows?.map((item)=>{
                     return(
                         <div className={style.user}>
@@ -44,4 +43,4 @@ const Followers = ({ subscriptions, setSubscription }) => {
     );
 };
 
-export default Followers;
+export default Subscribers;

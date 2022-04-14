@@ -5,12 +5,8 @@ import style from './Followers.module.css';
 import logo from "../../Images/user.png";
 
 
-const Followers = ( {setFollows , id }) => {
+const Followers = ( {setFollows , id, user }) => {
     const dispatch = useDispatch()
-
-  
-
-    const user = useSelector((state)=> state.application.searchUser)
 
     const handleCloseWindow = () => {
         setFollows(false)
@@ -33,11 +29,10 @@ const Followers = ( {setFollows , id }) => {
                 <div className={style.searchSvg}></div>
                 <input className={style.search} type="search" autoComplete='on' placeholder='Поиск по страницам'/>
             </div>
-            <div className={style.mainUsers}>
+            <div className={user.follows > 8 ? style.mainUsersScroll : style.mainUsers}>
                 {user?.freinds?.map((item)=>{
                     return(
                         <div className={style.user}>
-                            {console.log(item)}
                             <div className={style.userImg}><img src={item.avatar?`http://localhost:4000/${item.avatar}`:logo} alt='userImg'/></div>
                             <div className={style.userDescription}>
                                 <div className={style.userName}>{item.login}</div>
