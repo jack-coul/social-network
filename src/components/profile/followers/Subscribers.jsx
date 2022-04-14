@@ -1,10 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import style from './Followers.module.css';
 import logo from "../../Images/user.png";
 
 
-const Subscribers = ({ subscriptions, setSubscription, user }) => {
+const Subscribers = ({ setSubscription, user }) => {
 
     const handleCloseWindow = () => {
         setSubscription(false)
