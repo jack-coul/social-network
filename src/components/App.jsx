@@ -62,7 +62,7 @@ function App() {
     <div>
       <div>
         {/* <Header /> */}
-        <div className="App">
+        <div className="secondApp">
           <Routes>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
