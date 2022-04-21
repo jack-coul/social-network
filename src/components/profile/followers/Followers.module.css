@@ -1,0 +1,98 @@
+.mainFollower {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #eeeeee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #dce1e6;
+}
+
+.followers {
+    display: flex;
+    font-size: 14px;
+    color: #000000;
+}
+.follow {
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 16px;
+}
+.followCount {
+    opacity: .6;
+    font-weight: 600;
+    font-size: 16px;
+}
+.mainSearch {
+    border-bottom: 1px solid #dce1e6;
+    padding: 16px;
+    display: flex;
+    
+}
+.searchSvg {
+    width: 30px;
+    height: 30px;
+    background: url(data:image/svg+xml;charset=utf-8,%3Csvg%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22m0%200h24v24h-24z%22%2F%3E%3Cpath%20d%3D%22m16.7602287%2014.6529231%202.8964446%202.649819c.3906074.357348.4073389.9469542.0332853%201.3210078l-.0662697.0662697c-.3722244.3722244-.9659303.3548319-1.320999-.0332942l-2.6497846-2.896483c-1.0116996.7775182-2.2783216%201.2397576-3.6529053%201.2397576-3.3137085%200-6-2.6862915-6-6s2.6862915-6%206-6%206%202.6862915%206%206c0%201.3745918-.4622448%202.6412205-1.2397713%203.6529231zm-4.7602287.3470769c2.209139%200%204-1.790861%204-4s-1.790861-4-4-4-4%201.790861-4%204%201.790861%204%204%204z%22%20fill%3D%22%2393a3bc%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E) no-repeat;
+}
+.search {
+    width: 400px;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+.mainUsers {
+    margin: 9px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.mainUsersScroll {
+    height: 430px;
+    overflow-y: scroll;
+}
+.mainUsers::-webkit-scrollbar{
+    width: 10px;
+}
+.mainUsers::-webkit-scrollbar-thumb{
+    background: #b4b8bb;
+    border-radius: 10px;
+}
+.user {
+    padding: 16px 10px;
+    display: flex;
+}
+.userImg img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.userDescription {
+   margin-left: 14px;
+}
+.userName {
+    font-weight: 700;
+}
+.description{
+    font-weight: 400;
+    font-size: small;
+    color: #939393;
+}
+.subscribeButton {
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 20px;
+    background-color: #b1b5b8;
+    cursor: pointer;
+    border: none;
+}
+.closeButton {
+    cursor: pointer;
+}

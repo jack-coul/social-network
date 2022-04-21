@@ -1,0 +1,65 @@
+.cover {
+    position:absolute;
+    top: 15px;
+}
+.main {
+    position: absolute;
+    right: -70px;
+    top: 27px;
+    max-height: 362px;
+    min-height: 100px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    width: 500px;
+    background-color: #eeeeee;
+    border-radius: 5px;
+    margin-left: auto;   
+}
+.main::-webkit-scrollbar{
+    width: 10px;
+}
+.main::-webkit-scrollbar-thumb{
+    background: #b4b8bb;
+    border-radius: 10px;
+}
+.corner {
+    height: 14px;
+    width: 14px;
+    background: #eeeeee;
+    border: 1px solid #eeeeee;
+    position:relative;
+    transform: rotate(45deg);
+    top: 20px;
+    right: -5px;
+}
+.user{
+    display: flex;
+    padding: 12px 15px;
+    border-bottom: 1px solid #b4b8bb;
+    justify-content: space-between;
+}
+.userInfo{
+    display: flex;
+   
+}
+.userInfo img{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+.userName{
+    margin-left: 15px;
+    font-weight: 700;
+}
+.like{
+    font-weight: 300;
+    margin-left: 15px;
+}
+.userName, .like{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.postImg img {
+    width: 44px;
+    height: 44px;
+}

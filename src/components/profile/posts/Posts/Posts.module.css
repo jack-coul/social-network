@@ -1,0 +1,11 @@
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 975px;
+    position: relative;
+}
+.mainPostsImg img{
+    width: 223px;
+    height: 223px;
+    margin: 10px 10px;
+}

@@ -56,7 +56,7 @@ export const addLike = (id) => {
     const token = state.application.token;
     dispatch({ type: "add/like/pending" });
     try {
-      const res = await fetch(`http://localhost:4000/add/like${id}`, {
+      const res = await fetch(`http://localhost:4000/add/like/${id}`, {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
@@ -83,7 +83,7 @@ export const removeLike = (id) => {
     const token = state.application.token;
     dispatch({ type: "remove/like/pending" });
     try {
-      const res = await fetch(`http://localhost:4000/remove/like${id}`, {
+      const res = await fetch(`http://localhost:4000/remove/like/${id}`, {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
@@ -100,23 +100,6 @@ export const removeLike = (id) => {
       }
     } catch (error) {
       dispatch({ type: "remove/like/rejected", error });
-    }
-  };
-};
-
-export const getLikes = () => {
-  return async (dispatch) => {
-    dispatch({ type: "get/likes/pending" });
-    try {
-      const res = await fetch(`http://localhost:4000/likes`);
-      const likes = await res.json();
-      if (likes.error) {
-        dispatch({ type: "get/likes/rejected", error: likes.error });
-      } else {
-        dispatch({ type: "get/likes/fulfilled", payload: likes });
-      }
-    } catch (error) {
-      dispatch({ type: "get/likes/rejected", error });
     }
   };
 };

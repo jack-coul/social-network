@@ -1,0 +1,73 @@
+.example-1 .form-group {
+  padding: 1em;
+  margin: 1em;
+  margin: auto;
+  text-align: center;
+}
+.example-1 {
+  width: 400px;
+  margin: auto;
+  background-color: #FFF;
+  padding: 20px;
+  border: 1px solid rgb(212, 212, 212);
+}
+.example-1 input[type="file"] {
+  outline: 0;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.example-1 .label {
+  width: 200px;
+  border: 2px dashed grey;
+  border-radius: 5px;
+  display: block;
+  padding: 1.2em;
+  transition: border 300ms ease;
+  cursor: pointer;
+  text-align: center;
+  margin: auto;
+}
+.example-1 .label i {
+  display: block;
+  font-size: 42px;
+  padding-bottom: 16px;
+}
+.example-1 .label i,
+.example-1 .label .title {
+  color: grey;
+  transition: 200ms color;
+}
+.example-1 .label:hover {
+  border: 2px solid #000;
+}
+.example-1 .label:hover i,
+.example-1 .label:hover .title {
+  color: #000;
+}
+
+.addPhotoIcon {
+  line-height: 0;
+  margin-top: 30px;
+}
+.inpValue {
+  text-align: center;
+  margin: 5px;
+}
+.inpValue input {
+  padding: 8px;
+  width: 200px;
+  background-color: #efefef;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.sendSettings {
+  padding: 10px 32px;
+  text-align: center;
+  margin: auto;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600; 
+}
