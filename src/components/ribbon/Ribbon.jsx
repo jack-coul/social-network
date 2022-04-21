@@ -9,7 +9,7 @@ import { addLike, deletePost, removeLike } from "../../redux/features/posts";
 import Comments from "./Comments";
 import { addComment, getComments } from "../../redux/features/comments";
 import { Link } from "react-router-dom";
-import Del from './forever.png';
+import Del from "./forever.png";
 
 const Ribbon = ({ post, loadingPosts, postLikes }) => {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
   };
   const handlePostComment = (text, id) => {
     dispatch(addComment(text, id));
-    setText('')
+    setText("");
   };
   const hundleShowComments = () => {
     if (showComments) {
@@ -98,11 +98,15 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
 
         <Link
           to={`/one/user/${post.user._id}`}
+          onClick={() => handleGetUser(post.user._id)}
         >{`${post.user.firstname} ${post.user.lastname}`}</Link>
         {user?.role === "admin" && (
-          <div className={styles.feed_foot_delete} onClick={() => handleDeletePost(post._id)}>
+          <div
+            className={styles.feed_foot_delete}
+            onClick={() => handleDeletePost(post._id)}
+          >
             <img src={Del} alt="deletePost" title="Удалить пост" />
-            </div>
+          </div>
         )}
       </div>
       <div className={styles.feed_main}>
@@ -226,9 +230,13 @@ const Ribbon = ({ post, loadingPosts, postLikes }) => {
           </div>
         )}
         {showComments ? (
-          <div className={styles.commentsWrapper} style={commetsCurrent >= 3 ? commentStylesScroll : {color: "black"}}>
+          <div
+            className={styles.commentsWrapper}
+            style={
+              commetsCurrent >= 3 ? commentStylesScroll : { color: "black" }
+            }
+          >
             {comments?.map((comment) => {
-
               if (comment.post === post._id) {
                 return <Comments user={user} comment={comment} />;
               }

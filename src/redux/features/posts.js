@@ -257,7 +257,9 @@ export const deletePost = (id) => {
     const state = getState();
     const token = state.application.token;
     dispatch({ type: "delete/post/pending" });
+    console.log(id);
     try {
+      console.log(token);
       const res = await fetch(`http://localhost:4000/post/${id}`, {
         method: "DELETE",
         headers: {
@@ -266,6 +268,7 @@ export const deletePost = (id) => {
         },
       });
       const error = await res.json();
+      console.log(error.error);
       if (error.error) {
         dispatch({ type: "delete/post/rejected", error: error.error });
       } else {
@@ -273,6 +276,7 @@ export const deletePost = (id) => {
       }
     } catch (error) {
       dispatch({ type: "delete/post/rejected", error });
+      console.log(error.toString());
     }
   };
 };

@@ -9,39 +9,35 @@ import HeaderUser from "./HeaderUser";
 const User = () => {
   const dispatch = useDispatch();
   const userId = useParams();
-
-  const { searchImage, loading, searchFirstname, searchLastname, id, user } =
-    useSelector((state) => state.application);
   useEffect(() => {
     dispatch(getUserOne(userId.id));
     dispatch(getUserPosts(userId.id));
   }, [dispatch, userId.id]);
+
+  const { searchUser, loading, user } = useSelector(
+    (state) => state.application
+  );
+
   const { posts } = useSelector((state) => state.posts);
   return (
     <>
-      {loading ? (
-        "load"
-      ) : (
-        <>
-          <HeaderUser
-            image={searchImage}
-            loading={loading}
-            firstname={searchFirstname}
-            lastname={searchLastname}
-            id={id}
-            user={user}
-            userId={userId}
-            posts = {posts}
-          />
-          <Posts
-            image={searchImage}
-            loading={loading}
-            firstname={searchFirstname}
-            lastname={searchLastname}
-            posts={posts}
-          />
-        </>
-      )}
+      <HeaderUser
+        image={searchUser?.avatar}
+        loading={loading}
+        firstname={searchUser?.firstname}
+        lastname={searchUser?.lastname}
+        id={user?._id}
+        user={user}
+        userId={userId}
+        posts={posts}
+      />
+      <Posts
+        image={searchUser?.avatar}
+        loading={loading}
+        firstname={searchUser?.firstname}
+        lastname={searchUser?.lastname}
+        posts={posts}
+      />
     </>
   );
 };

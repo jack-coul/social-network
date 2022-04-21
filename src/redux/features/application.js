@@ -3,9 +3,6 @@ const initialState = {
   users: [],
   token: localStorage.getItem("token"),
   id: localStorage.getItem("id"),
-  firstname: "",
-  lastname: "",
-  image: "",
   error: null,
 };
 
@@ -66,10 +63,7 @@ const application = (state = initialState, action) => {
         userINF: [...state.userINF, action.payload.user],
         user: action.payload,
         id: action.payload._id,
-        firstname: action.payload.firstname,
-        lastname: action.payload.lastname,
         loading: false,
-        image: action.payload.avatar,
       };
     case "user/get/rejected":
       return {
@@ -86,12 +80,7 @@ const application = (state = initialState, action) => {
       return {
         ...state,
         searchUser: action.payload,
-        searchID: action.payload._id,
-        searchFirstname: action.payload.firstname,
-        searchLastname: action.payload.lastname,
-        searchLogin: action.payload.login,
         loading: false,
-        searchImage: action.payload.avatar,
       };
     case "user/one/get/rejected":
       return {
@@ -159,7 +148,7 @@ const application = (state = initialState, action) => {
       return {
         ...state,
         adding: false,
-        error: action.payload,
+        error: action.error,
       };
     case "remove/follow/pending":
       return {
@@ -229,7 +218,6 @@ export const loginUser = (email, password) => {
         body: JSON.stringify({ email, password }),
       });
       const token = await data.json();
-      localStorage.setItem("token", token.token);
       if (token.error) {
         dispatch({
           type: "register/post/rejected",
@@ -245,6 +233,7 @@ export const loginUser = (email, password) => {
             lastname: token.lastname,
           },
         });
+        localStorage.setItem("token", token.token);
       }
     } catch (err) {
       dispatch({ type: "login/post/rejected", error: err.toString() });
@@ -282,7 +271,6 @@ export const getUser = () => {
 };
 
 export const getUserOne = (id) => {
-  console.log(id);
   return async (dispatch, getState) => {
     const state = getState();
     dispatch({ type: "user/one/get/pending" });
@@ -319,7 +307,6 @@ export const editUser = (img, firstname, lastname, login) => {
     firstname && formData.append("firstname", firstname);
     lastname && formData.append("lastname", lastname);
     login && formData.append("login", login);
-    console.log(formData.get("image"));
     try {
       const res = await fetch("http://localhost:4000/user", {
         method: "PATCH",

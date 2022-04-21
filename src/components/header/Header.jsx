@@ -8,7 +8,6 @@ import Logo from "../Images/user.png";
 import RibbonPage from "./homePage/RibbonPage";
 import LogoHomePage from "./logoPage/LogoHomePage";
 import MessagePage from "./messagePage/MessagePage";
-import NotificationsPage from "./notifications/NotificationsPage";
 import UserPage from "./userPage/UserPage";
 import { Link } from "react-router-dom";
 

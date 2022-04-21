@@ -116,9 +116,10 @@ const Messages = () => {
       });
       setMessages([...messages, res.data]);
       setNewMessage("");
+      console.log(setMessages);
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err);
+      console.log(err.toString());
     }
   };
 
@@ -127,15 +128,15 @@ const Messages = () => {
     setReciver(userID);
   };
 
-  const dialog = useRef()
-  const scrollChat = ()=>{
-          dialog.current.scrollTop = dialog.current.scrollHeight
-  }
-  
-  const handleCurrentChat =  (c) => {
+  const dialog = useRef();
+  const scrollChat = () => {
+    dialog.current.scrollTop = dialog.current.scrollHeight;
+  };
+
+  const handleCurrentChat = (c) => {
     setCurrentChat(c);
-    scrollChat()  
-  }
+    scrollChat();
+  };
 
   return (
     <>
