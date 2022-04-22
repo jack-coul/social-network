@@ -58,9 +58,7 @@ const Messages = () => {
         );
         dispatch({ type: "conversation/get/fullfilled", payload: res.data });
         setConversations(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     getConversations();
   }, [user]);
@@ -79,9 +77,7 @@ const Messages = () => {
         );
         dispatch({ type: "message/get/fullfilled", payload: res.data });
         setMessages(res.data);
-      } catch (err) {
-        console.log(err.toString());
-      }
+      } catch (err) {}
     };
     getMessages();
   }, [currentChat, state]);
@@ -116,7 +112,6 @@ const Messages = () => {
       });
       setMessages([...messages, res.data]);
       setNewMessage("");
-      console.log(setMessages);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err.toString());

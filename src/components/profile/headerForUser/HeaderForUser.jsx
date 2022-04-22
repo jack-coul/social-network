@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import Followers from "../followers/Followers";
 import Subscribers from "../followers/Subscribers";
 
-
 const HeaderForUser = () => {
   const { posts } = useSelector((state) => state.posts);
 
@@ -17,13 +16,13 @@ const HeaderForUser = () => {
   const [follows, setFollows] = React.useState(false);
 
   const handleGetSubscription = () => {
-    setFollows(false)
+    setFollows(false);
     setSubscription(!subscription);
   };
   const { user, loading } = useSelector((state) => state.application);
 
   const handleGetFollows = () => {
-    setSubscription(false)
+    setSubscription(false);
     setFollows(!follows);
   };
 
@@ -97,9 +96,8 @@ const HeaderForUser = () => {
               <b>{user?.freinds?.length}</b> подписчиков
             </div>
 
-            <div  onClick={handleGetSubscription}  className={styles.followsWrap}>
+            <div onClick={handleGetSubscription} className={styles.followsWrap}>
               <b>{user?.follows?.length}</b> подписок
-
             </div>
             {follows && (
               <div className={styles.followComponentWrap}>
@@ -107,7 +105,7 @@ const HeaderForUser = () => {
               </div>
             )}
             {subscription && (
-              <div  className={styles.subscriptionComponentWrap}>
+              <div className={styles.subscriptionComponentWrap}>
                 <Subscribers user={user} setSubscription={setSubscription} />
               </div>
             )}
@@ -189,7 +187,7 @@ const HeaderForUser = () => {
         <div className={styles.menuMain}>
           <Link className={styles.menuLink} to="/saves">
             <svg
-              ariaLabel=""
+              aria-label=""
               className="_8-yf5 "
               color="#8e8e8e"
               fill="#8e8e8e"

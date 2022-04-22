@@ -9,6 +9,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMyPosts());
+    dispatch({ type: "unblocked" });
   }, [dispatch]);
 
   const { image, loading, firstname, lastname, id } = useSelector(

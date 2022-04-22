@@ -38,6 +38,7 @@ const Header = () => {
 
   const handleCloseWindow = () => {
     setWindow(false);
+    setUser("");
   };
 
   return (
