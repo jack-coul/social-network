@@ -3,7 +3,7 @@ import styles from "./User.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
 import style from "../profile/Profile.module.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addFollow,
@@ -16,6 +16,7 @@ import {
 } from "../../redux/features/conversation";
 import Followers from "../profile/followers/Followers";
 import Subscribers from "../profile/followers/Subscribers";
+import Blocked from "./Blocked";
 
 const HeaderUser = ({
   image,
@@ -63,6 +64,7 @@ const HeaderUser = ({
 
   const [subscription, setSubscription] = React.useState(false);
   const [getFollows, setGetFollows] = React.useState(false);
+  const [timer, setTimer] = React.useState(false);
 
   const handleGetSubscription = () => {
     setGetFollows(false);
@@ -76,9 +78,16 @@ const HeaderUser = ({
 
   const handleUserBlock = () => {
     dispatch(blockUser(userId.id));
+    setTimer(true);
+    setTimeout(() => {
+      setTimer(false);
+      dispatch({ type: "blocked" });
+    }, 3000);
   };
 
-  return (
+  return timer ? (
+    <Blocked />
+  ) : (
     <>
       <div className={styles.header}>
         <div className={styles.headerImg}>

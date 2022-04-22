@@ -11,7 +11,6 @@ const message = (state = initialState, action) => {
         error: null,
       };
     case "message/post/fullfilled":
-      console.log(action.payload);
       return {
         ...state,
         message: [...state.message, action.payload],

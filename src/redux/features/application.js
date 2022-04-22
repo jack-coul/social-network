@@ -168,6 +168,16 @@ const application = (state = initialState, action) => {
         adding: false,
         error: action.payload,
       };
+    case "blocked":
+      return {
+        ...state,
+        block: true,
+      };
+    case "unblocked":
+      return {
+        ...state,
+        block: false,
+      };
     default:
       return state;
   }
