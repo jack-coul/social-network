@@ -90,6 +90,8 @@
 .menuMain {
   height: 52px;
   margin-right: 60px;
+  display: flex;
+  align-items: center;
 }
 
 .menuLink {
@@ -151,4 +153,8 @@ a {
 .loadingWrapper {
   display: flex;
   flex-wrap: wrap;
+}
+
+.saves {
+  margin-top: 12px;
 }
