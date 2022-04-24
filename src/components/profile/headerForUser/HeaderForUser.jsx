@@ -11,6 +11,7 @@ import Subscribers from "../followers/Subscribers";
 
 const HeaderForUser = () => {
   const { posts } = useSelector((state) => state.posts);
+  const allUsers = useSelector((state) => state.application.users);
 
   const [subscription, setSubscription] = React.useState(false);
   const [follows, setFollows] = React.useState(false);
@@ -58,7 +59,7 @@ const HeaderForUser = () => {
             <div className={styles.descriptionEditSettings}>
               <Link to="/editProfile">
                 <svg
-                  ariaLabel="Параметры"
+                  aria-label="Параметры"
                   className="_8-yf5 "
                   color="#262626"
                   fill="#262626"
@@ -101,12 +102,20 @@ const HeaderForUser = () => {
             </div>
             {follows && (
               <div className={styles.followComponentWrap}>
-                <Followers user={user} setFollows={setFollows} />
+                <Followers
+                  user={user}
+                  allUsers={allUsers}
+                  setFollows={setFollows}
+                />
               </div>
             )}
             {subscription && (
               <div className={styles.subscriptionComponentWrap}>
-                <Subscribers user={user} setSubscription={setSubscription} />
+                <Subscribers
+                  user={user}
+                  allUsers={allUsers}
+                  setSubscription={setSubscription}
+                />
               </div>
             )}
           </div>
@@ -114,9 +123,9 @@ const HeaderForUser = () => {
       </div>
       <div className={styles.menu}>
         <div className={styles.menuMain}>
-          <Link className={styles.menuLink} to="/public">
+          <Link className={styles.menuLink} to="/">
             <svg
-              ariaLabel=""
+              aria-label=""
               className="_8-yf5 "
               color="#262626"
               fill="#262626"
@@ -185,30 +194,34 @@ const HeaderForUser = () => {
           </Link>
         </div>
         <div className={styles.menuMain}>
-          <Link className={styles.menuLink} to="/saves">
-            <svg
-              aria-label=""
-              className="_8-yf5 "
-              color="#8e8e8e"
-              fill="#8e8e8e"
-              height="12"
-              role="img"
-              viewBox="0 0 24 24"
-              width="12"
-            >
-              <polygon
-                fill="none"
-                points="20 21 12 13.44 4 21 4 3 20 3 20 21"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-              ></polygon>
-            </svg>
+          <div>
+            <Link className={styles.menuLink} to="/saves">
+              <svg
+                aria-label=""
+                className="_8-yf5 "
+                color="#8e8e8e"
+                fill="#8e8e8e"
+                height="12"
+                role="img"
+                viewBox="0 0 24 24"
+                width="12"
+              >
+                <polygon
+                  fill="none"
+                  points="20 21 12 13.44 4 21 4 3 20 3 20 21"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                ></polygon>
+              </svg>
+            </Link>
+          </div>
+          <div className={styles.saves}>
             <Link to="/saves">
               <div className={styles.menuText}>СОХРАНЕННОЕ</div>
             </Link>
-          </Link>
+          </div>
         </div>
       </div>
     </>

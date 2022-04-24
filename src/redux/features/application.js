@@ -271,7 +271,7 @@ export const getUser = () => {
 
         dispatch({
           type: "user/get/fullfilled",
-          payload: user.user,
+          payload: user,
         });
       }
     } catch (err) {
