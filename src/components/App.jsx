@@ -13,13 +13,14 @@ import Ribbons from "./ribbon/Ribbons";
 import Posts from "./profile/posts/Posts/Posts";
 import User from "./user/User";
 import { getUser } from "../redux/features/application";
+import { useTypesSelector } from "../hooks/useTypesSelector";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
-  const { token, block } = useSelector((state) => state.application);
+  const { token, block } = useTypesSelector((state) => state.application);
   if (token) {
     if (block) {
       return (

@@ -1,9 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import style from "./Followers.module.css";
 import logo from "../../Images/user.png";
 
-const Followers = ({ setFollows, id, user, allUsers }) => {
+const Followers = ({ setFollows, user, allUsers }) => {
   const handleCloseWindow = () => {
     setFollows(false);
   };

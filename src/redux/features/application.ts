@@ -1,50 +1,59 @@
-const initialState = {
-  userINF: [],
-  users: [],
+import {
+  actionApplication,
+  applicationState,
+  applicationTypes,
+  LOGIN_USER,
+  REGISTER_USER,
+  startState,
+} from "../../types/application";
+
+const initialState: startState = {
   token: localStorage.getItem("token"),
   id: localStorage.getItem("id"),
+  firstname: "",
+  lastname: "",
+  loading: false,
   error: null,
 };
 
-const application = (state = initialState, action) => {
+const application = (state = initialState, action: actionApplication) => {
   switch (action.type) {
-    case "register/post/pending": {
+    case applicationTypes.REGISTER_PENDING: {
       return {
         ...state,
         loading: true,
       };
     }
-    case "register/post/fullfilled": {
+    case REGISTER_USER: {
       return {
         ...state,
         loading: false,
       };
     }
-    case "register/post/rejected": {
+    case applicationTypes.REGISTER_REJECTED: {
       return {
         ...state,
         loading: false,
         error: action.error,
       };
     }
-    case "login/post/pending": {
+    case applicationTypes.SIGNIN_PENDING: {
       return {
         ...state,
         loading: true,
         error: null,
       };
     }
-    case "login/post/fullfilled": {
+    case LOGIN_USER: {
       return {
         ...state,
-        loading: false,
         token: action.payload.token,
         id: action.payload.id,
         firstname: action.payload.firstname,
         lastname: action.payload.lastname,
       };
     }
-    case "login/post/rejected": {
+    case applicationTypes.SIGNIN_REJECTED: {
       return {
         ...state,
         loading: false,
@@ -183,73 +192,7 @@ const application = (state = initialState, action) => {
   }
 };
 
-export const registerUser = (firstname, lastname, login, email, password) => {
-  return async (dispatch) => {
-    dispatch({ type: "register/post/pending" });
-    try {
-      const res = await fetch("http://localhost:4000/user/signup", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          firstname,
-          lastname,
-          login,
-          email,
-          password,
-        }),
-      });
-      const user = await res.json();
 
-      if (user.error) {
-        dispatch({
-          type: "register/post/rejected",
-          error: user.error,
-        });
-      } else {
-        dispatch({ type: "register/post/fullfilled" });
-      }
-    } catch (err) {
-      dispatch({ type: "register/post/rejected", error: err.toString() });
-    }
-  };
-};
-
-export const loginUser = (email, password) => {
-  return async (dispatch) => {
-    dispatch({ type: "login/post/pending" });
-    try {
-      const data = await fetch("http://localhost:4000/user/signin", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      const token = await data.json();
-      if (token.error) {
-        dispatch({
-          type: "register/post/rejected",
-          payload: token.error,
-        });
-      } else {
-        dispatch({
-          type: "login/post/fullfilled",
-          payload: {
-            token: token.token,
-            id: token.id,
-            firstname: token.firstname,
-            lastname: token.lastname,
-          },
-        });
-        localStorage.setItem("token", token.token);
-      }
-    } catch (err) {
-      dispatch({ type: "login/post/rejected", error: err.toString() });
-    }
-  };
-};
 
 export const getUser = () => {
   return async (dispatch, getState) => {

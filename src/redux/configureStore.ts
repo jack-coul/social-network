@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import thunk from "redux-thunk";
+import thunk, { ThunkDispatch } from "redux-thunk";
 import application from "./features/application";
 import posts from "./features/posts";
 import conversation from "./features/conversation";
@@ -18,12 +18,15 @@ const combineRouter = combineReducers({
   message,
   notification,
   saves,
-  comments
+  comments,
 });
 
 const store = createStore(
   combineRouter,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+export type RootState = ReturnType<typeof combineRouter>;
+export type AppDispatch = ThunkDispatch<RootState, void>;
 
 export default store;
