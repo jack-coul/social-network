@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getUserOne } from "../../redux/features/application";
+import { getUserOne } from "../../redux/actions/user";
 import { getUserPosts } from "../../redux/features/posts";
 import Posts from "../profile/posts/Posts/Posts";
 import HeaderUser from "./HeaderUser";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import { editUser } from "../../redux/features/application";
+import { editUser } from "../../redux/actions/user";
 
 const EditProfile = () => {
   const dispatch = useDispatch();

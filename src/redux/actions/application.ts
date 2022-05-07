@@ -3,26 +3,30 @@ import axios from "axios";
 import {
   actionApplication,
   ERRORS_APPLICATION,
+  ISigninForm,
   LOADING_APPLICATION,
   LOGIN_USER,
+  LOGOUT_USER,
   REGISTER_USER,
-} from "../../types/application";
+} from "../types/application";
+import { IRegisterForm } from "../../interfaces";
 
-export const registerUser = (data: any) => {
+export const registerUser = (data: IRegisterForm) => {
   return async (dispatch: Dispatch<actionApplication>) => {
     dispatch({
       type: LOADING_APPLICATION,
       payload: {
-        loadingUser: true,
+        loadingSign: true,
         errors: null,
       },
     });
+
     try {
-      const res = await axios.post("http://localhost:4000/user/signup", data);
+      const res = await axios.post("/user/signup", data);
       dispatch({
         type: LOADING_APPLICATION,
         payload: {
-          loadingUser: false,
+          loadingSign: false,
         },
       });
       if (res.data.error) {
@@ -30,39 +34,39 @@ export const registerUser = (data: any) => {
           type: ERRORS_APPLICATION,
           payload: {
             errors: res.data.error,
-            loadingUser: false,
+            loadingSign: false,
           },
         });
       } else {
         dispatch({ type: REGISTER_USER });
       }
-    } catch (err) {
+    } catch (err: any) {
       dispatch({
         type: ERRORS_APPLICATION,
         payload: {
           errors: err.toString(),
-          loadingUser: false,
+          loadingSign: false,
         },
       });
     }
   };
 };
 
-export const loginUser = (data: any) => {
+export const loginUser = (data: ISigninForm) => {
   return async (dispatch: Dispatch<actionApplication>) => {
     dispatch({
       type: LOADING_APPLICATION,
       payload: {
-        loadingUser: true,
+        loadingSign: true,
         errors: null,
       },
     });
     try {
-      const res = await axios.post("http://localhost:4000/user/signin", data);
+      const res = await axios.post("/user/signin", data);
       dispatch({
         type: LOADING_APPLICATION,
         payload: {
-          loadingUser: false,
+          loadingSign: false,
         },
       });
       if (res.data.error) {
@@ -70,7 +74,7 @@ export const loginUser = (data: any) => {
           type: ERRORS_APPLICATION,
           payload: {
             errors: res.data.error,
-            loadingUser: false,
+            loadingSign: false,
           },
         });
       } else {
@@ -84,13 +88,32 @@ export const loginUser = (data: any) => {
           },
         });
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("id", res.data.id);
       }
-    } catch (err) {
+    } catch (err: any) {
       dispatch({
         type: ERRORS_APPLICATION,
         payload: {
           errors: err.toString(),
-          loadingUser: false,
+          loadingSign: false,
+        },
+      });
+    }
+  };
+};
+
+export const logoutUser = () => {
+  return async (dispatch: Dispatch<actionApplication>) => {
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("id");
+      dispatch({ type: LOGOUT_USER });
+    } catch (err: any) {
+      dispatch({
+        type: ERRORS_APPLICATION,
+        payload: {
+          loadingSign: false,
+          errors: err.toString(),
         },
       });
     }

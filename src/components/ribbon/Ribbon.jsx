@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Ribbon.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../Images/user.png";
-import { getUser, getUserOne } from "../../redux/features/application";
 
 import { addLike, deletePost, removeLike } from "../../redux/features/posts";
 import Comments from "./Comments";
 import { addComment, getComments } from "../../redux/features/comments";
 import { Link } from "react-router-dom";
 import Del from "./forever.png";
+import { getUser, getUserOne } from "../../redux/actions/user";
 
 const Ribbon = ({ post, loadingPosts, postLikes }) => {
   const dispatch = useDispatch();

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../redux/features/application";
 import AddPosts from "./addPosts/AddPosts";
 import ExitUser from "./exitPage/ExitUser";
 import styles from "./Header.module.css";
@@ -10,6 +9,7 @@ import LogoHomePage from "./logoPage/LogoHomePage";
 import MessagePage from "./messagePage/MessagePage";
 import UserPage from "./userPage/UserPage";
 import { Link } from "react-router-dom";
+import { getUsers } from "../../redux/actions/user";
 
 const Header = () => {
   const [user, setUser] = useState("");

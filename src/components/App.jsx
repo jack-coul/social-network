@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Header from "./header/Header";
 import Messages from "./messages/Messages";
 import HeaderForUser from "./profile/headerForUser/HeaderForUser";
 import Profile from "./profile/Profile";
 import Saved from "./saved/Saved";
 import SignIn from "./singIn&singUp/signIn/SignIn";
-import SignUp from "./singIn&singUp/signUp/SignUp";
 import EditProfile from "./EditProfile/EditProfile";
 import Ribbons from "./ribbon/Ribbons";
 import Posts from "./profile/posts/Posts/Posts";
 import User from "./user/User";
-import { getUser } from "../redux/features/application";
 import { useTypesSelector } from "../hooks/useTypesSelector";
+import { getUser } from "../redux/actions/user";
+import SignUp from "./singIn&singUp/signUp/SignUp";
 
 function App() {
   const dispatch = useDispatch();
