@@ -1,17 +1,16 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo from "../../Images/user.png";
 import styles from "../Profile.module.css";
-import { useSelector } from "react-redux";
-
 import Followers from "../followers/Followers";
 import Subscribers from "../followers/Subscribers";
+import { useTypesSelector } from "../../../hooks/useTypesSelector";
 
-const HeaderForUser = () => {
-  const { posts } = useSelector((state) => state.posts);
-  const allUsers = useSelector((state) => state.application.users);
+const HeaderForUser: React.FC = () => {
+  const { posts } = useTypesSelector((state) => state.posts);
+  const { users, user } = useTypesSelector((state) => state.user);
+  const { loadingSign } = useTypesSelector((state) => state.alertReducer);
 
   const [subscription, setSubscription] = React.useState(false);
   const [follows, setFollows] = React.useState(false);
@@ -20,20 +19,19 @@ const HeaderForUser = () => {
     setFollows(false);
     setSubscription(!subscription);
   };
-  const { user, loading } = useSelector((state) => state.application);
 
   const handleGetFollows = () => {
     setSubscription(false);
     setFollows(!follows);
   };
 
-  return loading ? (
-    "loading..."
+  return loadingSign ? (
+    <>loading...</>
   ) : (
     <>
       <div className={styles.header}>
         <div className={styles.headerImg}>
-          {loading ? (
+          {loadingSign ? (
             <div className={styles.headerImgWrap}>
               <CircularProgress />
             </div>
@@ -91,7 +89,7 @@ const HeaderForUser = () => {
           </div>
           <div className={styles.descriptionPosts}>
             <div className={styles.followsWrap}>
-              <b>{posts.length}</b> публикаций
+              <b>{posts}</b> публикаций
             </div>
             <div onClick={handleGetFollows} className={styles.followsWrap}>
               <b>{user?.freinds?.length}</b> подписчиков
@@ -104,7 +102,7 @@ const HeaderForUser = () => {
               <div className={styles.followComponentWrap}>
                 <Followers
                   user={user}
-                  allUsers={allUsers}
+                  allUsers={users}
                   setFollows={setFollows}
                 />
               </div>
@@ -113,7 +111,7 @@ const HeaderForUser = () => {
               <div className={styles.subscriptionComponentWrap}>
                 <Subscribers
                   user={user}
-                  allUsers={allUsers}
+                  allUsers={users}
                   setSubscription={setSubscription}
                 />
               </div>

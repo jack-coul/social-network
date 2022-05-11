@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "react";
-import { IEditUserData, startState } from "../types/application";
+import { startState } from "../types/application";
 import {
   ADD_FOLLOW,
   BLOCK_USER,
@@ -31,7 +31,6 @@ export const getUser = () => {
     try {
       const res = await axios.get(`http://localhost:4000/user`, {
         headers: {
-          "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -124,7 +123,7 @@ export const getUserOne = (id: string) => {
   };
 };
 
-export const editUser = (data: IEditUserData) => {
+export const editUser = (data: {}) => {
   return async (
     dispatch: Dispatch<IUserAction>,
     getState: () => startState

@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../../hooks/useTypesDispatch";
 import { IRegisterForm } from "../../../interfaces";
 import { registerUser } from "../../../redux/actions/application";
 
-const SignUp = () => {
+const SignUp: React.FC = () => {
   const [registerData, setRegisterData] = useState<IRegisterForm>({
     firstname: "",
     lastname: "",
@@ -40,6 +40,7 @@ const SignUp = () => {
       setMessage("Пароли не совпадают");
     }
   };
+
   return (
     <div>
       <div className="backgroundLogo">

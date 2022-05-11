@@ -1,16 +1,20 @@
 import {
+  ADD_FOLLOW,
+  BLOCK_USER,
   EDIT_USER,
-  ERRORS_USER,
   GET_ALL_USERS,
   GET_OTHER_USER,
   GET_USER,
-  LOADING_USER,
+  REMOVE_FOLLOW,
   startState,
+  UNBLOCK_USER,
 } from "../types/user";
 
 const initialState: startState = {
   user: null,
   userINF: [],
+  users: [],
+  block: false,
 };
 
 const user = (state = initialState, action: any) => {
@@ -41,48 +45,26 @@ const user = (state = initialState, action: any) => {
         image: action.payload,
       };
 
-    case "add/follow/pending":
-      return {
-        ...state,
-        adding: true,
-        error: null,
-      };
-    case "add/follow/fulfilled":
+    case ADD_FOLLOW:
       return {
         ...state,
         user: action.payload,
         adding: false,
       };
-    case "add/follow/rejected":
-      return {
-        ...state,
-        adding: false,
-        error: action.error,
-      };
-    case "remove/follow/pending":
-      return {
-        ...state,
-        adding: true,
-        error: null,
-      };
-    case "remove/follow/fulfilled":
+
+    case REMOVE_FOLLOW:
       return {
         ...state,
         user: action.payload,
         adding: false,
       };
-    case "remove/follow/rejected":
-      return {
-        ...state,
-        adding: false,
-        error: action.payload,
-      };
-    case "blocked":
+
+    case BLOCK_USER:
       return {
         ...state,
         block: true,
       };
-    case "unblocked":
+    case UNBLOCK_USER:
       return {
         ...state,
         block: false,

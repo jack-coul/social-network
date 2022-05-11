@@ -7,10 +7,14 @@ export const GET_OTHER_USER = "get/other/user";
 export const GET_ALL_USERS = "get/all/users";
 export const EDIT_USER = "edit/user";
 export const BLOCK_USER = "block/user";
+export const UNBLOCK_USER = "unblock/user";
 export const ADD_FOLLOW = "add/follow";
 export const REMOVE_FOLLOW = "remove/follow";
 
-export type startState = Pick<applicationState, "user" | "userINF">;
+export type startState = Pick<
+  applicationState,
+  "user" | "userINF" | "block" | "users"
+>;
 
 type ILoad = {
   loaddingUser: boolean;

@@ -1,7 +1,5 @@
 import {
   actionApplication,
-  ERRORS_APPLICATION,
-  LOADING_APPLICATION,
   LOGIN_USER,
   LOGOUT_USER,
   REGISTER_USER,

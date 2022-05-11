@@ -4,15 +4,29 @@ import Content from "../../../content/Content";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../../../redux/features/comments";
 import { deletePost } from "../../../../redux/features/posts";
+import { useAppDispatch } from "../../../../hooks/useTypesDispatch";
+import { useTypesSelector } from "../../../../hooks/useTypesSelector";
 
-const Post = ({ comments, post, handleShowContent, loadingPosts }) => {
+interface IPostProps {
+  comments?: object[];
+  post?: object;
+  handleShowContent?: () => void;
+  loadingPosts?: boolean;
+}
+
+const Post: React.FC<IPostProps> = ({
+  comments,
+  post,
+  handleShowContent,
+  loadingPosts,
+}) => {
   const [window, setWindow] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { user } = useTypesSelector((state) => state.user);
 
   const handleGetNat = () => {
-    setWindow(!window)
-  }
-
+    setWindow(!window);
+  };
 
   const handleOpenPost = () => {
     setWindow(true);
@@ -21,12 +35,11 @@ const Post = ({ comments, post, handleShowContent, loadingPosts }) => {
   const handleDeletePost = (id) => {
     dispatch(deletePost(id));
   };
-  const commentsList = comments.filter((comment) => comment.post === post._id);
+  const commentsList = comments?.filter((comment) => comment.post === post._id);
 
   const img = post.imagePost;
 
   const host = "http://localhost:4000/";
-  const { user } = useSelector((state) => state.application);
 
   return (
     <div onClick={handleShowContent} className={styles.mainPosts}>

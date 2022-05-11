@@ -4,12 +4,13 @@ import { loginUser } from "../../../redux/actions/application";
 import { ISigninForm } from "../../../redux/types/application";
 import { useAppDispatch } from "../../../hooks/useTypesDispatch";
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const [signinData, setSigninData] = useState<ISigninForm>({
     email: "",
     password: "",
   });
-  const dispatch = useAppDispatch();
 
   const formEmpty = signinData.email && signinData.password;
 

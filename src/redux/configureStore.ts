@@ -10,8 +10,7 @@ import notification from "./features/notification";
 import saves from "./features/saves";
 import comments from "./features/comments";
 import user from "./features/user";
-import { IUserAction } from "./types/user";
-import { actionApplication } from "./types/application";
+import alertReducer from "./features/alert";
 
 const combineRouter = combineReducers({
   application,
@@ -23,6 +22,7 @@ const combineRouter = combineReducers({
   saves,
   comments,
   user,
+  alertReducer,
 });
 
 const store = createStore(
@@ -31,10 +31,7 @@ const store = createStore(
 );
 
 export type RootState = ReturnType<typeof combineRouter>;
-export type AppDispatch = ThunkDispatch<
-  RootState,
-  void,
-  actionApplication | IUserAction
->;
+export type RootAction = ReturnType<typeof store.dispatch>;
+export type AppDispatch = ThunkDispatch<RootState, void, RootAction>;
 
 export default store;

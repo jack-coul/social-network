@@ -6,6 +6,7 @@ export type IUserObject = {
   lastname: string;
   avatar: string;
   email: string;
+  login: string;
   password: string;
   role?: string;
   freinds?: [];
@@ -17,9 +18,11 @@ export type applicationState = {
   token: string | null;
   id: string | null;
   user: IUserObject | null;
+  users: IUserObject[];
   userINF: IUserObject[];
   firstname: string;
   lastname: string;
+  block: boolean;
 };
 
 export type ILoad = {
@@ -33,11 +36,14 @@ export const REGISTER_USER = "register/post/fullfilled";
 export const LOGIN_USER = "login/post/fullfilled";
 export const LOGOUT_USER = "logout/user";
 
-export type startState = Omit<applicationState, "user" | "userINF">;
+export type startState = Omit<
+  applicationState,
+  "user" | "userINF" | "block" | "users"
+>;
 export type ISigninForm = Pick<IRegisterForm, "email" | "password">;
 export type IEditUserData = Pick<
   IUserObject,
-  "firstname" | "lastname" | "avatar"
+  "firstname" | "lastname" | "login" | "avatar"
 >;
 
 type ILoadaction = {
