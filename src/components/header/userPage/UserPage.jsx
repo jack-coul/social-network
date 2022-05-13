@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./UserPage.module.css";
 import Logo from "../../Images/user.png";
-import { getUser } from "../../../redux/features/application";
+import { getUser } from "../../../redux/actions/user";
 
 const UserPage = () => {
   const { loading, image } = useSelector((state) => state.application);

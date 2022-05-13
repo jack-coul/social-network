@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../../redux/features/application";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../../redux/actions/user";
 import Logo from "../../Images/user.png";
 
 import styles from "./../Messages.module.css";

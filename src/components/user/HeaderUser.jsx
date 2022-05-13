@@ -5,11 +5,7 @@ import Logo from "../Images/user.png";
 import style from "../profile/Profile.module.css";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addFollow,
-  blockUser,
-  removeFollow,
-} from "../../redux/features/application";
+
 import {
   getConversations,
   postConversation,
@@ -17,6 +13,7 @@ import {
 import Followers from "../profile/followers/Followers";
 import Subscribers from "../profile/followers/Subscribers";
 import Blocked from "./Blocked";
+import { addFollow, blockUser, removeFollow } from "../../redux/actions/user";
 
 const HeaderUser = ({
   image,
