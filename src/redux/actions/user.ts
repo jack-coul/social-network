@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "react";
+import { RootState } from "../configureStore";
 import { startState } from "../types/application";
 import {
   ADD_FOLLOW,
@@ -15,12 +16,9 @@ import {
 } from "../types/user";
 
 export const getUser = () => {
-  return async (
-    dispatch: Dispatch<IUserAction>,
-    getState: () => startState
-  ) => {
+  return async (dispatch: Dispatch<IUserAction>, getState: () => RootState) => {
     const state = getState();
-    const token = state.token;
+    const token = state.application.token;
     dispatch({
       type: LOADING_USER,
       payload: {
@@ -34,7 +32,6 @@ export const getUser = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       dispatch({
         type: LOADING_USER,
         payload: {

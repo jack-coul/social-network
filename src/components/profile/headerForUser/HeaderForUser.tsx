@@ -11,23 +11,19 @@ const HeaderForUser: React.FC = () => {
   const { posts } = useTypesSelector((state) => state.posts);
   const { users, user } = useTypesSelector((state) => state.user);
   const { loadingSign } = useTypesSelector((state) => state.alertReducer);
-
+  const countPosts = posts?.length;
   const [subscription, setSubscription] = React.useState(false);
   const [follows, setFollows] = React.useState(false);
-
   const handleGetSubscription = () => {
     setFollows(false);
     setSubscription(!subscription);
   };
-
   const handleGetFollows = () => {
     setSubscription(false);
     setFollows(!follows);
   };
 
-  return loadingSign ? (
-    <>loading...</>
-  ) : (
+  return (
     <>
       <div className={styles.header}>
         <div className={styles.headerImg}>
@@ -89,7 +85,7 @@ const HeaderForUser: React.FC = () => {
           </div>
           <div className={styles.descriptionPosts}>
             <div className={styles.followsWrap}>
-              <b>{posts}</b> публикаций
+              <b>{countPosts}</b> публикаций
             </div>
             <div onClick={handleGetFollows} className={styles.followsWrap}>
               <b>{user?.freinds?.length}</b> подписчиков

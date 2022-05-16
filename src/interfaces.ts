@@ -5,8 +5,3 @@ export interface IRegisterForm {
   email: string;
   password: string;
 }
-
-interface IClassNames {
-  [className: string]: string;
-}
-export let styles: IClassNames;

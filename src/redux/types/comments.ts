@@ -1,14 +1,17 @@
+import { IUserObject } from "./application";
+import { IPostObject } from "./post";
+
 export const GET_COMMENTS = "get/comments";
 export const ADD_COMMENT = "add/comment";
 export const DELETE_COMMENT = "delete/comment";
 export const LOADING_COMMENT = "loading/comment";
 export const ERROR_COMMENT = "error/comment";
 
-interface ICommentObject {
+export interface ICommentObject {
   _id: string;
   text: string;
-  user?: object;
-  post?: object;
+  user?: IUserObject;
+  post: IPostObject;
   dateComments?: object;
 }
 

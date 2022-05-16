@@ -1,13 +1,8 @@
 import React from "react";
 import { useTypesSelector } from "../../../../hooks/useTypesSelector";
+import { IPostObject } from "../../../../redux/types/post";
 import Post from "./Post";
 const styles = require("./Posts.module.css");
-
-type IPostObject = {
-  imagePost: string;
-  text: string;
-  [key: string]: any;
-};
 
 interface IPostsProps {
   posts?: IPostObject[];

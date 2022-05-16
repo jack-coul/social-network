@@ -22,7 +22,7 @@ const user = (state = initialState, action: any) => {
     case GET_USER:
       return {
         ...state,
-        userINF: [...state.userINF, action.payload.user],
+        userINF: [...state.userINF, action.payload],
         user: action.payload,
         id: action.payload._id,
         loading: false,
