@@ -7,27 +7,30 @@ import {
   TextField,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../../redux/features/posts";
 import styles from "./AddPosts.module.css";
 import logo from "../../../images/2040520.png";
+import { useTypesSelector } from "../../../hooks/useTypesSelector";
+import { useAppDispatch } from "../../../hooks/useTypesDispatch";
 
 const AddPosts = () => {
   // const [img, setImg] = useState(null);
   // const [description, setDescription] = useState("");
-
-  const posts = useSelector((state) => state.posts.posts);
+  const dispatch = useAppDispatch();
+  const posts = useTypesSelector((state) => state.posts.posts);
   const [img, setImg] = useState(null);
   const [description, setDescription] = useState("");
 
+  const data = new FormData();
+  img && data.append("img", img);
+  description && data.append("description", description);
+
   const handleAddPost = () => {
-    dispatch(addPost(description, img));
+    dispatch(addPost(data));
     setImg(null);
 
     setDescription("");
   };
-
-  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
 

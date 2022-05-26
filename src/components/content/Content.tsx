@@ -1,23 +1,47 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { addComment, deleteComment } from "../../redux/features/comments";
-import { addLike, removeLike } from "../../redux/features/posts";
+import { useAppDispatch } from "../../hooks/useTypesDispatch";
+import { useTypesSelector } from "../../hooks/useTypesSelector";
+import { addComment, deleteComment } from "../../redux/actions/comments";
+import { addLike, removeLike } from "../../redux/actions/likes";
+import { IUserObject } from "../../redux/types/application";
+import { ICommentObject } from "../../redux/types/comments";
+import { IPostObject } from "../../redux/types/post";
 import styles from "./Content.module.css";
 import Logo from "./forever.png";
 
-const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user }) => {
-  const userId = useSelector((state) => state.application.id);
-  const [text, setText] = React.useState("");
-  const liked = post.likes.find((post) => post._id === userId);
-  const [like, setLike] = React.useState(!!liked);
-  const [likesCount, setLikesCount] = useState(post.likes.length);
+interface IContentProps {
+  handleDeletePost: (id: string) => void;
+  comments: ICommentObject[];
+  setWindow: (res: boolean) => void;
+  post: IPostObject;
+  img: string;
+  host: string;
+  user: IUserObject;
+}
 
-  const hundleGetCommentText = (e) => {
+const Content: React.FC<IContentProps> = ({
+  handleDeletePost,
+  comments,
+  setWindow,
+  post,
+  img,
+  host,
+  user,
+}) => {
+  const dispatch = useAppDispatch();
+
+  const userId = useTypesSelector((state) => state.application.id);
+  const [text, setText] = useState<string>("");
+  const liked = post.likes?.find((post) => post._id === userId);
+  const [like, setLike] = useState(!!liked);
+  const [likesCount, setLikesCount] = useState<number | undefined>(
+    post.likes?.length
+  );
+
+  const hundleGetCommentText = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
-
-  const dispatch = useDispatch();
 
   const hundleAddComments = () => {
     dispatch(addComment(text, post._id));
@@ -27,18 +51,18 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
     setWindow(false);
   };
 
-  const handleDeleteComment = (id, admin) => {
+  const handleDeleteComment = (id: string, admin: string) => {
     dispatch(deleteComment(id, admin));
   };
   const handlePostLike = () => {
     if (like) {
       dispatch(removeLike(post._id));
       setLike(false);
-      setLikesCount(likesCount - 1);
+      setLikesCount(likesCount && likesCount - 1);
     } else {
       setLike(true);
       dispatch(addLike(post._id));
-      setLikesCount(likesCount + 1);
+      setLikesCount(likesCount && likesCount + 1);
     }
   };
   const imgUser = post.user.avatar ? post.user.avatar : user.avatar;
@@ -64,17 +88,39 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
               <div className={styles.userLogin}>{login}</div>
             </div>
             <button onClick={hundleCloseWindow} className={styles.buttonClose}>
-              <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="cancel_24__Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="cancel_24__cancel_24"><path id="cancel_24__Bounds" d="M0 0h24v24H0z"></path><path d="M18.3 5.7a.99.99 0 00-1.4 0L12 10.6 7.1 5.7a.99.99 0 00-1.4 1.4l4.9 4.9-4.9 4.9a.99.99 0 001.4 1.4l4.9-4.9 4.9 4.9a.99.99 0 001.4-1.4L13.4 12l4.9-4.9a.99.99 0 000-1.4z" id="cancel_24__Mask" fill="currentColor"></path></g></g></svg>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  id="cancel_24__Page-2"
+                  stroke="none"
+                  stroke-width="1"
+                  fill="none"
+                  fill-rule="evenodd"
+                >
+                  <g id="cancel_24__cancel_24">
+                    <path id="cancel_24__Bounds" d="M0 0h24v24H0z"></path>
+                    <path
+                      d="M18.3 5.7a.99.99 0 00-1.4 0L12 10.6 7.1 5.7a.99.99 0 00-1.4 1.4l4.9 4.9-4.9 4.9a.99.99 0 001.4 1.4l4.9-4.9 4.9 4.9a.99.99 0 001.4-1.4L13.4 12l4.9-4.9a.99.99 0 000-1.4z"
+                      id="cancel_24__Mask"
+                      fill="currentColor"
+                    ></path>
+                  </g>
+                </g>
+              </svg>
             </button>
           </div>
           <div className={styles.postText}>{post.text}</div>
         </div>
         <div className={styles.mainComments}>
           {comments.map((comment) => {
-            const avatar = comment.user.avatar
+            const avatar = comment.user?.avatar
               ? host + comment.user.avatar
               : host + user.avatar;
-            const login = comment.user.login ? comment.user.login : user.login;
+            const login = comment.user?.login ? comment.user.login : user.login;
             return (
               <div className={styles.mainCommentsShow}>
                 <div className={styles.mainCommentsUserLogo}>
@@ -83,7 +129,7 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
                 <div className={styles.userInfoMain}>
                   <div className={styles.userInfo}>
                     <Link
-                      to={`/one/user/${comment.user._id}`}
+                      to={`/one/user/${comment.user?._id}`}
                       className={styles.userName}
                     >
                       {login}
@@ -91,10 +137,40 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
                     <div className={styles.userComment}>
                       <div>{comment.text}</div>
                       {user?.role === "admin" ||
-                        (comment?.user._id === user?._id && (
-                          <div className={styles.userCommentButton}
-                            onClick={() => handleDeleteComment(comment._id, user?.role)}>
-                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="cancel_24__Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="cancel_24__cancel_24"><path id="cancel_24__Bounds" d="M0 0h24v24H0z"></path><path d="M18.3 5.7a.99.99 0 00-1.4 0L12 10.6 7.1 5.7a.99.99 0 00-1.4 1.4l4.9 4.9-4.9 4.9a.99.99 0 001.4 1.4l4.9-4.9 4.9 4.9a.99.99 0 001.4-1.4L13.4 12l4.9-4.9a.99.99 0 000-1.4z" id="cancel_24__Mask" fill="currentColor"></path></g></g></svg>
+                        (comment.user?._id === user?._id && (
+                          <div
+                            className={styles.userCommentButton}
+                            onClick={() =>
+                              user?.role &&
+                              handleDeleteComment(comment._id, user?.role)
+                            }
+                          >
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <g
+                                id="cancel_24__Page-2"
+                                stroke="none"
+                                stroke-width="1"
+                                fill="none"
+                                fill-rule="evenodd"
+                              >
+                                <g id="cancel_24__cancel_24">
+                                  <path
+                                    id="cancel_24__Bounds"
+                                    d="M0 0h24v24H0z"
+                                  ></path>
+                                  <path
+                                    d="M18.3 5.7a.99.99 0 00-1.4 0L12 10.6 7.1 5.7a.99.99 0 00-1.4 1.4l4.9 4.9-4.9 4.9a.99.99 0 001.4 1.4l4.9-4.9 4.9 4.9a.99.99 0 001.4-1.4L13.4 12l4.9-4.9a.99.99 0 000-1.4z"
+                                    id="cancel_24__Mask"
+                                    fill="currentColor"
+                                  ></path>
+                                </g>
+                              </g>
+                            </svg>
                           </div>
                         ))}
                     </div>
@@ -114,7 +190,7 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
               {like ? (
                 <svg
                   aria-label="Не нравится"
-                  class="_8-yf5 "
+                  className="_8-yf5 "
                   color="#ed4956"
                   fill="#ed4956"
                   height="24"
@@ -127,7 +203,7 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
               ) : (
                 <svg
                   aria-label="Нравится"
-                  class="_8-yf5 "
+                  className="_8-yf5 "
                   color="#262626"
                   fill="#262626"
                   height="24"
@@ -165,11 +241,14 @@ const Content = ({ handleDeletePost, comments, setWindow, post, img, host, user 
             </div>
           </div>
           {user?._id === post?.user?._id && (
-          <div className={styles.postDelete} onClick={() => handleDeletePost(post._id)}>
-            {/* <b>Удалить пост</b> */}
-            <img src={Logo} alt="deltepicture" title="Удалить пост"/>
-          </div>
-        )}
+            <div
+              className={styles.postDelete}
+              onClick={() => handleDeletePost(post._id)}
+            >
+              {/* <b>Удалить пост</b> */}
+              <img src={Logo} alt="deltepicture" title="Удалить пост" />
+            </div>
+          )}
         </div>
       </div>
     </div>
